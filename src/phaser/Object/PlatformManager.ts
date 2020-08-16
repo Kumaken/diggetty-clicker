@@ -9,6 +9,7 @@ import { PlatformData } from '../Data/PlatformData';
 import Player from './Player';
 import TilePool from './TilePool';
 import { TextureKeys } from '../Config/TextureKeys';
+import '../Object/TilePool';
 
 export default class PlatformManager {
 	private scene: Phaser.Scene;
@@ -34,7 +35,7 @@ export default class PlatformManager {
 
 	constructor(scene: Phaser.Scene, player: Player) {
 		this.scene = scene;
-		this.pool = new TilePool(scene.physics.world, scene, TextureKeys.TL_DIRT.key);
+		this.pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
 		this.player = player;
 		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.49);
 

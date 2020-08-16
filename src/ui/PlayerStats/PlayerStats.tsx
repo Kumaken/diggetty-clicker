@@ -7,7 +7,7 @@
 // import { StatsText } from './TextElements';
 
 import React from 'react';
-import 'react-bulma-components/basic/react-bulma-components.min.css';
+// import 'react-bulma-components/basic/react-bulma-components.min.css';
 import Tag from 'react-bulma-components/lib/components/tag';
 
 export const PlayerStats = () => {

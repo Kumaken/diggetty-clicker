@@ -1,93 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import logo from './assets/logo.png';
+import React, { useEffect, useContext } from 'react';
 
-import { gameConfig, PhaserConfig } from './phaser/Config/PhaserConfig';
-import './App.css';
-import registerScenes from './registerScenes';
+import './App.scss';
+
 import SceneKeys from './phaser/Config/SceneKeys';
-import { PlayerStats } from './ui/PlayerStats/PlayerStats';
-
-// const gameConfig: GameInstance = {
-//   width: "100%",
-//   height: "100%",
-//   type: Phaser.AUTO,
-//   scale: {
-//     mode: Phaser.Scale.FIT,
-//     autoCenter: Phaser.Scale.CENTER_BOTH,
-//     width: '100%',
-//     height: '100%'
-//   },
-//   render: {
-//     antialias: false,
-//     pixelArt: true,
-//     roundPixels: true
-//   },
-//   physics: {
-//     default: 'arcade',
-//     arcade: {
-//       gravity: { y: 400 },
-//       debug: true
-//     }
-//   },
-//   scene: MainScene
-// };
-
-export class PhaserGame extends Phaser.Game {
-	constructor(config: PhaserConfig) {
-		super(config);
-	}
-}
-
-let game: PhaserGame;
-export function createGame() {
-	game = new PhaserGame(gameConfig);
-	return game;
-}
-
-export function getGame(): PhaserGame {
-	return game;
-}
+import { createGame } from './phaser/Game';
+import { UI } from './ui/UI';
+import { RootStoreContext } from 'index';
 
 export default function App() {
+	const store = useContext(RootStoreContext);
+
 	useEffect(() => {
-		let game = createGame();
-		registerScenes(game);
+		let game = createGame(store.gameStore);
 		game.scene.start(SceneKeys.Preload);
-		// if (initialize) {
-		// 	setGame(Object.assign({}, gameConfig));
-		// }
 	}, []);
 
 	return (
 		<>
 			<div id="game" />
-			<PlayerStats></PlayerStats>
+			<UI></UI>
 		</>
 	);
-
-	// return (
-	// 	<div className="App">
-	// 		<header className="App-header">
-	// 			{initialize ? (
-	// 				<>
-	// 					<IonPhaser game={game} initialize={initialize} />
-	// 					<div onClick={destroy} className="flex destroyButton">
-	// 						<a href="#1" className="bttn">
-	// 							Destroy
-	// 						</a>
-	// 					</div>
-	// 				</>
-	// 			) : (
-	// 				<>
-	// 					<img src={logo} className="App-logo" alt="logo" />
-	// 					<div onClick={() => setInitialize(true)} className="flex">
-	// 						<a href="#1" className="bttn">
-	// 							Initialize
-	// 						</a>
-	// 					</div>
-	// 				</>
-	// 			)}
-	// 		</header>
-	// 	</div>
-	// );
 }

@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+import 'phaser';
 // import tile from './tile';
 // import { Itile } from '../Interfaces/Itile';
 // import { IStatictilePool } from '../Interfaces/IStatictilePool';
@@ -7,34 +7,31 @@ import Tile from './Tile';
 import { ITilePool } from '../Interfaces/ITilePool';
 import AlignTool from '../Util/AlignTool';
 
-export default class TilePool {
-	private group?: Phaser.Physics.Arcade.Group;
-	private scene: Phaser.Scene;
-	private world: Phaser.Physics.Arcade.World;
-	constructor(world: Phaser.Physics.Arcade.World, scene: Phaser.Scene, texture: string) {
-		// const defaults:
-		// 	| Phaser.Types.Physics.Arcade.PhysicsGroupConfig
-		// 	| Phaser.Types.GameObjects.Group.GroupCreateConfig = {
-		// 	classType: Tile,
-		// 	maxSize: -1,
-		// 	key: texture,
-		// 	frame: 0,
-		// 	active: false,
-		// 	visible: false,
-		// 	frameQuantity: 10
-		// };
-		this.world = world;
-		this.scene = scene;
-		this.group = scene.physics.add.group({
-			defaultKey: texture
-		});
-		scene.add.existing(this.group);
-		// super(world, scene, Object.assign(defaults, config));
+export default class TilePool extends Phaser.Physics.Arcade.Group implements ITilePool {
+	constructor(
+		world: Phaser.Physics.Arcade.World,
+		scene: Phaser.Scene,
+		texture: string,
+		config: Phaser.Types.Physics.Arcade.PhysicsGroupConfig | Phaser.Types.GameObjects.Group.GroupCreateConfig = {}
+	) {
+		const defaults:
+			| Phaser.Types.Physics.Arcade.PhysicsGroupConfig
+			| Phaser.Types.GameObjects.Group.GroupCreateConfig = {
+			classType: Tile,
+			maxSize: -1,
+			key: texture,
+			frame: 0,
+			active: false,
+			visible: false,
+			frameQuantity: 10
+		};
+
+		super(world, scene, Object.assign(defaults, config));
 	}
 
 	spawn(x: number, y: number, key: string, frame: number): Tile {
-		const spawnExisting = this.group.countActive(false) > 0;
-		const tile: Tile = this.group.get(x, y, key, frame);
+		const spawnExisting = this.countActive(false) > 0;
+		const tile: Tile = this.get(x, y, key, frame);
 		if (!tile) {
 			return tile;
 		}
@@ -61,7 +58,7 @@ export default class TilePool {
 	}
 
 	despawn(tile: Tile): void {
-		this.group.killAndHide(tile);
+		this.killAndHide(tile);
 		this.world.remove(tile.body);
 		tile.alpha = 1;
 		tile.body.reset(0, 0);
@@ -71,13 +68,13 @@ export default class TilePool {
 }
 
 // Register to gameobject factory (Module Augmentation)
-// Phaser.GameObjects.GameObjectFactory.register('tilePool', function (
-// 	texture: string,
-// 	config: Phaser.Types.Physics.Arcade.PhysicsGroupConfig | Phaser.Types.GameObjects.Group.GroupCreateConfig = {}
-// ) {
-// 	const pool = new TilePool(this.scene.physics.world, this.scene, texture, config);
+Phaser.GameObjects.GameObjectFactory.register('tilePool', function (
+	texture: string,
+	config: Phaser.Types.Physics.Arcade.PhysicsGroupConfig | Phaser.Types.GameObjects.Group.GroupCreateConfig = {}
+) {
+	const pool = new TilePool(this.scene.physics.world, this.scene, texture, config);
 
-// 	this.updateList.add(pool);
+	this.updateList.add(pool);
 
-// 	return pool;
-// });
+	return pool;
+});

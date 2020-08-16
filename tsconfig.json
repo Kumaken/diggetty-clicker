@@ -14,7 +14,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"baseUrl": "./src"
+		"baseUrl": "./src", // setup for bulma-react to locate _variable.sass
+		"experimentalDecorators": true // to use mobx decorators
 	},
 	"include": ["src", "src/App.ts", "src/phaser/Types/GameObjectFactory.d.ts"],
 	"typeRoots": ["node_modules/@types", "node_module/phaser/types"],
