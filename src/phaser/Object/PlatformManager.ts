@@ -7,13 +7,15 @@ import Platform from './Platform';
 import GameEvents from '../Config/GameEvents';
 import { PlatformData } from '../Data/PlatformData';
 import Player from './Player';
-import TilePool from './TilePool';
 import { TextureKeys } from '../Config/TextureKeys';
 import '../Object/TilePool';
+import { ITopMostPlatformInfo } from 'phaser/Interfaces/ITopMostPlatformInfo';
+import { getGame } from 'phaser/Game';
 
 export default class PlatformManager {
+	private game: Phaser.Game;
 	private scene: Phaser.Scene;
-	private pool: TilePool;
+	private pool: ITilePool;
 	private player: Player;
 	private bottomMostY: number = 0;
 	private platformYInterval: number = 0;
@@ -35,6 +37,7 @@ export default class PlatformManager {
 
 	constructor(scene: Phaser.Scene, player: Player) {
 		this.scene = scene;
+		this.game = getGame();
 		this.pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
 		this.player = player;
 		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.49);
@@ -48,7 +51,7 @@ export default class PlatformManager {
 		this.pool.despawn(sample);
 
 		// listen to game events:
-		this.scene.events.on(GameEvents.TopmostPlatformDestroyed, this.destroyTopmostPlatform, this);
+		this.game.events.on(GameEvents.TopmostPlatformDestroyed, this.destroyTopmostPlatform, this);
 
 		this.scene.input.on('gameobjectdown', () => {
 			// damage topmost platform:
@@ -70,7 +73,12 @@ export default class PlatformManager {
 		}
 		this.bottomMostY = curY - this.tileSize.height;
 
-		this.scene.events.emit(GameEvents.TopmostPlatformChanged);
+		const topMostPlatformInfo: ITopMostPlatformInfo = {
+			name: PlatformManager.topMostPlatform.platformData.name,
+			toughness: PlatformManager.topMostPlatform.toughness,
+			maxToughness: PlatformManager.topMostPlatform.platformData.toughness
+		};
+		this.game.events.emit(GameEvents.TopmostPlatformChanged, topMostPlatformInfo);
 	}
 
 	despawnTopmostPlatform() {
@@ -79,7 +87,13 @@ export default class PlatformManager {
 			this.pool.despawn(tile);
 		});
 		PlatformManager.topMostPlatform = this.platforms[0];
-		// this.scene.events.emit(GameEvents.TopmostPlatformChanged);
+		const topMostPlatformInfo: ITopMostPlatformInfo = {
+			name: PlatformManager.topMostPlatform.platformData.name,
+			toughness: PlatformManager.topMostPlatform.toughness,
+			maxToughness: PlatformManager.topMostPlatform.platformData.toughness
+		};
+		console.log(topMostPlatformInfo);
+		this.game.events.emit(GameEvents.TopmostPlatformChanged, topMostPlatformInfo);
 	}
 
 	shiftAllPlatformsUpward() {

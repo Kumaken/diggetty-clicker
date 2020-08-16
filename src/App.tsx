@@ -13,7 +13,7 @@ export default function App() {
 	useEffect(() => {
 		let game = createGame(store.gameStore);
 		game.scene.start(SceneKeys.Preload);
-	}, []);
+	}, [store]);
 
 	return (
 		<>

@@ -1,87 +1,80 @@
-// import 'phaser';
-// import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
-// import AlignTool from '../Util/AlignTool';
-// import Algorithm from '../Util/Algorithm';
-// import GameEvents from '../Config/GameEvents';
-// import PlatformManager from './PlatformManager';
-// import Player from './Player';
-// // import UIText from '../UI/UIText';
-// // import { Title } from '../UI/TextElements';
+import 'phaser';
+import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
+import AlignTool from '../Util/AlignTool';
+import Algorithm from '../Util/Algorithm';
+import GameEvents from '../Config/GameEvents';
+import PreloadScene from '../Scene/PreloadScene';
+import FontKeys from '../../config/FontKeys';
+import { getGame } from 'phaser/Game';
+import PlatformManager from './PlatformManager';
+import Player from './Player';
 
-// export default class DamageTextPool extends Phaser.GameObjects.Group implements IDamageTextPool {
-// 	public scene: Phaser.Scene;
+export default class DamageTextPool extends Phaser.GameObjects.Group implements IDamageTextPool {
+	constructor(scene: Phaser.Scene, config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {}) {
+		const defaults: Phaser.Types.GameObjects.Group.GroupCreateConfig = {
+			classType: Phaser.GameObjects.Text,
+			active: false,
+			visible: false,
+			frameQuantity: 0
+		};
+		super(scene, Object.assign(defaults, config));
+	}
 
-// 	constructor(scene: Phaser.Scene, config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {}) {
-// 		const defaults: Phaser.Types.GameObjects.Group.GroupCreateConfig = {
-// 			classType: Phaser.GameObjects.DOMElement,
-// 			active: false,
-// 			visible: false,
-// 			frameQuantity: 10
-// 		};
-// 		super(scene, Object.assign(defaults, config));
-// 		this.scene = scene;
-// 	}
+	spawn(x: number, y: number, damage: number): Phaser.GameObjects.Text {
+		const spawnExisting = this.countActive(false) > 0;
+		const DamageText: Phaser.GameObjects.Text = this.get(x, y - 50);
+		if (!DamageText) {
+			return DamageText;
+		}
 
-// 	spawn(x: number, y: number, damage: number): Phaser.GameObjects.DOMElement {
-// 		const spawnExisting = this.countActive(false) > 0;
-// 		// const DamageText: Phaser.GameObjects.DOMElement = this.get(x, y - 50);
-// 		let DamageText: Phaser.GameObjects.DOMElement = this.getFirst(false);
+		if (spawnExisting) {
+			DamageText.setVisible(true);
+			DamageText.setActive(true);
+		}
 
-// 		if (!DamageText) {
-// 			// no more exists:
-// 			DamageText = new UIText(this.scene, x, y, Title(`${damage}`));
-// 			this.add(DamageText);
-// 			// return DamageText;
-// 		}
+		DamageText.text = damage.toLocaleString();
+		DamageText.setFontSize(80 * PreloadScene.screenScale.scaleWidth);
+		DamageText.setFontFamily(FontKeys.SHPinscherRegular);
+		AlignTool.scaleToScreenWidth(this.scene, DamageText, 0.05);
 
-// 		if (spawnExisting) {
-// 			DamageText.setVisible(true);
-// 			DamageText.setActive(true);
-// 			DamageText.update(Title(`${damage}`));
-// 		}
+		// Animation:
+		this.scene.tweens.add({
+			targets: DamageText,
+			x: x + Algorithm.randomIntFromInterval(-100, 100),
+			y: y + Algorithm.randomIntFromInterval(-100, 0),
+			duration: 1500,
+			alpha: 0,
+			ease: 'Power2',
+			onComplete: () => {
+				this.despawn(DamageText);
+			}
+		});
+		return DamageText;
+	}
 
-// 		AlignTool.scaleToScreenWidth(this.scene, DamageText, 0.05);
+	despawn(DamageText: Phaser.GameObjects.Text): void {
+		this.killAndHide(DamageText);
+		DamageText.alpha = 1;
+		// DamageText.anims.stop();
+	}
+}
 
-// 		// Animation:
-// 		this.scene.tweens.add({
-// 			targets: DamageText,
-// 			x: x + Algorithm.randomIntFromInterval(-100, 100),
-// 			y: y + Algorithm.randomIntFromInterval(-100, 0),
-// 			duration: 1500,
-// 			alpha: 0,
-// 			ease: 'Power2',
-// 			onComplete: () => {
-// 				this.despawn(DamageText);
-// 			}
-// 		});
-// 		return DamageText;
-// 	}
+// Register to gameobject factory (Module Augmentation)
+Phaser.GameObjects.GameObjectFactory.register('damageTextPool', function (
+	config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {}
+) {
+	const pool = new DamageTextPool(this.scene, config);
 
-// 	despawn(DamageText: Phaser.GameObjects.DOMElement): void {
-// 		this.killAndHide(DamageText);
-// 		DamageText.x = AlignTool.getCenterHorizontal(this.scene);
-// 		DamageText.y = PlatformManager.topMostY;
-// 		DamageText.alpha = 1;
-// 	}
-// }
+	this.updateList.add(pool);
 
-// // Register to gameobject factory (Module Augmentation)
-// Phaser.GameObjects.GameObjectFactory.register('damageTextPool', function (
-// 	config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {}
-// ) {
-// 	const pool = new DamageTextPool(this.scene, config);
-
-// 	this.updateList.add(pool);
-
-// 	// listen to damage events:
-// 	this.scene.events.on(
-// 		GameEvents.OnDamage,
-// 		() => {
-// 			pool.spawn(AlignTool.getCenterHorizontal(this.scene), PlatformManager.topMostY, Player.clickDamage);
-// 		},
-// 		this
-// 	);
-// 	return pool;
-// });
-
-export {};
+	// listen to damage events:
+	const game = getGame();
+	game.events.on(
+		GameEvents.OnDamage,
+		() => {
+			pool.spawn(AlignTool.getCenterHorizontal(this.scene), PlatformManager.topMostY, Player.clickDamage);
+		},
+		this
+	);
+	return pool;
+});

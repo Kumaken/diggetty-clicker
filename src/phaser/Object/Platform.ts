@@ -7,13 +7,15 @@ import GameEvents from '../Config/GameEvents';
 import { IPlatformData } from '../Interfaces/IPlatformData';
 import Algorithm from '../Util/Algorithm';
 import TilePool from './TilePool';
+import { getGame } from 'phaser/Game';
 
 export default class Platform {
 	public row: ITile[] = [];
 	private rowSize: number = 9;
 
 	private scene: Phaser.Scene;
-	private pool: TilePool;
+	private game: Phaser.Game;
+	private pool: ITilePool;
 	public platformData: IPlatformData;
 	public y: number;
 	private effRightX: number;
@@ -31,6 +33,7 @@ export default class Platform {
 		platformData: IPlatformData
 	) {
 		this.scene = scene;
+		this.game = getGame();
 		this.pool = pool;
 		this.platformData = platformData;
 		this.effLeftX = AlignTool.getXfromScreenWidth(scene, 0.115);
@@ -64,12 +67,12 @@ export default class Platform {
 
 	// Events:
 	onDestruction() {
-		this.scene.events.emit(GameEvents.TopmostPlatformDestroyed);
+		this.game.events.emit(GameEvents.TopmostPlatformDestroyed);
 	}
 
 	onClickPlatform() {
+		this.game.events.emit(GameEvents.OnDamage, this.toughness - 1);
 		this.damage(Player.clickDamage);
-		this.scene.events.emit(GameEvents.OnDamage);
 	}
 
 	// Platform stats methods:

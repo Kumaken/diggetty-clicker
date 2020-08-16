@@ -1,10 +1,25 @@
 import GameEvents from './Config/GameEvents';
 import { IGameStore } from './Store/GameStore';
+import { ITopMostPlatformInfo } from './Interfaces/ITopMostPlatformInfo';
 
 // Custom event that change value in Mobx store
 const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
-	game.events.on(GameEvents.TopmostPlatformChanged, (name: string) => {
-		gameStore?.setTopPlatformName(name);
+	game.events.on(GameEvents.TopmostPlatformChanged, (data: ITopMostPlatformInfo) => {
+		gameStore?.setTopPlatformName(data.name);
+		gameStore?.setTopPlatformToughness(data.toughness);
+		gameStore?.setTopPlatformMaxToughness(data.maxToughness);
+	});
+
+	game.events.on(GameEvents.OnDamage, (value: number) => {
+		gameStore?.setTopPlatformToughness(value);
+	});
+
+	game.events.on(GameEvents.OnMoneyChanged, (value: number) => {
+		gameStore?.setMoney(value);
+	});
+
+	game.events.on(GameEvents.OnDepthChanged, (value: number) => {
+		gameStore?.setDepth(value);
 	});
 };
 

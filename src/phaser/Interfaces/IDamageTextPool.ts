@@ -1,6 +1,6 @@
 export interface IDamageTextPool extends Phaser.GameObjects.Group {
-  spawn(x: number, y: number, damage: number): Phaser.GameObjects.DOMElement;
-  despawn(DamageTextPool: Phaser.GameObjects.DOMElement): void;
+	spawn(x: number, y: number, damage: number): Phaser.GameObjects.Text;
+	despawn(DamageTextPool: Phaser.GameObjects.Text);
 }
 
 /*

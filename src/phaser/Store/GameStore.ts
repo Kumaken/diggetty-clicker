@@ -5,16 +5,15 @@ export interface IGameStore {
 	topPlatformName: string;
 	topPlatformToughness: number;
 	topPlatformMaxToughness: number;
-	currentLevel: number;
-	currentScore: number;
-	gameStart(): void;
-	gameEnd(): void;
-	increaseScore(total: number): void;
-	resetScore(): void;
-	setTopPlatformName(name: string): void;
+	playerDPC: number;
+	money: number;
+	depth: number;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
+	setPlayerDPC(value: number): void;
+	setMoney(value: number): void;
+	setDepth(value: number): void;
 }
 
 export class GameStore implements IGameStore {
@@ -25,7 +24,10 @@ export class GameStore implements IGameStore {
 
 	@observable topPlatformName: string = 'Loading';
 	@observable topPlatformToughness: number = 0;
-	@observable topPlatformMaxToughness: number = 10;
+	@observable topPlatformMaxToughness: number = 1;
+	@observable playerDPC: number = 1;
+	@observable money: number = 0;
+	@observable depth: number = 0;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -39,27 +41,15 @@ export class GameStore implements IGameStore {
 		this.topPlatformMaxToughness = value;
 	}
 
-	@observable isCurrentlyPlaying: boolean = true;
-	@observable currentLevel: number = 0;
-	@observable currentScore: number = 0;
-
-	@action
-	increaseScore(total: number) {
-		this.currentScore = total;
+	@action setPlayerDPC(value: number) {
+		this.playerDPC = value;
 	}
 
-	@action
-	resetScore() {
-		this.currentScore = 0;
+	@action setMoney(value: number) {
+		this.money = value;
 	}
 
-	@action
-	gameEnd() {
-		this.isCurrentlyPlaying = false;
-	}
-
-	@action
-	gameStart() {
-		this.isCurrentlyPlaying = true;
+	@action setDepth(value: number) {
+		this.depth = value;
 	}
 }

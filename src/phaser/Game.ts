@@ -7,7 +7,7 @@ let game: Phaser.Game;
 export function createGame(gameStore: IGameStore) {
 	game = new Phaser.Game(gameConfig);
 	registerScenes(game);
-	addGameEventListeners(this.game, gameStore);
+	addGameEventListeners(game, gameStore);
 	return game;
 }
 
