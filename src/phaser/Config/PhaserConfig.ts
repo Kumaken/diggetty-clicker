@@ -1,7 +1,6 @@
 import 'phaser';
 import { GameInstance } from '../../../node_modules/@ion-phaser/react';
 import { getResolution } from '../Util/Util';
-// import GameUI from './phaser/Scene/GameUI';
 
 export type PhaserConfig = Phaser.Types.Core.GameConfig;
 
