@@ -1,0 +1,53 @@
+.default-active {
+	display: block;
+}
+
+.tabs ul li a {
+	transition: color 300ms linear, border-color 300ms linear;
+}
+/*  Transition group */
+.fade-enter {
+	opacity: 0;
+}
+
+.fade-enter-active {
+	opacity: 1;
+	transition: opacity 300ms ease-in;
+	transition-delay: 300ms;
+}
+
+.fade-enter-done {
+	opacity: 1;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit-active {
+	opacity: 0;
+	transition: opacity 300ms ease-in;
+}
+
+.fade-exit-done {
+	opacity: 0;
+}
+
+/* bottom tab */
+.bottom-tab {
+	width: 100%;
+	position: absolute;
+	top: 70%;
+}
+
+.align-both-center {
+	display: flex;
+	align-items: center; /* vertically */
+	justify-content: center; /* horizontally */
+}
+
+.content-tab {
+	max-height: 20rem;
+	overflow: auto;
+	display: none;
+}
