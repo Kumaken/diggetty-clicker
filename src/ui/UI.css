@@ -8,3 +8,30 @@
 	height: 100%;
 	z-index: 1;
 }
+
+/* Fonts */
+.silk-screen-A {
+	font-family: 'SilkScreenA';
+}
+
+.shpinscher-regular {
+	font-family: 'SHPinscher-Regular';
+}
+
+/* Alignment & Positioning */
+.is-centered {
+	text-align: center;
+}
+
+/* Colors */
+.text-white {
+	color: white !important;
+}
+
+.text-black {
+	color: rgb(0, 0, 0) !important;
+}
+
+.text-gray {
+	color: rgb(80, 80, 80) !important;
+}

@@ -2,9 +2,9 @@ import { IUpgradeData } from '../Interfaces/IUpgradeData';
 
 export const UpgradeData: IUpgradeData = {
 	Pickaxe: {
-		key: 'pickaxe',
 		name: "Good ol' pickaxe",
-		desc: "Your good ol' trusty pickaxe. Increases your click damage by 1",
+		desc: "Your good ol' trusty pickaxe",
+		effectDesc: 'Increases your click damage by 1',
 		baseCost: 2,
 		costUpRatio: 1.5,
 		baseDMG: 0,
@@ -12,23 +12,33 @@ export const UpgradeData: IUpgradeData = {
 		dmgUpRatio: 1
 	},
 	Bicep: {
-		key: 'bicep',
 		name: 'Firm Biceps',
-		desc: 'Work that guns! Increases your click damage exponentially.',
+		desc: 'Work that guns!',
+		effectDesc: 'Increases your click damage exponentially.',
 		baseCost: 10,
 		costUpRatio: 2,
 		baseDMG: 1,
 		dmgGrowthType: 'exponential',
 		dmgUpRatio: 1
 	},
-	Bicep2: {
-		key: 'bicep2',
-		name: 'Firm Biceps',
-		desc: 'Work that guns! Increases your click damage exponentially.',
-		baseCost: 10,
+	Calf: {
+		name: 'Calf Muscles',
+		desc: 'Never skip leg day!',
+		effectDesc: 'Increases your click damage exponentially',
+		baseCost: 100,
+		costUpRatio: 2.5,
+		baseDMG: 2,
+		dmgGrowthType: 'exponential',
+		dmgUpRatio: 3
+	},
+	Tenacity: {
+		name: 'Tenacity',
+		desc: 'Much ambis... wow...',
+		effectDesc: 'Increases your click damage by 10',
+		baseCost: 50,
 		costUpRatio: 2,
 		baseDMG: 1,
-		dmgGrowthType: 'exponential',
-		dmgUpRatio: 2
+		dmgGrowthType: 'linear',
+		dmgUpRatio: 10
 	}
 };

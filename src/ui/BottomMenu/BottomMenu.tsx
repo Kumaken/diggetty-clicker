@@ -1,35 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from 'react';
-import Tabs from 'react-bulma-components/lib/components/tabs';
 import './BottomMenu.scss';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Algorithm from 'phaser/Util/Algorithm';
+import { UpgradeTabIterator } from './UpgradeTabIterator';
+
+const transitionDuration = 300;
 
 export const BottomMenu = () => {
 	const [tabList, setTabList] = useState([
 		{
-			name: 'Pictures',
+			name: 'Upgrades',
 			icon: '',
-			content: 'Stuff 1'
+			content: <UpgradeTabIterator />
 		},
 		{
-			name: 'Music',
+			name: 'Hiring',
 			icon: '',
 			content: 'Stuff 2'
 		},
 		{
-			name: 'Videos',
+			name: 'Marketing',
 			icon: '',
 			content: 'Stuff 3'
 		},
 		{
-			name: 'Documents',
+			name: 'Inventory',
 			icon: '',
 			content: 'Stuff 4'
 		}
 	]);
-	const [activeTab, setActiveTab] = useState('Pictures');
+	const [activeTab, setActiveTab] = useState('Upgrades');
 	const [beginAnimation, setBeginAnimation] = useState(true);
 
 	const Tab = (props) => {
@@ -40,13 +42,13 @@ export const BottomMenu = () => {
 				className={name === activeTab ? 'is-active' : null}
 				onClick={async () => {
 					setBeginAnimation(!beginAnimation);
-					await Algorithm.delay(300);
+					await Algorithm.delay(transitionDuration);
 					setActiveTab(name);
 				}}
 			>
 				<a>
 					{/* <span className="icon is-small"><i className="fa fa-image"></i></span> */}
-					<span>{name}</span>
+					<span className="text-white">{name}</span>
 				</a>
 			</li>
 		);
@@ -72,19 +74,20 @@ export const BottomMenu = () => {
 		);
 	};
 
-	const ActiveTabContent = (props) => <div>{props.content}</div>;
+	const ActiveTabContent = (props) => <div className="tabs-content">{props.content}</div>;
 
 	return (
 		<div className="bottom-tab">
 			<Tabs />
+			{/* <ActiveTabContent key={activeTab} content={activeTabContent()} /> */}
+
 			<CSSTransition
-				className="tabs-content"
 				in={beginAnimation}
 				classNames="fade"
-				timeout={{ enter: 300, exit: 300 }}
+				timeout={{ enter: transitionDuration + 100, exit: transitionDuration }}
 				onExited={() => setBeginAnimation(true)}
 			>
-				<ActiveTabContent key={activeTab} content={activeTabContent()} />
+				{ActiveTabContent({ key: activeTab, content: activeTabContent() })}
 			</CSSTransition>
 		</div>
 	);

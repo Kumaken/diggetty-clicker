@@ -7,7 +7,7 @@ import './resource-text.css';
 const DepthText = () => {
 	const store = useContext(RootStoreContext);
 
-	return <Heading className="silk-screen-A is-centered">{store.gameStore?.depth} km</Heading>;
+	return <Heading className="text-white silk-screen-A is-centered">{store.gameStore?.depth} km</Heading>;
 };
 
 export default observer(DepthText);

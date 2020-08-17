@@ -40,7 +40,7 @@ export default class PlatformManager {
 		this.game = getGame();
 		this.pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
 		this.player = player;
-		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.49);
+		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.45);
 
 		// deduce tile size dynamically:
 		const sample = this.pool.spawn(0, 0, '', 0);

@@ -1,6 +1,6 @@
 import React from 'react';
-import './TabEntry.scss';
-import { IUpgradeData } from '../../phaser/Interfaces/IUpgradeData';
+import './UpgradeEntry.scss';
+import { IUpgradeData, IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
 import GameEvents from '../../phaser/Config/GameEvents';
 
 import Card from 'react-bulma-components/lib/components/card';
@@ -8,33 +8,47 @@ import Media from 'react-bulma-components/lib/components/media';
 import Image from 'react-bulma-components/lib/components/image';
 import Content from 'react-bulma-components/lib/components/content';
 import Heading from 'react-bulma-components/lib/components/heading';
-
+import Box from 'react-bulma-components/lib/components/box';
+import Columns from 'react-bulma-components/lib/components/columns';
 // const issueUpgradeLevelUp = (scene: Phaser.Scene, key: string) => {
 // 	scene.events.emit(GameEvents.OnUpgradeIssued, key);
 // };
 
-export const TabEntry = (key: string, upgradeData: IUpgradeData, cur_cost: number, scene: Phaser.Scene) => (
-	<Card>
-		<Card.Image size="4by3" src="http://bulma.io/images/placeholders/1280x960.png" />
-		<Card.Content>
-			<Media>
-				<Media.Item renderAs="figure" position="left">
-					<Image size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
-				</Media.Item>
-				<Media.Item>
-					<Heading size={4}>John Smith</Heading>
-					<Heading subtitle size={6}>
-						@johnsmith
-					</Heading>
+export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number) => (
+	<Card className="upgrade-cards">
+		<Card.Content className="upgrade-content">
+			<Media className="upgrade-img-container">
+				<Media.Item renderAs="figure">
+					<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
 				</Media.Item>
 			</Media>
-			<Content>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-				<a href="#1">#css</a> <a href="#2">#responsive</a>
-				<br />
-				<time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-			</Content>
+			<Heading className="is-centered" size={5}>
+				{upgradeData.name}
+			</Heading>
+			<Heading className="level-text is-centered" subtitle size={6}>
+				Lvl.{upgradeData.baseDMG}
+			</Heading>
+			<Box className="desc-box">
+				<Heading italic className="effect-text text-gray is-centered" subtitle size={6}>
+					"{upgradeData.desc}"
+				</Heading>
+				<Content>{upgradeData.effectDesc}</Content>
+			</Box>
 		</Card.Content>
+		<Columns>
+			<Columns.Column>
+				<span>Yes</span>
+			</Columns.Column>
+			<Columns.Column>
+				<span>No</span>
+			</Columns.Column>
+		</Columns>
+		{/* <Card.Footer.Item renderAs="a" href="#Yes">
+				Yes
+			</Card.Footer.Item>
+			<Card.Footer.Item renderAs="a" href="#No">
+				No
+			</Card.Footer.Item> */}
 	</Card>
 	// <div
 	// 	key={key}

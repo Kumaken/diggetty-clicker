@@ -8,7 +8,7 @@ const MoneyText = () => {
 	const store = useContext(RootStoreContext);
 
 	return (
-		<Heading className="silk-screen-A is-centered" size={1}>
+		<Heading className="text-white silk-screen-A is-centered" size={1}>
 			{store.gameStore?.money}$
 		</Heading>
 	);

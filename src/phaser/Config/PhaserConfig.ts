@@ -20,7 +20,7 @@ export const gameConfig: GameInstance = {
 			debug: false
 		}
 	},
-	backgroundColor: '#493a52',
+	backgroundColor: '#000000',
 	// parent: 'phaser-ui',
 	dom: {
 		createContainer: true

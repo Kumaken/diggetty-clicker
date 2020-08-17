@@ -1,35 +1,32 @@
-// import { UpgradeData } from '../../Data/UpgradeData';
-// import { TabEntry } from './TabEntry';
-// import { IUpgradeData } from '../../Interfaces/IUpgradeData';
+import { UpgradeData } from '../../phaser/Data/UpgradeData';
+import { UpgradeEntry } from './UpgradeEntry';
+import { IUpgradeData, IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
+import React, { useEffect, useState } from 'react';
 
-// export default class UpgradeManager {
-// 	private upgradeProgress = {};
-// 	private gameScene: Phaser.Scene;
+export const UpgradeTabIterator = () => {
+	const [upgradeProgress, setUpdateProgress] = useState({});
 
-// 	constructor(scene: Phaser.Scene) {
-// 		this.gameScene = scene;
-// 		for (let key in UpgradeData) {
-// 			console.log(key);
-// 			this.upgradeProgress[key] = 0;
-// 		}
+	useEffect(() => {
+		const _upgradeProgress = {};
+		for (let key in UpgradeData) {
+			console.log(key);
+			upgradeProgress[key] = 0;
+		}
+		setUpdateProgress(_upgradeProgress);
+	}, []);
 
-// 		// this.upgradeProgress = {
-// 		//   [UpgradeData.Pickaxe.key]: 0,
-// 		//   [UpgradeData.Bicep.key]: 0
-// 		// };
-// 	}
+	const createUpgradeEntry = (key: string, upgradeData: IUpgradeDatum) => {
+		return UpgradeEntry(key, upgradeData, 10);
+	};
 
-// 	createUpgradeEntry(key: string, upgradeData: IUpgradeData) {
-// 		return TabEntry(key, upgradeData, 10, this.gameScene);
-// 	}
-// 	createUpgradeList() {
-// 		const upgrades = [];
-// 		for (let key in UpgradeData) {
-// 			console.log(key);
-// 			upgrades.push(this.createUpgradeEntry(key, UpgradeData[key]));
-// 		}
-// 		return upgrades;
-// 	}
-// }
+	const createUpgradeList = () => {
+		const upgrades = [];
+		for (let key in UpgradeData) {
+			console.log(key);
+			upgrades.push(createUpgradeEntry(key, UpgradeData[key]));
+		}
+		return upgrades;
+	};
 
-export {};
+	return <>{createUpgradeList()}</>;
+};
