@@ -13,7 +13,7 @@
 
 .upgrade-content {
 	position: relative;
-	padding: 5rem 1rem 1rem 1rem !important;
+	padding: 4.5rem 1rem 1rem 1rem !important;
 	margin-top: -2rem;
 }
 
@@ -29,15 +29,28 @@
 }
 
 .effect-text {
-	margin-bottom: 0.5rem !important;
+	margin-bottom: 0.25rem !important;
 }
 
 .desc-box {
-	white-space: pre-wrap;
+	white-space: pre-line;
+	text-align: justify;
 	color: black !important;
 	border-radius: 20% !important;
 	background-color: #ffcd00 !important;
-	height: 9rem;
+	height: 7.5rem;
+}
+
+.upgrade-action {
+	margin: -0.25rem 0.25rem !important;
+}
+
+.upgrade-cost {
+	display: flex; // both container and self needs to be flex?
+	justify-content: center; // align horizontally
+	width: 100%; // needs this for horizontal center
+	align-items: center; // align vertically
+	white-space: nowrap !important;
 }
 // .card {
 // 	&.is-horizontal {

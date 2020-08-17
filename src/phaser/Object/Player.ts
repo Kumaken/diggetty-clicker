@@ -28,7 +28,7 @@ export default class Player {
 		Player.clickDamage = 1;
 
 		// listen to game events (with params):
-		this.scene.events.on(GameEvents.OnUpgradeIssued, (key: string) => this.handleUpgrade(key), this);
+		this.game.events.on(GameEvents.OnUpgradeIssued, (key: string) => this.handleUpgrade(key), this);
 	}
 
 	addGold(amount: number) {

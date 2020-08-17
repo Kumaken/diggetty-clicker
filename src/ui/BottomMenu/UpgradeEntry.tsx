@@ -10,9 +10,13 @@ import Content from 'react-bulma-components/lib/components/content';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Box from 'react-bulma-components/lib/components/box';
 import Columns from 'react-bulma-components/lib/components/columns';
-// const issueUpgradeLevelUp = (scene: Phaser.Scene, key: string) => {
-// 	scene.events.emit(GameEvents.OnUpgradeIssued, key);
-// };
+import Button from 'react-bulma-components/lib/components/button';
+import { getGame } from 'phaser/Game';
+
+const issueUpgradeLevelUp = (key: string) => {
+	const game = getGame();
+	game.events.emit(GameEvents.OnUpgradeIssued, key);
+};
 
 export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number) => (
 	<Card className="upgrade-cards">
@@ -22,25 +26,29 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 					<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
 				</Media.Item>
 			</Media>
-			<Heading className="is-centered" size={5}>
+			<Heading className="shpinscher-regular is-centered" size={4}>
 				{upgradeData.name}
 			</Heading>
-			<Heading className="level-text is-centered" subtitle size={6}>
+			<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
 				Lvl.{upgradeData.baseDMG}
 			</Heading>
 			<Box className="desc-box">
-				<Heading italic className="effect-text text-gray is-centered" subtitle size={6}>
+				<Heading italic className="effect-text text-gray is-centered " subtitle size={6}>
 					"{upgradeData.desc}"
 				</Heading>
 				<Content>{upgradeData.effectDesc}</Content>
 			</Box>
 		</Card.Content>
-		<Columns>
-			<Columns.Column>
-				<span>Yes</span>
+		<Columns className="upgrade-action" mobile>
+			<Columns.Column className="is-6">
+				<Button color="primary" rounded onClick={() => issueUpgradeLevelUp(key)}>
+					UPGRADE
+				</Button>
 			</Columns.Column>
-			<Columns.Column>
-				<span>No</span>
+			<Columns.Column className="is-6 is-flex">
+				<Heading className="is-centered silk-screen-A upgrade-cost" size={4}>
+					{cur_cost}$
+				</Heading>
 			</Columns.Column>
 		</Columns>
 		{/* <Card.Footer.Item renderAs="a" href="#Yes">
