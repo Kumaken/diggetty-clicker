@@ -20,6 +20,7 @@
     "react": "^16.13.1",
     "react-bulma-components": "^3.4.0",
     "react-dom": "^16.13.1",
+    "react-responsive-spritesheet": "^2.3.9",
     "react-scripts": "3.4.3",
     "react-transition-group": "^4.4.1",
     "typescript": "~3.7.2"

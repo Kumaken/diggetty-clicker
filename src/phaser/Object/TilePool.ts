@@ -1,8 +1,4 @@
 import 'phaser';
-// import tile from './tile';
-// import { Itile } from '../Interfaces/Itile';
-// import { IStatictilePool } from '../Interfaces/IStatictilePool';
-// import ColorConfig from '../Config/ColorConfig';
 import Tile from './Tile';
 import { ITilePool } from '../Interfaces/ITilePool';
 import AlignTool from '../Util/AlignTool';
@@ -38,21 +34,14 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 
 		tile.setTexture(key);
 		tile.setFrame(frame);
-		// tile.giveCircleCollider();
-		// tile.emit('on-spawned');
 
 		if (spawnExisting) {
 			tile.setVisible(true);
 			tile.setActive(true);
 			this.world.add(tile.body);
-			// tile.randomizeColor();
 		}
 
 		AlignTool.scaleToScreenWidth(this.scene, tile, 0.11);
-		// tile.setScale(
-		//   PreloadScene.screenScale.scaleWidth,
-		//   PreloadScene.screenScale.scaleHeight
-		// );
 		tile.setInteractive();
 		return tile;
 	}
@@ -63,7 +52,6 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 		tile.alpha = 1;
 		tile.body.reset(0, 0);
 		tile.disableInteractive();
-		// tile.anims.stop();
 	}
 }
 

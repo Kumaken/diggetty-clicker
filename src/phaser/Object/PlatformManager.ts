@@ -11,6 +11,7 @@ import { TextureKeys } from '../Config/TextureKeys';
 import '../Object/TilePool';
 import { ITopMostPlatformInfo } from 'phaser/Interfaces/ITopMostPlatformInfo';
 import { getGame } from 'phaser/Game';
+import Algorithm from 'phaser/Util/Algorithm';
 
 export default class PlatformManager {
 	private game: Phaser.Game;
@@ -20,9 +21,8 @@ export default class PlatformManager {
 	private bottomMostY: number = 0;
 	private platformYInterval: number = 0;
 	private platforms: Platform[] = [];
-	private tileSize: Phaser.Structs.Size;
 	private rowNums: number = 4;
-
+	private textureKeyArr: string[] = Object.keys(PlatformData);
 	// NOTE DELETE THIS IF NOT USING TERRARIA TILES: to handle the gap from the tilesheet
 	private tileWidthGap: number = 10;
 	private tileHeightGap: number = 10;
@@ -34,6 +34,7 @@ export default class PlatformManager {
 	// Static properties
 	public static topMostY: number;
 	public static topMostPlatform: Platform;
+	public static tileSize: Phaser.Structs.Size;
 
 	constructor(scene: Phaser.Scene, player: Player) {
 		this.scene = scene;
@@ -44,7 +45,7 @@ export default class PlatformManager {
 
 		// deduce tile size dynamically:
 		const sample = this.pool.spawn(0, 0, '', 0);
-		this.tileSize = new Phaser.Structs.Size(
+		PlatformManager.tileSize = new Phaser.Structs.Size(
 			sample.displayWidth - this.tileWidthGap,
 			sample.displayHeight - this.tileHeightGap
 		);
@@ -62,16 +63,22 @@ export default class PlatformManager {
 
 	spawnPlatformInitial(textureKey: ITextureKey) {
 		let curY = PlatformManager.topMostY;
-		PlatformManager.topMostPlatform = new Platform(this.scene, this.pool, curY, this.tileSize, PlatformData.Dirt);
+		PlatformManager.topMostPlatform = new Platform(
+			this.scene,
+			this.pool,
+			curY,
+			PlatformManager.tileSize,
+			PlatformData.Dirt
+		);
 		this.platforms.push(PlatformManager.topMostPlatform);
-		curY += this.tileSize.height;
+		curY += PlatformManager.tileSize.height;
 
 		for (let i = 1; i < this.rowNums; i++) {
-			const newPlatform = new Platform(this.scene, this.pool, curY, this.tileSize, PlatformData.Dirt);
+			const newPlatform = new Platform(this.scene, this.pool, curY, PlatformManager.tileSize, PlatformData.Dirt);
 			this.platforms.push(newPlatform);
-			curY += this.tileSize.height;
+			curY += PlatformManager.tileSize.height;
 		}
-		this.bottomMostY = curY - this.tileSize.height;
+		this.bottomMostY = curY - PlatformManager.tileSize.height;
 
 		const topMostPlatformInfo: ITopMostPlatformInfo = {
 			name: PlatformManager.topMostPlatform.platformData.name,
@@ -92,7 +99,6 @@ export default class PlatformManager {
 			toughness: PlatformManager.topMostPlatform.toughness,
 			maxToughness: PlatformManager.topMostPlatform.platformData.toughness
 		};
-		console.log(topMostPlatformInfo);
 		this.game.events.emit(GameEvents.TopmostPlatformChanged, topMostPlatformInfo);
 	}
 
@@ -103,7 +109,13 @@ export default class PlatformManager {
 	}
 
 	spawnBottommostPlatform(platformData: IPlatformData) {
-		const newPlatform = new Platform(this.scene, this.pool, this.bottomMostY, this.tileSize, platformData);
+		const newPlatform = new Platform(
+			this.scene,
+			this.pool,
+			this.bottomMostY,
+			PlatformManager.tileSize,
+			platformData
+		);
 		this.platforms.push(newPlatform);
 	}
 
@@ -112,6 +124,7 @@ export default class PlatformManager {
 		this.player.addGold(this.goldPerPlatform);
 		this.despawnTopmostPlatform();
 		this.shiftAllPlatformsUpward();
-		this.spawnBottommostPlatform(PlatformData.RockyDirt);
+		const randIdx = Algorithm.randomIntFromInterval(0, this.textureKeyArr.length - 1);
+		this.spawnBottommostPlatform(PlatformData[this.textureKeyArr[randIdx]]);
 	}
 }

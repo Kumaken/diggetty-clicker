@@ -9,12 +9,17 @@ import Player from '../Object/Player';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
 
 import '../Object/DamageTextPool';
+import TilePillar from 'phaser/Object/TilePillar';
+import { TexturePreloadKeys } from 'phaser/Config/TexturePreloadKeys';
+import TilePillarsManager from 'phaser/Object/TilePillarsManager';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 
 export default class LevelScene extends Phaser.Scene {
 	private fpsText!: FpsText;
 	private platformManager!: PlatformManager;
 	private player!: Player;
+	private tilePillarsManager: TilePillarsManager;
+
 	// private gameUI: GameUI;
 	constructor() {
 		const sceneConfig = {
@@ -27,8 +32,6 @@ export default class LevelScene extends Phaser.Scene {
 
 	create(): void {
 		// UI ---
-		this.fpsText = new FpsText(this);
-		this.scene.run(SceneKeys.GameUI, {});
 		// this.gameUI = this.scene.get(SceneKeys.GameUI) as GameUI;
 		// this.scene.bringToTop(SceneKeys.GameUI);
 
@@ -39,6 +42,10 @@ export default class LevelScene extends Phaser.Scene {
 		this.add.damageTextPool();
 		this.platformManager = new PlatformManager(this, this.player);
 		this.platformManager.spawnPlatformInitial(TextureKeys.TL_DIRT);
+
+		this.tilePillarsManager = new TilePillarsManager(this);
+
+		this.fpsText = new FpsText(this);
 	}
 
 	update(): void {

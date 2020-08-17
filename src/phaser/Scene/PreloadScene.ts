@@ -5,7 +5,8 @@ import GameEvents from '../Config/GameEvents';
 import AlignTool from '../Util/AlignTool';
 
 // import images so webpack could include it:
-import Tiles from '../../assets/Tiles/dirt_Tiles_407.png';
+import TL_DIRT from '../../assets/Tiles/dirt_Tiles_407.png';
+import TL_HARD_ROCK from '../../assets/Tiles/hard_rock.png';
 
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
@@ -27,16 +28,15 @@ export default class PreloadScene extends Phaser.Scene {
 		//   `${this.assetRoot}QuantityBar/track.png`
 		// );
 
-		this.load.spritesheet(TexturePreloadKeys.TL_DIRT, Tiles, {
+		this.load.spritesheet(TexturePreloadKeys.TL_DIRT, TL_DIRT, {
 			frameWidth: this.tileFrameWidth,
 			frameHeight: this.tileFrameHeight
 		});
 
-		// this.load.spritesheet(
-		//   TexturePreloadKeys.VB_BAR,
-		//   `${this.assetRoot}QuantityBar/bar.png`,
-		//   { frameWidth: 260, frameHeight: 32 }
-		// );
+		this.load.spritesheet(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK, {
+			frameWidth: this.tileFrameWidth,
+			frameHeight: this.tileFrameHeight
+		});
 
 		// // Load Icons:
 		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}Icons/minecraft_transparent.png`, {

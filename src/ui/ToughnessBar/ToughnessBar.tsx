@@ -9,7 +9,6 @@ const ToughnessBar = () => {
 
 	return (
 		<div className="health-bar">
-			{console.log('rendered health bar')}
 			<span className="platform-name">{store.gameStore?.topPlatformName}</span>
 			<span className="platform-toughness">{store.gameStore?.topPlatformToughness}</span>
 			<Progress
