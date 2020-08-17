@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import './BottomMenu.scss';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Algorithm from 'phaser/Util/Algorithm';
-import { UpgradeTabIterator } from './UpgradeTabIterator';
+import UpgradeTabIterator from './UpgradeTabIterator';
 
 const transitionDuration = 300;
 

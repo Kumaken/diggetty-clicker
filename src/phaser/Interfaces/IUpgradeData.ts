@@ -11,4 +11,5 @@ export interface IUpgradeDatum {
 	baseDMG: number;
 	dmgGrowthType: string;
 	dmgUpRatio: number;
+	img: string;
 }

@@ -38,7 +38,9 @@
 	color: black !important;
 	border-radius: 20% !important;
 	background-color: #ffcd00 !important;
-	height: 7.5rem;
+	padding: 1rem !important;
+	margin-top: 1rem;
+	height: 5rem;
 }
 
 .upgrade-action {
@@ -52,6 +54,7 @@
 	align-items: center; // align vertically
 	white-space: nowrap !important;
 }
+
 // .card {
 // 	&.is-horizontal {
 // 		display: flex;

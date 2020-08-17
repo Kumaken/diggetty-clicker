@@ -1,5 +1,8 @@
+export interface IUpgradeProgresses {
+	[key: string]: IUpgradeProgress;
+}
+
 export interface IUpgradeProgress {
-  key: string;
-  level: number;
-  currdmg: number;
+	level: number;
+	currdmg: number;
 }

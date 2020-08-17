@@ -1,6 +1,6 @@
 import 'phaser';
 import GameEvents from '../Config/GameEvents';
-import UpgradeProgressManager from './UpgradeProgress';
+import UpgradeProgressManager from './UpgradeProgressManager';
 import { getGame } from 'phaser/Game';
 
 export default class Player {
@@ -8,15 +8,22 @@ export default class Player {
 	private game: Phaser.Game;
 	private gold: number;
 	private depth: number;
-	private upgradeProgress: UpgradeProgressManager;
+	private upgradeProgressManager: UpgradeProgressManager;
 	public static clickDamage: number;
 
 	handleUpgrade(key: string) {
-		this.upgradeProgress.levelUpProgress(key);
-		const dmgChange = this.upgradeProgress.calculateDamageIncrease(key);
-		Player.clickDamage += dmgChange;
+		const price = this.upgradeProgressManager.getCurrentUpgradePrice(key);
+		if (price <= this.gold) {
+			this.upgradeProgressManager.levelUpProgress(key);
+			const dmgChange = this.upgradeProgressManager.calculateDamageIncrease(key);
+			Player.clickDamage += dmgChange;
 
-		this.scene.events.emit(GameEvents.OnUpgradeDone);
+			this.spendGold(price);
+			this.scene.events.emit(GameEvents.OnUpgradeDone);
+		} else {
+			console.log('not enough money');
+			this.scene.events.emit(GameEvents.NotEnoughMoney);
+		}
 	}
 
 	constructor(scene: Phaser.Scene) {
@@ -24,7 +31,7 @@ export default class Player {
 		this.game = getGame();
 		this.gold = 0;
 		this.depth = 0;
-		this.upgradeProgress = new UpgradeProgressManager(this.scene);
+		this.upgradeProgressManager = new UpgradeProgressManager(this.scene);
 		Player.clickDamage = 1;
 
 		// listen to game events (with params):

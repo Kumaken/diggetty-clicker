@@ -19,11 +19,12 @@ const issueUpgradeLevelUp = (key: string) => {
 };
 
 export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number) => (
-	<Card className="upgrade-cards">
+	<Card key={key} className="upgrade-cards">
 		<Card.Content className="upgrade-content">
 			<Media className="upgrade-img-container">
 				<Media.Item renderAs="figure">
 					<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
+					<Image className="is-overlay" rounded size={64} alt="64x64" src={upgradeData.img} />
 				</Media.Item>
 			</Media>
 			<Heading className="shpinscher-regular is-centered" size={4}>
@@ -32,61 +33,24 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 			<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
 				Lvl.{upgradeData.baseDMG}
 			</Heading>
+			<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
+				{upgradeData.desc}
+			</Heading>
 			<Box className="desc-box">
-				<Heading italic className="effect-text text-gray is-centered " subtitle size={6}>
-					"{upgradeData.desc}"
-				</Heading>
 				<Content>{upgradeData.effectDesc}</Content>
 			</Box>
 		</Card.Content>
-		<Columns className="upgrade-action" mobile>
-			<Columns.Column className="is-6">
+		<Columns className="upgrade-action">
+			<Columns.Column className="is-8">
 				<Button color="primary" rounded onClick={() => issueUpgradeLevelUp(key)}>
 					UPGRADE
 				</Button>
 			</Columns.Column>
-			<Columns.Column className="is-6 is-flex">
+			<Columns.Column className="is-4 is-flex">
 				<Heading className="is-centered silk-screen-A upgrade-cost" size={4}>
 					{cur_cost}$
 				</Heading>
 			</Columns.Column>
 		</Columns>
-		{/* <Card.Footer.Item renderAs="a" href="#Yes">
-				Yes
-			</Card.Footer.Item>
-			<Card.Footer.Item renderAs="a" href="#No">
-				No
-			</Card.Footer.Item> */}
 	</Card>
-	// <div
-	// 	key={key}
-	// 	class="container is-marginless"
-	// 	onClick={() => {
-	// 		issueUpgradeLevelUp(scene, key);
-	// 	}}
-	// >
-	// 	<div class="card is-horizontal tab-entry">
-	// 		<div class="card-image align-both-center">
-	// 			<figure class="image is-64x64">
-	// 				<img
-	// 					src="https://p1.hiclipart.com/preview/38/630/500/minecraft-diamond-pickaxe-minecraft-diamond-axe-png-clipart.jpg"
-	// 					alt="Placeholder image"
-	// 				/>
-	// 			</figure>
-	// 		</div>
-	// 		<div class="card-stacked">
-	// 			<div class="card-content is-paddingless">
-	// 				<div class="media-content">
-	// 					<p class="title is-4">{upgradeData.name}</p>
-	// 					<p class="subtitle is-6">{cur_cost}</p>
-	// 				</div>
-
-	// 				<div class="content">
-	// 					{upgradeData.desc} <a>@bulmaio</a>.<a href="#">#css</a> <a href="#">#responsive</a>
-	// 					<br />
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// </div>
 );
