@@ -19,10 +19,10 @@ export default class Player {
 			Player.clickDamage += dmgChange;
 
 			this.spendGold(price);
-			this.scene.events.emit(GameEvents.OnUpgradeDone);
+			this.game.events.emit(GameEvents.OnUpgradeDone, key);
 		} else {
 			console.log('not enough money');
-			this.scene.events.emit(GameEvents.NotEnoughMoney);
+			this.game.events.emit(GameEvents.InsufficientMoney);
 		}
 	}
 

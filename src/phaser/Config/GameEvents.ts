@@ -7,7 +7,7 @@ enum GameEvents {
 	OnMoneyChanged = 'ON_GOLD_CHANGED',
 	OnUpgradeIssued = 'ON_UPGRADE_ISSUED',
 	OnUpgradeDone = 'ON_UPGRADE_DONE',
-	NotEnoughMoney = 'NotEnoughMoney'
+	InsufficientMoney = 'InsufficientMoney'
 }
 
 export default GameEvents;

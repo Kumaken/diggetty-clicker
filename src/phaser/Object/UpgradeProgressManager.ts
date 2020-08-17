@@ -19,9 +19,6 @@ export default class UpgradeProgressManager {
 	}
 	levelUpProgress(key: string): void {
 		this.upgradeProgresses[key].level += 1;
-		const game = getGame();
-		game.events.emit(GameEvents.OnUpgradeDone, key);
-		console.log(this.upgradeProgresses);
 	}
 
 	getCurrentUpgradePrice(key: string) {

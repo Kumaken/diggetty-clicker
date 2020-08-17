@@ -11,6 +11,7 @@ export interface IGameStore {
 	money: number;
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
+	insufficientMoneyNotif: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
@@ -19,6 +20,7 @@ export interface IGameStore {
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
 	upgradeByKey(key: string);
+	setInsufficientMoneyNotif(value: boolean);
 }
 
 export class GameStore implements IGameStore {
@@ -46,6 +48,7 @@ export class GameStore implements IGameStore {
 	@observable money: number = 0;
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
+	@observable insufficientMoneyNotif: boolean = false;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -77,5 +80,9 @@ export class GameStore implements IGameStore {
 
 	@action upgradeByKey(key: string) {
 		this.upgradeProgresses[key].level += 1;
+	}
+
+	@action setInsufficientMoneyNotif(value: boolean) {
+		this.insufficientMoneyNotif = value;
 	}
 }

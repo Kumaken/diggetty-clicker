@@ -23,7 +23,7 @@ const UpgradeTabIterator = () => {
 	};
 
 	const createUpgradeEntry = (key: string, upgradeDatum: IUpgradeDatum) => {
-		console.log(store.gameStore?.upgradeProgresses);
+		//console.log(store.gameStore?.upgradeProgresses);
 		return UpgradeEntry(
 			key,
 			upgradeDatum,

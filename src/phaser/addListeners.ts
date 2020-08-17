@@ -24,8 +24,12 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 	});
 
 	game.events.on(GameEvents.OnUpgradeDone, (key: string) => {
-		console.log('uupdate');
 		gameStore?.upgradeByKey(key);
+	});
+
+	game.events.on(GameEvents.InsufficientMoney, () => {
+		console.log('called');
+		gameStore?.setInsufficientMoneyNotif(true);
 	});
 };
 
