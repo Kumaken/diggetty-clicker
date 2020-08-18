@@ -1,6 +1,6 @@
 import React from 'react';
 import './UpgradeEntry.scss';
-import { IUpgradeData, IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
+import { IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
 import GameEvents from '../../phaser/Config/GameEvents';
 
 import Card from 'react-bulma-components/lib/components/card';
@@ -18,7 +18,7 @@ const issueUpgradeLevelUp = (key: string) => {
 	game.events.emit(GameEvents.OnUpgradeIssued, key);
 };
 
-export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number) => (
+export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number, cur_level: number) => (
 	<Card key={key} className="upgrade-cards">
 		<Card.Content className="upgrade-content">
 			<Media className="upgrade-img-container">
@@ -31,12 +31,12 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 				{upgradeData.name}
 			</Heading>
 			<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
-				Lvl.{upgradeData.baseDMG}
+				Lvl.{cur_level}
 			</Heading>
 			<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
 				{upgradeData.desc}
 			</Heading>
-			<Box className="desc-box">
+			<Box className="desc-box text-yellow">
 				<Content>{upgradeData.effectDesc}</Content>
 			</Box>
 		</Card.Content>

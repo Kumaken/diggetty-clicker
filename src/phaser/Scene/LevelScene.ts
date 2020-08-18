@@ -9,8 +9,6 @@ import Player from '../Object/Player';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
 
 import '../Object/DamageTextPool';
-import TilePillar from 'phaser/Object/TilePillar';
-import { TexturePreloadKeys } from 'phaser/Config/TexturePreloadKeys';
 import TilePillarsManager from 'phaser/Object/TilePillarsManager';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 

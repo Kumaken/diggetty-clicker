@@ -34,11 +34,14 @@
 
 .desc-box {
 	white-space: pre-line;
-	text-align: justify;
-	color: black !important;
-	border-radius: 20% !important;
-	background-color: #ffcd00 !important;
-	padding: 1rem !important;
+	text-align: center;
+	border-radius: 5% !important;
+	// background-color: #ffcd00 !important;
+	background-color: transparent !important;
+	border-color: #ffcd00 !important;
+	border-style: solid;
+	border-width: 2px;
+	padding: 0.5rem 1rem !important;
 	margin-top: 1rem;
 	height: 5rem;
 }

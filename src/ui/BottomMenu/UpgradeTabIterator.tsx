@@ -1,22 +1,22 @@
 import { UpgradeData } from '../../phaser/Data/UpgradeData';
 import { UpgradeEntry } from './UpgradeEntry';
-import { IUpgradeData, IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
-import React, { useEffect, useState, useContext } from 'react';
+import { IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
+import React, { /* useEffect, useState, */ useContext } from 'react';
 import { RootStoreContext } from 'index';
 import { observer } from 'mobx-react';
 
 const UpgradeTabIterator = () => {
-	const [upgradeProgress, setUpdateProgress] = useState({});
+	// const [upgradeProgress, setUpdateProgress] = useState({});
 	const store = useContext(RootStoreContext);
 
-	useEffect(() => {
-		const _upgradeProgress = {};
-		for (let key in UpgradeData) {
-			console.log(key);
-			upgradeProgress[key] = 0;
-		}
-		setUpdateProgress(_upgradeProgress);
-	}, []);
+	// useEffect(() => {
+	// 	const _upgradeProgress = {};
+	// 	for (let key in UpgradeData) {
+	// 		console.log(key);
+	// 		_upgradeProgress[key] = 0;
+	// 	}
+	// 	setUpdateProgress(_upgradeProgress);
+	// }, []);
 
 	const calculateCurrentCost = (level: number, upgradeDatum: IUpgradeDatum) => {
 		return upgradeDatum.baseCost * level * upgradeDatum.costUpRatio;
@@ -27,7 +27,8 @@ const UpgradeTabIterator = () => {
 		return UpgradeEntry(
 			key,
 			upgradeDatum,
-			calculateCurrentCost(store.gameStore?.upgradeProgresses[key].level, upgradeDatum)
+			calculateCurrentCost(store.gameStore?.upgradeProgresses[key].level, upgradeDatum),
+			store.gameStore?.upgradeProgresses[key].level
 		);
 	};
 

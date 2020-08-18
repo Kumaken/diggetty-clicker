@@ -1,7 +1,6 @@
 import GameEvents from './Config/GameEvents';
 import { IGameStore } from './Store/GameStore';
 import { ITopMostPlatformInfo } from './Interfaces/ITopMostPlatformInfo';
-import { IUpgradeProgresses } from './Interfaces/IUpgradeProgress';
 
 // Custom event that change value in Mobx store
 const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
@@ -23,8 +22,9 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 		gameStore?.setDepth(value);
 	});
 
-	game.events.on(GameEvents.OnUpgradeDone, (key: string) => {
+	game.events.on(GameEvents.OnUpgradeDone, (key: string, DPC: number) => {
 		gameStore?.upgradeByKey(key);
+		gameStore?.setPlayerDPC(DPC);
 	});
 
 	game.events.on(GameEvents.InsufficientMoney, () => {

@@ -1,0 +1,35 @@
+.player-stats {
+	position: absolute;
+	top: 63%;
+	left: 0%;
+	width: 100%;
+}
+
+.player-stats-row {
+	width: 100%;
+	position: relative;
+}
+
+.dpc-tag {
+	margin-left: 0rem;
+	padding-left: 4rem !important;
+}
+
+.stats-pic {
+	position: absolute;
+	top: -120%;
+	left: 1%;
+}
+
+.stats-text {
+	width: 8.5rem;
+	direction: rtl;
+	position: absolute;
+	left: 7.5%;
+	top: -170%;
+	-webkit-text-stroke: 1px #ffffff !important;
+}
+
+.stats-subtext {
+	font-size: small;
+}

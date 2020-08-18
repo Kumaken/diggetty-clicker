@@ -1,16 +1,15 @@
-// import 'phaser';
-// import AlignTool from '../Util/AlignTool';
-// import BottomMenuManager from './BottomMenu/BottomMenuManager';
-// import { TextureKeys } from '../Config/TextureKeys';
-// import Player from '../Object/Player';
-// import GameEvents from '../Config/GameEvents';
-// import { StatsText } from './TextElements';
-
-import React from 'react';
-// import 'react-bulma-components/basic/react-bulma-components.min.css';
+import React, { useContext } from 'react';
+import { RootStoreContext } from 'index';
+import { observer } from 'mobx-react';
 import Tag from 'react-bulma-components/lib/components/tag';
+import Media from 'react-bulma-components/lib/components/media';
+import Image from 'react-bulma-components/lib/components/image';
+import Heading from 'react-bulma-components/lib/components/heading';
+import './PlayerStats.css';
+import { IconData } from 'phaser/Data/IconData';
 
-export const PlayerStats = () => {
+const PlayerStats = () => {
+	const store = useContext(RootStoreContext);
 	// const gameScene: Phaser.Scene;
 
 	//   const updateDPC = () => {
@@ -18,10 +17,34 @@ export const PlayerStats = () => {
 	//   }
 
 	const createDPC = () => {
-		return <Tag color="danger">Tag Text</Tag>;
+		return (
+			<>
+				<Media className="stats-pic">
+					<Media.Item renderAs="figure">
+						<Image
+							rounded
+							size={48}
+							alt="dpc icon pic bg"
+							src="http://bulma.io/images/placeholders/16x16.png"
+						/>
+						<Image overlay rounded size={48} alt="dpc icon pic" src={IconData.DPC} />
+					</Media.Item>
+				</Media>
+				<Tag className="dpc-tag" color="dark">
+					<p className="text-yellow silk-screen-A">Damage Per Click</p>
+				</Tag>
+				<Heading className="stats-text text-black silk-screen-A" size={1}>
+					{store.gameStore?.playerDPC}
+				</Heading>
+			</>
+		);
 	};
 
-	return <>{createDPC()}</>;
+	return (
+		<div className="player-stats">
+			<div className="player-stats-row">{createDPC()}</div>
+		</div>
+	);
 	// this.DPSText = this.gameScene.add.dom(
 	//   AlignTool.getXfromScreenWidth(this.gameScene, 0.12),
 	//   AlignTool.getYfromScreenHeight(
@@ -50,3 +73,5 @@ export const PlayerStats = () => {
 	//     this.createDPSUI();
 	//   }
 };
+
+export default observer(PlayerStats);
