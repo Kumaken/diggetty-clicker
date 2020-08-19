@@ -5,7 +5,7 @@ import Tag from 'react-bulma-components/lib/components/tag';
 import Media from 'react-bulma-components/lib/components/media';
 import Image from 'react-bulma-components/lib/components/image';
 import Heading from 'react-bulma-components/lib/components/heading';
-import './PlayerStats.css';
+import './PlayerStats.scss';
 import { IconData } from 'phaser/Data/IconData';
 
 const PlayerStats = () => {

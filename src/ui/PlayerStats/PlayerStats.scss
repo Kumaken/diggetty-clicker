@@ -1,3 +1,5 @@
+@import "../../_variables.sass";
+
 .player-stats {
 	position: absolute;
 	top: 63%;
@@ -27,7 +29,7 @@
 	position: absolute;
 	left: 7.5%;
 	top: -170%;
-	-webkit-text-stroke: 1px #ffffff !important;
+	-webkit-text-stroke: 1px #{$yellow} !important;
 }
 
 .stats-subtext {

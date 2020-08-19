@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerStats from './PlayerStats/PlayerStats';
-import './UI.css';
+import './UI.scss';
 import ToughnessBar from './ToughnessBar/ToughnessBar';
 import { ResourceStats } from './ResourceStats';
 import { BottomMenu } from './BottomMenu/BottomMenu';

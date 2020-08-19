@@ -27,7 +27,7 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 					<Image className="is-overlay" rounded size={64} alt="64x64" src={upgradeData.img} />
 				</Media.Item>
 			</Media>
-			<Heading className="shpinscher-regular is-centered" size={4}>
+			<Heading className="text-yellow-outline text-gray shpinscher-regular is-centered" size={4}>
 				{upgradeData.name}
 			</Heading>
 			<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>

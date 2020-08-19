@@ -1,3 +1,5 @@
+@import "../_variables.sass";
+
 .UI {
 	position: absolute;
 	left: 0;
@@ -25,23 +27,27 @@
 
 /* Colors */
 .text-white {
-	color: white !important;
+	color: #{$white} !important;
 }
 
 .text-black {
-	color: rgb(0, 0, 0) !important;
+	color: #{$black} !important;
 }
 
 .text-gray {
-	color: rgb(80, 80, 80) !important;
+	color: #{$gray} !important;
 }
 
 .text-yellow {
-	color: #ffe52c !important;
+	color: #{$yellow} !important;
 }
 
 .text-red {
-	color: red !important;
+	color: #{$red} !important;
+}
+
+.text-yellow-outline{
+	text-shadow: -1px -1px 0 #{$yellow}, 1px -1px 0 #{$yellow}, -1px 1px 0 #{$yellow}, 1px 1px 0 #{$yellow};
 }
 
 /* Animations: */
