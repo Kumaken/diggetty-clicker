@@ -1,6 +1,6 @@
 import 'phaser';
 import PlatformManager from './PlatformManager';
-import AlignTool from 'phaser/Util/AlignTool';
+import AlignTool from 'phaser/util/AlignTool';
 
 export default class TilePillar {
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor

@@ -1,6 +1,6 @@
 import TilePillar from './TilePillar';
-import { TexturePreloadKeys } from 'phaser/Config/TexturePreloadKeys';
-import AlignTool from 'phaser/Util/AlignTool';
+import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
+import AlignTool from 'phaser/util/AlignTool';
 import PlatformManager from './PlatformManager';
 
 export default class TilePillarsManager {

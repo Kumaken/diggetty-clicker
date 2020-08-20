@@ -1,9 +1,9 @@
 import 'phaser';
-import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
-import AlignTool from '../Util/AlignTool';
-import Algorithm from '../Util/Algorithm';
-import GameEvents from '../Config/GameEvents';
-import PreloadScene from '../Scene/PreloadScene';
+import { IDamageTextPool } from '../interface/IDamageTextPool';
+import AlignTool from '../util/AlignTool';
+import Algorithm from '../util/Algorithm';
+import GameEvents from '../config/GameEvents';
+import PreloadScene from '../scene/PreloadScene';
 import FontKeys from '../../config/FontKeys';
 import { getGame } from 'phaser/Game';
 import PlatformManager from './PlatformManager';

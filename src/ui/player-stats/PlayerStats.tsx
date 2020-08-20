@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { RootStoreContext } from 'index';
 import { observer } from 'mobx-react';
 import Tag from 'react-bulma-components/lib/components/tag';
-import Media from 'react-bulma-components/lib/components/media';
-import Image from 'react-bulma-components/lib/components/image';
-import Heading from 'react-bulma-components/lib/components/heading';
+import Media from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/media';
+import Image from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/image';
+import Heading from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/heading';
 import './PlayerStats.scss';
-import { IconData } from 'phaser/Data/IconData';
-import { DPSStatsText } from 'phaser/Data/UITextData';
+import { IconData } from 'phaser/data/IconData';
+import { DPSStatsText } from 'phaser/data/UITextData';
 
 const PlayerStats = () => {
 	const store = useContext(RootStoreContext);

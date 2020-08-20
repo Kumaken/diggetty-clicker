@@ -1,15 +1,15 @@
 import * as Phaser from 'phaser';
-import '../Object/TilePool';
-import FpsText from '../Object/FpsText';
-import PlatformManager from '../Object/PlatformManager';
-import { TextureKeys } from '../Config/TextureKeys';
-import SceneKeys from '../Config/SceneKeys';
-import Player from '../Object/Player';
+import '../object/TilePool';
+import FpsText from '../object/FpsText';
+import PlatformManager from '../object/PlatformManager';
+import { TextureKeys } from '../config/TextureKeys';
+import SceneKeys from '../config/SceneKeys';
+import Player from '../object/Player';
 // import GameUI from './GameUI';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
 
-import '../Object/DamageTextPool';
-import TilePillarsManager from 'phaser/Object/TilePillarsManager';
+import '../object/DamageTextPool';
+import TilePillarsManager from 'phaser/object/TilePillarsManager';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 
 export default class LevelScene extends Phaser.Scene {

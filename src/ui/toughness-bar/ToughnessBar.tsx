@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Progress from 'react-bulma-components/lib/components/progress';
-import { RootStoreContext } from '../../';
+import { RootStoreContext } from '../..';
 import { observer } from 'mobx-react';
 import './ToughnessBar.scss';
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import PlayerStats from './PlayerStats/PlayerStats';
+import PlayerStats from './player-stats/PlayerStats';
 import './UI.scss';
-import ToughnessBar from './ToughnessBar/ToughnessBar';
-import { ResourceStats } from './ResourceStats';
-import { BottomMenu } from './BottomMenu/BottomMenu';
+import ToughnessBar from './toughness-bar/ToughnessBar';
+import { ResourceStats } from './resource-stats';
+import { BottomMenu } from './bottom-menu/BottomMenu';
 import { observer } from 'mobx-react';
-import InsufficientMoneyAlert from './Alerts/InsufficientMoney';
+import InsufficientMoneyAlert from './alert/InsufficientMoney';
 
 const UI = () => {
 	return (
