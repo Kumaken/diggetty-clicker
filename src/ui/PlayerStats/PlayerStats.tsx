@@ -7,13 +7,14 @@ import Image from 'react-bulma-components/lib/components/image';
 import Heading from 'react-bulma-components/lib/components/heading';
 import './PlayerStats.scss';
 import { IconData } from 'phaser/Data/IconData';
+import { DPSStatsText } from 'phaser/Data/UITextData';
 
 const PlayerStats = () => {
 	const store = useContext(RootStoreContext);
 
-	const createDPC = () => {
+	const StatsComponent = (icon: string, name: string, value: number) => {
 		return (
-			<>
+			<div className="stats-component">
 				<Media className="stats-pic">
 					<Media.Item renderAs="figure">
 						<Image
@@ -22,22 +23,25 @@ const PlayerStats = () => {
 							alt="dpc icon pic bg"
 							src="http://bulma.io/images/placeholders/16x16.png"
 						/>
-						<Image overlay rounded size={48} alt="dpc icon pic" src={IconData.DPC} />
+						<Image overlay rounded size={48} alt="dpc icon pic" src={icon} />
 					</Media.Item>
 				</Media>
-				<Tag className="dpc-tag" color="dark">
-					<p className="text-yellow silk-screen-A">Damage Per Click</p>
+				<Tag className="dpc-tag" color="dark" rounded>
+					<p className="text-yellow silk-screen-A">{name}</p>
 				</Tag>
-				<Heading className="stats-text text-black silk-screen-A" size={1}>
-					{store.gameStore?.playerDPC}
+				<Heading className="stats-text text-gray text-yellow-outline silk-screen-A" size={1}>
+					{value}
 				</Heading>
-			</>
+			</div>
 		);
 	};
 
 	return (
 		<div className="player-stats">
-			<div className="player-stats-row">{createDPC()}</div>
+			<div className="player-stats-row">
+				{StatsComponent(IconData.DPC, DPSStatsText, store.gameStore?.playerDPC)}
+				{StatsComponent(IconData.DPS, DPSStatsText, store.gameStore?.playerDPS)}
+			</div>
 		</div>
 	);
 };
