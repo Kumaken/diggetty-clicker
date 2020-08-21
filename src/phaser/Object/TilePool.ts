@@ -34,6 +34,8 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 
 		tile.setTexture(key);
 		tile.setFrame(frame);
+		tile.currentTexture = key;
+		tile.currentFrame = frame;
 
 		if (spawnExisting) {
 			tile.setVisible(true);

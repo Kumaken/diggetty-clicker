@@ -91,11 +91,11 @@ export default class Platform {
 	// Platform animation methods:
 	animatePlatformBreak(): void {
 		const currentPhase = (-1*Math.ceil(this.toughness/this.breakStep)) + 5;
-		console.log(currentPhase);
 		if(currentPhase !== this.phase) {
 			this.row.forEach(tile => {
 				tile.animateBreak();
 			});
+			this.phase = currentPhase;
 		}
 	}
 }

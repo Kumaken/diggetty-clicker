@@ -4,6 +4,7 @@ import FpsText from '../Object/FpsText';
 import PlatformManager from '../Object/PlatformManager';
 import { TextureKeys } from '../Config/TextureKeys';
 import SceneKeys from '../Config/SceneKeys';
+import GameEvents from '../Config/GameEvents';
 import Player from '../Object/Player';
 // import GameUI from './GameUI';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
@@ -44,6 +45,14 @@ export default class LevelScene extends Phaser.Scene {
 		this.tilePillarsManager = new TilePillarsManager(this);
 
 		this.fpsText = new FpsText(this);
+		
+		this.game.events.on(
+			GameEvents.TopmostPlatformDestroyed, 
+			() => {
+				this.tilePillarsManager.moveDown();
+			},
+			this
+		);
 	}
 
 	update(): void {

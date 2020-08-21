@@ -30,21 +30,50 @@ export default class PreloadScene extends Phaser.Scene {
 		//   `${this.assetRoot}QuantityBar/track.png`
 		// );
 
-		this.load.spritesheet(TexturePreloadKeys.TL_DIRT, TL_DIRT, {
-			frameWidth: this.tileFrameWidth,
-			frameHeight: this.tileFrameHeight
-		});
-		this.load.spritesheet(TexturePreloadKeys.TL_ROCKY_DIRT, TL_ROCKY_DIRT, {
-			frameWidth: this.tileFrameWidth,
-			frameHeight: this.tileFrameHeight
-		});
-		this.load.spritesheet(TexturePreloadKeys.TL_SHAKY_DIRT, TL_SHAKY_DIRT, {
-			frameWidth: this.tileFrameWidth,
-			frameHeight: this.tileFrameHeight
-		});
+		/* UNCOMMENT IF USING NORMAL FORMAT*/
+		// this.load.spritesheet(TexturePreloadKeys.TL_DIRT, TL_DIRT, {
+		// 	frameWidth: this.tileFrameWidth,
+		// 	frameHeight: this.tileFrameHeight
+		// });
+		// this.load.spritesheet(TexturePreloadKeys.TL_ROCKY_DIRT, TL_ROCKY_DIRT, {
+		// 	frameWidth: this.tileFrameWidth,
+		// 	frameHeight: this.tileFrameHeight
+		// });
+		// this.load.spritesheet(TexturePreloadKeys.TL_SHAKY_DIRT, TL_SHAKY_DIRT, {
+		// 	frameWidth: this.tileFrameWidth,
+		// 	frameHeight: this.tileFrameHeight
+		// });
+		// this.load.image(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK);
 
-		this.load.image(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK);
-		console.log(this.textures.get(TexturePreloadKeys.TL_DIRT));
+		/* UNCOMMENT IF USING BASE64 FORMAT */
+		let dirtImg = new Image();
+		dirtImg.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.TL_DIRT, dirtImg, { 
+				frameWidth: this.tileFrameWidth, 
+				frameHeight:  this.tileFrameHeight
+			});
+		};
+		dirtImg.src = TL_DIRT;
+
+		let rockyDirtImg = new Image();
+		rockyDirtImg.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.TL_ROCKY_DIRT, rockyDirtImg, { 
+				frameWidth: this.tileFrameWidth, 
+				frameHeight:  this.tileFrameHeight
+			});
+		};
+		rockyDirtImg.src = TL_ROCKY_DIRT;
+
+		let shakyDirtImg = new Image();
+		shakyDirtImg.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.TL_SHAKY_DIRT, shakyDirtImg, { 
+				frameWidth: this.tileFrameWidth, 
+				frameHeight:  this.tileFrameHeight
+			});
+		};
+		shakyDirtImg.src = TL_SHAKY_DIRT;
+
+		this.textures.addBase64(TexturePreloadKeys.TL_HARD_ROCK,TL_HARD_ROCK);
 
 		// Load Icons:
 		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}Icons/minecraft_transparent.png`, {
