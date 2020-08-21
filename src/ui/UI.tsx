@@ -32,7 +32,7 @@ const UI = () => {
 	}, []);
 
 	return (
-		<div className="UI">
+		<div className="UI noselect">
 			{isConfigLoaded ? (
 				<>
 					<PlayerStats></PlayerStats>
