@@ -7,14 +7,17 @@ export const TextureKeys = {
   },
   TL_DIRT: {
     key: TexturePreloadKeys.TL_DIRT,
-    frame: [104, 105, 106, 107, 108]
+    frame: [0, 1, 2, 3, 4],
+    frameStep: 5
   },
   TL_ROCKY_DIRT: {
-    key: TexturePreloadKeys.TL_DIRT,
-    frame: [192, 193, 194]
+    key: TexturePreloadKeys.TL_ROCKY_DIRT,
+    frame: [0, 1, 2],
+    frameStep: 3
   },
   TL_SHAKY_DIRT: {
-    key: TexturePreloadKeys.TL_DIRT,
-    frame: [103]
+    key: TexturePreloadKeys.TL_SHAKY_DIRT,
+    frame: [0],
+    frameStep: 1
   }
 };

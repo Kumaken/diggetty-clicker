@@ -5,8 +5,10 @@ import GameEvents from '../Config/GameEvents';
 import AlignTool from '../Util/AlignTool';
 
 // import images so webpack could include it:
-import TL_DIRT from '../../assets/Tiles/dirt_Tiles_407.png';
-import TL_HARD_ROCK from '../../assets/Tiles/hard_rock.png';
+import TL_DIRT from '../../assets/Tiles/dirt_spritesheet.png';
+import TL_ROCKY_DIRT from '../../assets/Tiles/rocky_dirt_spritesheet.png';
+import TL_SHAKY_DIRT from '../../assets/Tiles/shaky_dirt_spritesheet.png';
+import TL_HARD_ROCK from '../../assets/Tiles/hardrock.png';
 
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
@@ -14,8 +16,8 @@ export default class PreloadScene extends Phaser.Scene {
 		scaleWidth: number;
 		scaleHeight: number;
 	};
-	private tileFrameWidth: number = 17.9;
-	private tileFrameHeight: number = 17.9;
+	private tileFrameWidth: number = 16;
+	private tileFrameHeight: number = 16;
 
 	constructor() {
 		super({ key: SceneKeys.Preload });
@@ -32,13 +34,19 @@ export default class PreloadScene extends Phaser.Scene {
 			frameWidth: this.tileFrameWidth,
 			frameHeight: this.tileFrameHeight
 		});
-
-		this.load.spritesheet(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK, {
+		this.load.spritesheet(TexturePreloadKeys.TL_ROCKY_DIRT, TL_ROCKY_DIRT, {
+			frameWidth: this.tileFrameWidth,
+			frameHeight: this.tileFrameHeight
+		});
+		this.load.spritesheet(TexturePreloadKeys.TL_SHAKY_DIRT, TL_SHAKY_DIRT, {
 			frameWidth: this.tileFrameWidth,
 			frameHeight: this.tileFrameHeight
 		});
 
-		// // Load Icons:
+		this.load.image(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK);
+		console.log(this.textures.get(TexturePreloadKeys.TL_DIRT));
+
+		// Load Icons:
 		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}Icons/minecraft_transparent.png`, {
 			frameWidth: 18,
 			frameHeight: 18

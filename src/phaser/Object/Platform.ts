@@ -24,6 +24,8 @@ export default class Platform {
 
 	// Platform Stats:
 	public toughness: number;
+	private breakStep: number;
+	private phase: number;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -42,6 +44,8 @@ export default class Platform {
 		this.tileSize = tileSize;
 		// Stats initialization:
 		this.toughness = platformData.toughness;
+		this.breakStep = Math.floor(this.toughness/5);
+		this.phase = 0;
 		this.generateRow(platformData.textureKey.frame);
 	}
 
@@ -80,6 +84,18 @@ export default class Platform {
 		if (amount >= this.toughness) this.onDestruction();
 		else {
 			this.toughness -= amount;
+			this.animatePlatformBreak();
+		}
+	}
+
+	// Platform animation methods:
+	animatePlatformBreak(): void {
+		const currentPhase = (-1*Math.ceil(this.toughness/this.breakStep)) + 5;
+		console.log(currentPhase);
+		if(currentPhase !== this.phase) {
+			this.row.forEach(tile => {
+				tile.animateBreak();
+			});
 		}
 	}
 }
