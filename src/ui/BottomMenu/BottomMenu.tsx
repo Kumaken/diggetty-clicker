@@ -9,7 +9,7 @@ import UpgradeTabIterator from './UpgradeTabIterator';
 const transitionDuration = 300;
 
 export const BottomMenu = () => {
-	const [tabList, setTabList] = useState([
+	const [tabList] = useState([
 		{
 			name: 'Upgrades',
 			icon: '',

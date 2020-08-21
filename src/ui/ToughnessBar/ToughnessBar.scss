@@ -1,12 +1,14 @@
+@import "../../_variables.sass";
+
 .health-bar {
 	position: absolute;
 	width: 40%;
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, 0);
-	color: white;
+	color: #{$black};
 	font-size: 1.5rem;
-	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	text-shadow: -1px -1px 0 #{$yellow}, 1px -1px 0 #{$yellow}, -1px 1px 0 #{$yellow}, 1px 1px 0 #{$yellow};
 }
 
 .platform-name {
@@ -18,7 +20,8 @@
 
 .platform-toughness {
 	position: absolute;
-	top: -1.5rem;
-	right: 1rem;
+	top: -1.8rem;
+	right: 0.5rem;
+	font-size: 2rem;
 	float: right;
 }

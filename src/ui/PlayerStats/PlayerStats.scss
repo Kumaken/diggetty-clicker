@@ -1,3 +1,5 @@
+@import "../../_variables.sass";
+
 .player-stats {
 	position: absolute;
 	top: 63%;
@@ -10,7 +12,16 @@
 	position: relative;
 }
 
+.stats-component{
+	width:30%;
+	margin-right: 0.1rem;
+	margin-left: 0.1rem;
+	position: relative;
+	display: inline-block; // put two relative divs side-by-side
+}
+
 .dpc-tag {
+	width:100%;
 	margin-left: 0rem;
 	padding-left: 4rem !important;
 }
@@ -25,9 +36,8 @@
 	width: 8.5rem;
 	direction: rtl;
 	position: absolute;
-	left: 7.5%;
+	left: 30%;
 	top: -170%;
-	-webkit-text-stroke: 1px #ffffff !important;
 }
 
 .stats-subtext {

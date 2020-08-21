@@ -8,6 +8,7 @@ export interface IGameStore {
 	topPlatformToughness: number;
 	topPlatformMaxToughness: number;
 	playerDPC: number;
+	playerDPS: number;
 	money: number;
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
@@ -16,6 +17,7 @@ export interface IGameStore {
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
 	setPlayerDPC(value: number): void;
+	setPlayerDPS(value: number): void;
 	setMoney(value: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
@@ -45,6 +47,7 @@ export class GameStore implements IGameStore {
 	@observable topPlatformToughness: number = 0;
 	@observable topPlatformMaxToughness: number = 1;
 	@observable playerDPC: number = 1;
+	@observable playerDPS: number = 0;
 	@observable money: number = 0;
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
@@ -64,6 +67,10 @@ export class GameStore implements IGameStore {
 
 	@action setPlayerDPC(value: number) {
 		this.playerDPC = value;
+	}
+
+	@action setPlayerDPS(value: number) {
+		this.playerDPS = value;
 	}
 
 	@action setMoney(value: number) {
