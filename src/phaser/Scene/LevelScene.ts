@@ -2,6 +2,7 @@ import * as Phaser from 'phaser';
 import '../Object/TilePool';
 import FpsText from '../Object/FpsText';
 import PlatformManager from '../Object/PlatformManager';
+import ParticlesManager from '../Object/ParticlesManager';
 import { TextureKeys } from '../Config/TextureKeys';
 import SceneKeys from '../Config/SceneKeys';
 import GameEvents from '../Config/GameEvents';
@@ -11,11 +12,13 @@ import Player from '../Object/Player';
 
 import '../Object/DamageTextPool';
 import TilePillarsManager from 'phaser/Object/TilePillarsManager';
+import { ITile } from 'phaser/Interfaces/ITile';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 
 export default class LevelScene extends Phaser.Scene {
 	private fpsText!: FpsText;
 	private platformManager!: PlatformManager;
+	private particlesManager: ParticlesManager;
 	private player!: Player;
 	private tilePillarsManager: TilePillarsManager;
 
@@ -42,10 +45,8 @@ export default class LevelScene extends Phaser.Scene {
 		this.platformManager = new PlatformManager(this, this.player);
 		this.platformManager.spawnPlatformInitial(TextureKeys.TL_DIRT);
 
+		// Tile pillars
 		this.tilePillarsManager = new TilePillarsManager(this);
-
-		this.fpsText = new FpsText(this);
-		
 		this.game.events.on(
 			GameEvents.TopmostPlatformDestroyed, 
 			() => {
@@ -53,6 +54,19 @@ export default class LevelScene extends Phaser.Scene {
 			},
 			this
 		);
+		
+		// Particles Manager
+		this.particlesManager = new ParticlesManager(this);
+		this.game.events.on(
+			GameEvents.OnDamage, 
+			() => {
+				this.particlesManager.showParticles();
+			},
+			this
+		);
+
+		this.fpsText = new FpsText(this);
+		
 	}
 
 	update(): void {
