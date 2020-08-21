@@ -2,6 +2,7 @@ import 'phaser';
 import PlatformManager from './PlatformManager';
 import AlignTool from 'phaser/Util/AlignTool';
 import { ITilePillar } from '../Interfaces/ITilePillar';
+import { DepthConfig } from '../Config/DepthConfig';
 
 export default class TilePillar extends Phaser.GameObjects.TileSprite implements ITilePillar{
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -19,11 +20,24 @@ export default class TilePillar extends Phaser.GameObjects.TileSprite implements
 		this.tileScaleX = 4;
 		this.tileScaleY = this.tileScaleX;
 		this.setOrigin(0);
-		this.setDepth(2);
+		this.setDepth(DepthConfig.Pillar);
 		scene.add.existing(this);
 	}
 
 	scrollUp(): void{
-		this.tilePositionY += 5;
+		// this.scene.tweens.add({
+		// 	targets: this.tilePositionY,
+		// 	y: this.tilePositionY + 5,
+		// 	duration: 500
+		// });
+
+		this.scene.time.addEvent({
+			delay: 1,
+			callback: () => {
+				this.tilePositionY += 1;
+			},
+			callbackScope: this,
+			repeat: 25
+		});
 	}
 }

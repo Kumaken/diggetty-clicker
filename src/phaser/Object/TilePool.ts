@@ -2,6 +2,7 @@ import 'phaser';
 import Tile from './Tile';
 import { ITilePool } from '../Interfaces/ITilePool';
 import AlignTool from '../Util/AlignTool';
+import { DepthConfig } from '../Config/DepthConfig';
 
 export default class TilePool extends Phaser.Physics.Arcade.Group implements ITilePool {
 	constructor(
@@ -34,6 +35,7 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 
 		tile.setTexture(key);
 		tile.setFrame(frame);
+		tile.setDepth(DepthConfig.Tile);
 		tile.currentTexture = key;
 		tile.currentFrame = frame;
 

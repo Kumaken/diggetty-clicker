@@ -3,5 +3,6 @@ export const TexturePreloadKeys = {
 	TL_DIRT: 'dirt',
 	TL_ROCKY_DIRT: 'rocky-dirt',
 	TL_SHAKY_DIRT: 'shaky-dirt',
-	TL_HARD_ROCK: 'hard-rock'
+	TL_HARD_ROCK: 'hard-rock',
+	BACKGROUND: 'background'
 };

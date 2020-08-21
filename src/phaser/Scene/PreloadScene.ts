@@ -9,6 +9,7 @@ import TL_DIRT from '../../assets/Tiles/dirt_spritesheet.png';
 import TL_ROCKY_DIRT from '../../assets/Tiles/rocky_dirt_spritesheet.png';
 import TL_SHAKY_DIRT from '../../assets/Tiles/shaky_dirt_spritesheet.png';
 import TL_HARD_ROCK from '../../assets/Tiles/hardrock.png';
+import BACKGROUND from '../../assets/background.jpg';
 
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
@@ -44,6 +45,8 @@ export default class PreloadScene extends Phaser.Scene {
 		// 	frameHeight: this.tileFrameHeight
 		// });
 		// this.load.image(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK);
+
+		this.load.image(TexturePreloadKeys.BACKGROUND,BACKGROUND);
 
 		/* UNCOMMENT IF USING BASE64 FORMAT */
 		let dirtImg = new Image();
