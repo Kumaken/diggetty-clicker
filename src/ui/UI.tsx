@@ -41,7 +41,11 @@ const UI = () => {
 					<BottomMenu></BottomMenu>
 					<Alerts></Alerts>
 				</>
-			) : null}
+			) : (
+				<div className="pageloader is-active is-bottom-to-top">
+					<span className="title">Loading Configurations...</span>
+				</div>
+			)}
 		</div>
 	);
 };

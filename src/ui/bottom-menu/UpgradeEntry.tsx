@@ -43,12 +43,14 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 		</Card.Content>
 		<Columns className="upgrade-action">
 			<Columns.Column className="is-8">
-				<Button color="primary" rounded onClick={() => issueUpgradeLevelUp(key)}>
-					UPGRADE
+				<Button color="warning" rounded onClick={() => issueUpgradeLevelUp(key)}>
+					<Heading italic className="shpinscher-regular text-gray" subtitle size={4}>
+						UPGRADE
+					</Heading>
 				</Button>
 			</Columns.Column>
 			<Columns.Column className="is-4 is-flex">
-				<Heading className="is-centered silk-screen-A upgrade-cost" size={4}>
+				<Heading className="is-centered silk-screen-A upgrade-cost text-yellow-outline text-gray" size={4}>
 					<MoneyText value={cur_cost} />
 				</Heading>
 			</Columns.Column>

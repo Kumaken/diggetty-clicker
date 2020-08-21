@@ -41,8 +41,8 @@ const PlayerStats = () => {
 	return (
 		<div className="player-stats">
 			<div className="player-stats-row">
-				{StatsComponent(IconData.DPC, DPSText, store.gameStore?.playerDPC)}
-				{StatsComponent(IconData.DPS, DPCText, store.gameStore?.playerDPS)}
+				{StatsComponent(IconData.DPC, DPCText, store.gameStore?.playerDPC)}
+				{StatsComponent(IconData.DPS, DPSText, store.gameStore?.playerDPS)}
 			</div>
 		</div>
 	);
