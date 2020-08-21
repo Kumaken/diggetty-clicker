@@ -22,7 +22,7 @@ export default class Player {
 			this.game.events.emit(GameEvents.OnUpgradeDone, key, Player.clickDamage);
 		} else {
 			console.log('not enough money');
-			this.game.events.emit(GameEvents.InsufficientMoney);
+			this.game.events.emit(GameEvents.OnUpgradeDone);
 		}
 	}
 

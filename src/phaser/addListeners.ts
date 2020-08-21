@@ -23,13 +23,12 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 	});
 
 	game.events.on(GameEvents.OnUpgradeDone, (key: string, DPC: number) => {
+		if (!key && !DPC) {
+			gameStore?.setInsufficientMoneyNotif(true);
+			return;
+		}
 		gameStore?.upgradeByKey(key);
 		gameStore?.setPlayerDPC(DPC);
-	});
-
-	game.events.on(GameEvents.InsufficientMoney, () => {
-		console.log('called');
-		gameStore?.setInsufficientMoneyNotif(true);
 	});
 };
 

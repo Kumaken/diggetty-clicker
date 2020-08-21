@@ -50,6 +50,10 @@
 	text-shadow: -1px -1px 0 #{$yellow}, 1px -1px 0 #{$yellow}, -1px 1px 0 #{$yellow}, 1px 1px 0 #{$yellow};
 }
 
+.text-gray-outline{
+	text-shadow: -0.5px -0.5px 0 #{$gray}, 0.5px -0.5px 0 #{$gray}, -0.5px 0.5px 0 #{$gray}, 0.5px 0.5px 0 #{$gray};
+}
+
 /* Animations: */
 .alert-enter {
 	opacity: 0;

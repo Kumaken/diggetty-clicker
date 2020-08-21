@@ -56,6 +56,20 @@
 	white-space: nowrap !important;
 }
 
+.button-text{
+	font-size: medium !important;
+	font-weight: bold;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	// font-weight: bold;
+}
+.button-text:hover{
+
+	border: 3px solid #{$yellow} !important;
+	background-color: #{$dark-orange} !important;
+	color: #{$light-yellow}!important;
+}
 // .card {
 // 	&.is-horizontal {
 // 		display: flex;
