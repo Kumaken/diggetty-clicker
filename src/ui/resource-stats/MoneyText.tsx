@@ -1,16 +1,18 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 import LocalStorageKeys from 'config/LocalStorageKeys';
 
-const MoneyText = (value: number) => {
-	const currency = localStorage.getKey(LocalStorageKeys.Currency);
+interface IMoneyProps {
+	value: number;
+}
+const MoneyText = (props: IMoneyProps) => {
+	const currency = localStorage.getItem(LocalStorageKeys.Currency);
 
 	return (
 		<>
-			{value}
+			{props.value}
 			{currency}
 		</>
 	);
 };
 
-export default observer(MoneyText);
+export default MoneyText;

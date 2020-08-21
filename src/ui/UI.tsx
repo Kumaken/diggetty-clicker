@@ -21,11 +21,13 @@ const UI = () => {
 
 	// setup configurations:
 	useEffect(() => {
-		if (localStorage.getItem('isConfigured')) return;
-
+		if (localStorage.getItem('isConfigured') === 'true') {
+			setIsConfigLoaded(true);
+			return;
+		}
 		saveToLocalStorage(UITextData);
 
-		// localStorage.setItem('isConfigured', 'true');
+		localStorage.setItem('isConfigured', 'true');
 		setIsConfigLoaded(true);
 	}, []);
 

@@ -1,16 +1,17 @@
 import React from 'react';
-import Heading from 'react-bulma-components/lib/components/heading';
-import { observer } from 'mobx-react';
 import LocalStorageKeys from 'config/LocalStorageKeys';
 
-const DepthText = (value: number) => {
-	const depthMetric = localStorage.getKey(LocalStorageKeys.DepthMetric);
+interface IDepthProps {
+	value: number;
+}
 
+const DepthText = (props: IDepthProps) => {
+	const depthMetric = localStorage.getItem(LocalStorageKeys.DepthMetric);
 	return (
 		<>
-			{value} {depthMetric}
+			{props.value} {depthMetric}
 		</>
 	);
 };
 
-export default observer(DepthText);
+export default DepthText;
