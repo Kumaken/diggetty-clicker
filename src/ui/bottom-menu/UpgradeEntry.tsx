@@ -12,6 +12,7 @@ import Box from 'react-bulma-components/lib/components/box';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
 import { getGame } from 'phaser/Game';
+import MoneyText from 'ui/resource-stats/MoneyText';
 
 const issueUpgradeLevelUp = (key: string) => {
 	const game = getGame();
@@ -48,7 +49,7 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 			</Columns.Column>
 			<Columns.Column className="is-4 is-flex">
 				<Heading className="is-centered silk-screen-A upgrade-cost" size={4}>
-					{cur_cost}$
+					{MoneyText(cur_cost)}
 				</Heading>
 			</Columns.Column>
 		</Columns>

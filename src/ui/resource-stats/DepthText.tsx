@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Heading from 'react-bulma-components/lib/components/heading';
-import { RootStoreContext } from '../..';
 import { observer } from 'mobx-react';
+import LocalStorageKeys from 'config/LocalStorageKeys';
 
-const DepthText = () => {
-	const store = useContext(RootStoreContext);
+const DepthText = (value: number) => {
+	const depthMetric = localStorage.getKey(LocalStorageKeys.DepthMetric);
 
 	return (
-		<Heading className="text-gray text-yellow-outline silk-screen-A is-centered">
-			{store.gameStore?.depth} km
-		</Heading>
+		<>
+			{value} {depthMetric}
+		</>
 	);
 };
 

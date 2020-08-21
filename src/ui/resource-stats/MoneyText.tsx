@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import Heading from 'react-bulma-components/lib/components/heading';
-import { RootStoreContext } from '../..';
+import React from 'react';
 import { observer } from 'mobx-react';
+import LocalStorageKeys from 'config/LocalStorageKeys';
 
-const MoneyText = () => {
-	const store = useContext(RootStoreContext);
+const MoneyText = (value: number) => {
+	const currency = localStorage.getKey(LocalStorageKeys.Currency);
 
 	return (
-		<Heading className="text-gray text-yellow-outline silk-screen-A is-centered" size={1}>
-			{store.gameStore?.money}$
-		</Heading>
+		<>
+			{value}
+			{currency}
+		</>
 	);
 };
 

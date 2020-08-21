@@ -5,11 +5,11 @@ import { ITextureKey } from '../interface/ITextureKey';
 import { ITilePool } from '../interface/ITilePool';
 import Platform from './Platform';
 import GameEvents from '../config/GameEvents';
-import { PlatformData } from '../data/PlatformData';
+import { PlatformData } from '../../data/PlatformData';
 import Player from './Player';
 import { TextureKeys } from '../config/TextureKeys';
 import './TilePool';
-import { ITopMostPlatformInfo } from 'phaser/object/node_modules/phaser/Interfaces/ITopMostPlatformInfo;
+import { ITopMostPlatformInfo } from 'phaser/interface/ITopMostPlatformInfo';
 import { getGame } from 'phaser/Game';
 import Algorithm from 'phaser/util/Algorithm';
 

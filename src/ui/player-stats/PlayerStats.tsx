@@ -2,15 +2,17 @@ import React, { useContext } from 'react';
 import { RootStoreContext } from 'index';
 import { observer } from 'mobx-react';
 import Tag from 'react-bulma-components/lib/components/tag';
-import Media from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/media';
-import Image from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/image';
-import Heading from 'ui/bottom-menu/node_modules/react-bulma-components/lib/components/heading';
+import Media from 'react-bulma-components/lib/components/media';
+import Image from 'react-bulma-components/lib/components/image';
+import Heading from 'react-bulma-components/lib/components/heading';
 import './PlayerStats.scss';
-import { IconData } from 'phaser/data/IconData';
-import { DPSStatsText } from 'phaser/data/UITextData';
+import { IconData } from 'data/IconData';
+import LocalStorageKeys from 'config/LocalStorageKeys';
 
 const PlayerStats = () => {
 	const store = useContext(RootStoreContext);
+	const DPSText = localStorage.getItem(LocalStorageKeys.DPSText);
+	const DPCText = localStorage.getItem(LocalStorageKeys.DPCText);
 
 	const StatsComponent = (icon: string, name: string, value: number) => {
 		return (
@@ -39,8 +41,8 @@ const PlayerStats = () => {
 	return (
 		<div className="player-stats">
 			<div className="player-stats-row">
-				{StatsComponent(IconData.DPC, DPSStatsText, store.gameStore?.playerDPC)}
-				{StatsComponent(IconData.DPS, DPSStatsText, store.gameStore?.playerDPS)}
+				{StatsComponent(IconData.DPC, DPSText, store.gameStore?.playerDPC)}
+				{StatsComponent(IconData.DPS, DPCText, store.gameStore?.playerDPS)}
 			</div>
 		</div>
 	);
