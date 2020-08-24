@@ -1,12 +1,8 @@
 import 'phaser';
 import PlatformManager from './PlatformManager';
-<<<<<<< HEAD
 import AlignTool from 'phaser/Util/AlignTool';
-import { ITilePillar } from '../Interfaces/ITilePillar';
-import { DepthConfig } from '../config/DepthConfig';
-=======
-import AlignTool from 'phaser/util/AlignTool';
->>>>>>> a995294a6740b9d4ac26c8f58f5e7d125ee2f4fc
+import { ITilePillar } from '../interfaces/ITilePillar';
+import { DepthConfig } from '../Config/DepthConfig';
 
 export default class TilePillar extends Phaser.GameObjects.TileSprite implements ITilePillar{
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor

@@ -1,5 +1,5 @@
 import 'phaser';
-import { IUpgradeProgresses, IUpgradeProgress } from '../Interfaces/IUpgradeProgress';
+import { IUpgradeProgresses, IUpgradeProgress } from '../interfaces/IUpgradeProgress';
 import { UpgradeData } from '../../data/UpgradeData';
 
 export default class UpgradeProgressManager {

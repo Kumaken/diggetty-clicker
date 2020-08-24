@@ -1,6 +1,6 @@
-import { gameConfig } from './config/PhaserConfig';
+import { gameConfig } from './Config/PhaserConfig';
 import registerScenes from './registerScenes';
-import { IGameStore } from './store/GameStore';
+import { IGameStore } from './Store/GameStore';
 import addGameEventListeners from './addListeners';
 
 let game: Phaser.Game;

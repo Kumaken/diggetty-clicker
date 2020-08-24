@@ -1,11 +1,11 @@
 import 'phaser';
-import AlignTool from '../util/AlignTool';
-import { ITile } from '../Interfaces/ITile';
-import { ITilePool } from '../Interfaces/ITilePool';
+import AlignTool from '../Util/AlignTool';
+import { ITile } from '../interfaces/ITile';
+import { ITilePool } from '../interfaces/ITilePool';
 import Player from './Player';
-import GameEvents from '../config/GameEvents';
-import { IPlatformData } from '../Interfaces/IPlatformData';
-import Algorithm from '../util/Algorithm';
+import GameEvents from '../Config/GameEvents';
+import { IPlatformData } from '../interfaces/IPlatformData';
+import Algorithm from '../Util/Algorithm';
 import TilePool from './TilePool';
 import { getGame } from 'phaser/Game';
 

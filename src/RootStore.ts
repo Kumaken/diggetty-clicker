@@ -1,4 +1,4 @@
-import { GameStore, IGameStore } from './phaser/store/GameStore';
+import { GameStore, IGameStore } from './phaser/Store/GameStore';
 
 export interface IRootStore {
 	gameStore?: IGameStore;

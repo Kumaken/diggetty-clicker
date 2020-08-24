@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import Notification from 'react-bulma-components/lib/components/notification';
 import Button from 'react-bulma-components/lib/components/button';
 import { observer } from 'mobx-react';
-import Algorithm from 'phaser/util/Algorithm';
+import Algorithm from 'phaser/Util/Algorithm';
 
 const InsufficientMoneyAlert = () => {
 	const store = useContext(RootStoreContext);

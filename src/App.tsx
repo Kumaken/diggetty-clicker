@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 
 import './App.scss';
 
-import SceneKeys from './phaser/config/SceneKeys';
+import SceneKeys from './phaser/Config/SceneKeys';
 import { createGame } from './phaser/Game';
 import UI from './ui/UI';
 import { RootStoreContext } from 'index';

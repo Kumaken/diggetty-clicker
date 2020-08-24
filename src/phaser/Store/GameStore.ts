@@ -1,6 +1,6 @@
 import { IRootStore } from '../../RootStore';
-import { action, observable } from 'mobx';
-import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/Interfaces/IUpgradeProgress';
+import { action, observable } from '../../../node_modules/mobx';
+import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/interfaces/IUpgradeProgress';
 import { UpgradeData } from 'data/UpgradeData';
 
 export interface IGameStore {

@@ -2,7 +2,7 @@ import TilePillar from './TilePillar';
 import { TexturePreloadKeys } from '../Config/TexturePreloadKeys';
 import AlignTool from 'phaser/Util/AlignTool';
 import PlatformManager from './PlatformManager';
-import { ITilePillar } from '../Interfaces/ITilePillar';
+import { ITilePillar } from '../interfaces/ITilePillar';
 import { DepthConfig } from '../Config/DepthConfig';
 
 export default class TilePillarsManager {

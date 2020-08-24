@@ -1,6 +1,6 @@
 import 'phaser';
 import Tile from './Tile';
-import { ITilePool } from '../Interfaces/ITilePool';
+import { ITilePool } from '../interfaces/ITilePool';
 import AlignTool from '../Util/AlignTool';
 import { DepthConfig } from '../Config/DepthConfig';
 

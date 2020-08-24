@@ -1,6 +1,6 @@
 import { UpgradeData } from '../../data/UpgradeData';
 import { UpgradeEntry } from './UpgradeEntry';
-import { IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
+import { IUpgradeDatum } from '../../phaser/interfaces/IUpgradeData';
 import React, { /* useEffect, useState, */ useContext } from 'react';
 import { RootStoreContext } from 'index';
 import { observer } from 'mobx-react';

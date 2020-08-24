@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './UpgradeEntry.scss';
-import { IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
-import GameEvents from '../../phaser/config/GameEvents';
+import { IUpgradeDatum } from '../../phaser/interfaces/IUpgradeData';
+import GameEvents from '../../phaser/Config/GameEvents';
 
 import Card from 'react-bulma-components/lib/components/card';
 import Media from 'react-bulma-components/lib/components/media';

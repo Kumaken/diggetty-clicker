@@ -1,5 +1,5 @@
 import 'phaser';
-import { ITile } from '../Interfaces/ITile';
+import { ITile } from '../interfaces/ITile';
 import { TextureKeys } from '../Config/TextureKeys';
 
 export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile {

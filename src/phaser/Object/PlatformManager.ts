@@ -1,17 +1,17 @@
 import 'phaser';
-import AlignTool from '../util/AlignTool';
-import { IPlatformData } from '../Interfaces/IPlatformData';
-import { ITextureKey } from '../Interfaces/ITextureKey';
-import { ITilePool } from '../Interfaces/ITilePool';
+import AlignTool from '../Util/AlignTool';
+import { IPlatformData } from '../interfaces/IPlatformData';
+import { ITextureKey } from '../interfaces/ITextureKey';
+import { ITilePool } from '../interfaces/ITilePool';
 import Platform from './Platform';
-import GameEvents from '../config/GameEvents';
+import GameEvents from '../Config/GameEvents';
 import { PlatformData } from '../../data/PlatformData';
 import Player from './Player';
-import { TextureKeys } from '../config/TextureKeys';
+import { TextureKeys } from '../Config/TextureKeys';
 import './TilePool';
-import { ITopMostPlatformInfo } from 'phaser/Interfaces/ITopMostPlatformInfo';
+import { ITopMostPlatformInfo } from 'phaser/interfaces/ITopMostPlatformInfo';
 import { getGame } from 'phaser/Game';
-import Algorithm from 'phaser/util/Algorithm';
+import Algorithm from 'phaser/Util/Algorithm';
 
 export default class PlatformManager {
 	private game: Phaser.Game;

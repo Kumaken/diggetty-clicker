@@ -1,6 +1,6 @@
-import GameEvents from './config/GameEvents';
-import { IGameStore } from './store/GameStore';
-import { ITopMostPlatformInfo } from './Interfaces/ITopMostPlatformInfo';
+import GameEvents from './Config/GameEvents';
+import { IGameStore } from './Store/GameStore';
+import { ITopMostPlatformInfo } from './interfaces/ITopMostPlatformInfo';
 
 // Custom event that change value in Mobx store
 const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {

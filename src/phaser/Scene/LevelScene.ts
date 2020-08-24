@@ -12,7 +12,7 @@ import Player from '../Object/Player';
 
 import '../Object/DamageTextPool';
 import TilePillarsManager from '../Object/TilePillarsManager';
-import { ITile } from '../Interfaces/ITile';
+// import { ITile } from '../interfaces/ITile';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 
 export default class LevelScene extends Phaser.Scene {

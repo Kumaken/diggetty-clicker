@@ -1,4 +1,4 @@
-import { IUpgradeData } from '../phaser/Interfaces/IUpgradeData';
+import { IUpgradeData } from '../phaser/interfaces/IUpgradeData';
 
 // import icons: (PATH HAS TO BE STATIC LITERAL STRING)
 import pickaxe from 'assets/Icons/individuals/minecraft_transparent_181.png';
