@@ -1,8 +1,8 @@
 import * as Phaser from 'phaser';
-import { TexturePreloadKeys } from '../Config/TexturePreloadKeys';
-import SceneKeys from '../Config/SceneKeys';
-import GameEvents from '../Config/GameEvents';
-import AlignTool from '../Util/AlignTool';
+import { TexturePreloadKeys } from '../config/TexturePreloadKeys';
+import SceneKeys from '../config/SceneKeys';
+import GameEvents from '../config/GameEvents';
+import AlignTool from '../util/AlignTool';
 
 // import images so webpack could include it:
 import TL_DIRT from '../../assets/Tiles/dirt_spritesheet.png';

@@ -1,17 +1,17 @@
 import * as Phaser from 'phaser';
-import '../Object/TilePool';
-import FpsText from '../Object/FpsText';
-import PlatformManager from '../Object/PlatformManager';
-import ParticlesManager from '../Object/ParticlesManager';
-import { TextureKeys } from '../Config/TextureKeys';
-import SceneKeys from '../Config/SceneKeys';
-import GameEvents from '../Config/GameEvents';
-import Player from '../Object/Player';
+import '../object/TilePool';
+import FpsText from '../object/FpsText';
+import PlatformManager from '../object/PlatformManager';
+import ParticlesManager from '../object/ParticlesManager';
+import { TextureKeys } from '../config/TextureKeys';
+import SceneKeys from '../config/SceneKeys';
+import GameEvents from '../config/GameEvents';
+import Player from '../object/Player';
 // import GameUI from './GameUI';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
 
-import '../Object/DamageTextPool';
-import TilePillarsManager from '../Object/TilePillarsManager';
+import '../object/DamageTextPool';
+import TilePillarsManager from '../object/TilePillarsManager';
 // import { ITile } from '../interfaces/ITile';
 // import { IDamageTextPool } from 'phaser/Interfaces/IDamageTextPool';
 

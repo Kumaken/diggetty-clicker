@@ -1,5 +1,5 @@
 import 'phaser';
-import GameEvents from '../Config/GameEvents';
+import GameEvents from '../config/GameEvents';
 import UpgradeProgressManager from './UpgradeProgressManager';
 import { getGame } from 'phaser/Game';
 

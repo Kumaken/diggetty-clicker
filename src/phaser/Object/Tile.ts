@@ -1,6 +1,6 @@
 import 'phaser';
-import { ITile } from '../interfaces/ITile';
-import { TextureKeys } from '../Config/TextureKeys';
+import { ITile } from '../interface/ITile';
+import { TextureKeys } from '../config/TextureKeys';
 
 export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile {
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor

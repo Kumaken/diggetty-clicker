@@ -1,5 +1,5 @@
-import { ITilePool } from '../interfaces/ITilePool';
-import { IDamageTextPool } from '../interfaces/IDamageTextPool';
+import { ITilePool } from '../interface/ITilePool';
+import { IDamageTextPool } from '../interface/IDamageTextPool';
 // import { IBubble } from '../Interfaces/IBubble';
 // import { IStaticBubblePool } from '../Interfaces/IStaticBubblePool';
 // import { IShooter } from '../Interfaces/IShooter';

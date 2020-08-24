@@ -1,9 +1,9 @@
 import TilePillar from './TilePillar';
-import { TexturePreloadKeys } from '../Config/TexturePreloadKeys';
-import AlignTool from 'phaser/Util/AlignTool';
+import { TexturePreloadKeys } from '../config/TexturePreloadKeys';
+import AlignTool from 'phaser/util/AlignTool';
 import PlatformManager from './PlatformManager';
-import { ITilePillar } from '../interfaces/ITilePillar';
-import { DepthConfig } from '../Config/DepthConfig';
+import { ITilePillar } from '../interface/ITilePillar';
+import { DepthConfig } from '../config/DepthConfig';
 
 export default class TilePillarsManager {
 	private scene: Phaser.Scene;

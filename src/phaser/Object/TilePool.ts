@@ -1,8 +1,8 @@
 import 'phaser';
 import Tile from './Tile';
-import { ITilePool } from '../interfaces/ITilePool';
-import AlignTool from '../Util/AlignTool';
-import { DepthConfig } from '../Config/DepthConfig';
+import { ITilePool } from '../interface/ITilePool';
+import AlignTool from '../util/AlignTool';
+import { DepthConfig } from '../config/DepthConfig';
 
 export default class TilePool extends Phaser.Physics.Arcade.Group implements ITilePool {
 	constructor(

@@ -1,7 +1,7 @@
-import SceneKeys from './Config/SceneKeys';
-import TitleScene from './Scene/TitleScene';
-import PreloadScene from './Scene/PreloadScene';
-import LevelScene from './Scene/LevelScene';
+import SceneKeys from './config/SceneKeys';
+import TitleScene from './scene/TitleScene';
+import PreloadScene from './scene/PreloadScene';
+import LevelScene from './scene/LevelScene';
 
 const registerScenes = (game: Phaser.Game): void => {
 	const scene = game.scene;

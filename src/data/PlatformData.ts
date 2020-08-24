@@ -1,4 +1,4 @@
-import { TextureKeys } from 'phaser/Config/TextureKeys';
+import { TextureKeys } from 'phaser/config/TextureKeys';
 
 export const PlatformData = {
 	Dirt: {

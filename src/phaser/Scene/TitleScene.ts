@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
-import FpsText from '../Object/FpsText';
-import SceneKeys from '../Config/SceneKeys';
+import FpsText from '../object/FpsText';
+import SceneKeys from '../config/SceneKeys';
 
 export default class TitleScene extends Phaser.Scene {
 	private fpsText!: FpsText;

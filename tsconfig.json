@@ -8,7 +8,7 @@
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": false,
-		// "forceConsistentCasingInFileNames": true,
+		"forceConsistentCasingInFileNames": true,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true, // enable import jsons
