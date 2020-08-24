@@ -1,7 +1,7 @@
 import { IRootStore } from '../../RootStore';
 import { action, observable } from 'mobx';
 import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/Interfaces/IUpgradeProgress';
-import { UpgradeData } from 'phaser/Data/UpgradeData';
+import { UpgradeData } from 'data/UpgradeData';
 
 export interface IGameStore {
 	topPlatformName: string;

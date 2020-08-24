@@ -50,6 +50,10 @@
 	text-shadow: -1px -1px 0 #{$yellow}, 1px -1px 0 #{$yellow}, -1px 1px 0 #{$yellow}, 1px 1px 0 #{$yellow};
 }
 
+.text-gray-outline{
+	text-shadow: -0.5px -0.5px 0 #{$gray}, 0.5px -0.5px 0 #{$gray}, -0.5px 0.5px 0 #{$gray}, 0.5px 0.5px 0 #{$gray};
+}
+
 /* Animations: */
 .alert-enter {
 	opacity: 0;
@@ -68,3 +72,14 @@
 	transform: scale(0.9);
 	transition: opacity 300ms, transform 300ms;
 }
+
+/* No Text Selection/Highlighting */
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Old versions of Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Edge, Opera and Firefox */
+  }

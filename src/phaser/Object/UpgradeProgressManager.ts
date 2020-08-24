@@ -1,6 +1,6 @@
 import 'phaser';
 import { IUpgradeProgresses, IUpgradeProgress } from '../Interfaces/IUpgradeProgress';
-import { UpgradeData } from '../Data/UpgradeData';
+import { UpgradeData } from '../../data/UpgradeData';
 
 export default class UpgradeProgressManager {
 	private scene: Phaser.Scene;

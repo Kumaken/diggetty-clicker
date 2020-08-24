@@ -6,11 +6,13 @@ import Media from 'react-bulma-components/lib/components/media';
 import Image from 'react-bulma-components/lib/components/image';
 import Heading from 'react-bulma-components/lib/components/heading';
 import './PlayerStats.scss';
-import { IconData } from 'phaser/Data/IconData';
-import { DPSStatsText } from 'phaser/Data/UITextData';
+import { IconData } from 'data/IconData';
+import LocalStorageKeys from 'config/LocalStorageKeys';
 
 const PlayerStats = () => {
 	const store = useContext(RootStoreContext);
+	const DPSText = localStorage.getItem(LocalStorageKeys.DPSText);
+	const DPCText = localStorage.getItem(LocalStorageKeys.DPCText);
 
 	const StatsComponent = (icon: string, name: string, value: number) => {
 		return (
@@ -39,8 +41,8 @@ const PlayerStats = () => {
 	return (
 		<div className="player-stats">
 			<div className="player-stats-row">
-				{StatsComponent(IconData.DPC, DPSStatsText, store.gameStore?.playerDPC)}
-				{StatsComponent(IconData.DPS, DPSStatsText, store.gameStore?.playerDPS)}
+				{StatsComponent(IconData.DPC, DPCText, store.gameStore?.playerDPC)}
+				{StatsComponent(IconData.DPS, DPSText, store.gameStore?.playerDPS)}
 			</div>
 		</div>
 	);

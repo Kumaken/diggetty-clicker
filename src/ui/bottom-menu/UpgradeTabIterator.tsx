@@ -1,4 +1,4 @@
-import { UpgradeData } from '../../phaser/Data/UpgradeData';
+import { UpgradeData } from '../../data/UpgradeData';
 import { UpgradeEntry } from './UpgradeEntry';
 import { IUpgradeDatum } from '../../phaser/Interfaces/IUpgradeData';
 import React, { /* useEffect, useState, */ useContext } from 'react';

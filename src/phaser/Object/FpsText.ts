@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { DepthConfig } from 'phaser/Config/DepthConfig';
+import { DepthConfig } from 'phaser/config/DepthConfig';
 
 export default class FpsText extends Phaser.GameObjects.Text {
   constructor(scene: Phaser.Scene) {

@@ -1,5 +1,5 @@
-import TilePillar from '../Object/TilePillar';
-import { TexturePreloadKeys } from 'phaser/Config/TexturePreloadKeys';
+import TilePillar from './TilePillar';
+import { TexturePreloadKeys } from '../Config/TexturePreloadKeys';
 import AlignTool from 'phaser/Util/AlignTool';
 import PlatformManager from './PlatformManager';
 import { ITilePillar } from '../Interfaces/ITilePillar';

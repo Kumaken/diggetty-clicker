@@ -1,6 +1,6 @@
 import 'phaser';
-import { TextureKeys } from '../Config/TextureKeys';
-import PlatformManager from '../Object/PlatformManager';
+import { TextureKeys } from '../config/TextureKeys';
+import PlatformManager from './PlatformManager';
 
 export default class ParticlesManager extends Phaser.GameObjects.Particles.ParticleEmitterManager {
     constructor(scene: Phaser.Scene){
