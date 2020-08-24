@@ -5,10 +5,10 @@ import GameEvents from '../config/GameEvents';
 import AlignTool from '../util/AlignTool';
 
 // import images so webpack could include it:
-import TL_DIRT from '../../assets/Tiles/dirt_spritesheet.png';
-import TL_ROCKY_DIRT from '../../assets/Tiles/rocky_dirt_spritesheet.png';
-import TL_SHAKY_DIRT from '../../assets/Tiles/shaky_dirt_spritesheet.png';
-import TL_HARD_ROCK from '../../assets/Tiles/hardrock.png';
+import TL_DIRT from '../../assets/tiles/dirt_spritesheet.png';
+import TL_ROCKY_DIRT from '../../assets/tiles/rocky_dirt_spritesheet.png';
+import TL_SHAKY_DIRT from '../../assets/tiles/shaky_dirt_spritesheet.png';
+import TL_HARD_ROCK from '../../assets/tiles/hardrock.png';
 import BACKGROUND from '../../assets/background.jpg';
 
 export default class PreloadScene extends Phaser.Scene {
@@ -79,7 +79,7 @@ export default class PreloadScene extends Phaser.Scene {
 		this.textures.addBase64(TexturePreloadKeys.TL_HARD_ROCK,TL_HARD_ROCK);
 
 		// Load Icons:
-		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}Icons/minecraft_transparent.png`, {
+		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}icons/minecraft_transparent.png`, {
 			frameWidth: 18,
 			frameHeight: 18
 		});
