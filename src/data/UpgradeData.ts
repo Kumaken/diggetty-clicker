@@ -1,10 +1,10 @@
 import { IUpgradeData } from '../phaser/interface/IUpgradeData';
 
 // import icons: (PATH HAS TO BE STATIC LITERAL STRING)
-import pickaxe from 'assets/Icons/individuals/minecraft_transparent_181.png';
-import body from 'assets/Icons/individuals/minecraft_transparent_42.png';
-import legs from 'assets/Icons/individuals/minecraft_transparent_44.png';
-import tenacity from 'assets/Icons/individuals/minecraft_transparent_195.png';
+import pickaxe from 'assets/icons/individuals/minecraft_transparent_181.png';
+import body from 'assets/icons/individuals/minecraft_transparent_42.png';
+import legs from 'assets/icons/individuals/minecraft_transparent_44.png';
+import tenacity from 'assets/icons/individuals/minecraft_transparent_195.png';
 
 export const UpgradeData: IUpgradeData = {
 	Pickaxe: {
