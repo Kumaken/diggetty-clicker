@@ -4,5 +4,9 @@ export const TexturePreloadKeys = {
 	TL_ROCKY_DIRT: 'rocky-dirt',
 	TL_SHAKY_DIRT: 'shaky-dirt',
 	TL_HARD_ROCK: 'hard-rock',
-	BACKGROUND: 'background'
+	BACKGROUND: 'background',
+	APPLE: 'apple',
+	BOOK: 'book',
+	GOLD_INGOT: 'gold',
+	POTION: 'potion'
 };

@@ -26,7 +26,7 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 		super(world, scene, Object.assign(defaults, config));
 	}
 
-	spawn(x: number, y: number, key: string, frame: number): Tile {
+	spawnTile(x: number, y: number, key: string, frame: number, tileType?: string): Tile {
 		const spawnExisting = this.countActive(false) > 0;
 		const tile: Tile = this.get(x, y, key, frame);
 		if (!tile) {
@@ -38,6 +38,7 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 		tile.setDepth(DepthConfig.Tile);
 		tile.currentTexture = key;
 		tile.currentFrame = frame;
+		tile.itemType = tileType;
 
 		if (spawnExisting) {
 			tile.setVisible(true);
