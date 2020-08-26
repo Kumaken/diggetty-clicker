@@ -33,14 +33,8 @@ export default class LevelScene extends Phaser.Scene {
 	preload(): void {}
 
 	create(): void {
-		// UI ---
-		// this.gameUI = this.scene.get(SceneKeys.GameUI) as GameUI;
-		// this.scene.bringToTop(SceneKeys.GameUI);
-
 		this.player = new Player(this);
-		// const tilePool: ITilePool = this.add.tilePool(TextureKeys.TL_DIRT.key);
 
-		// this.add.existing(tilePool);
 		this.add.damageTextPool();
 		this.platformManager = new PlatformManager(this, this.player);
 		this.platformManager.spawnPlatformInitial(TextureKeys.TL_DIRT);
@@ -48,17 +42,17 @@ export default class LevelScene extends Phaser.Scene {
 		// Tile pillars
 		this.tilePillarsManager = new TilePillarsManager(this);
 		this.game.events.on(
-			GameEvents.TopmostPlatformDestroyed, 
+			GameEvents.TopmostPlatformDestroyed,
 			() => {
 				this.tilePillarsManager.moveDown();
 			},
 			this
 		);
-		
+
 		// Particles Manager
 		this.particlesManager = new ParticlesManager(this);
 		this.game.events.on(
-			GameEvents.OnDamage, 
+			GameEvents.OnDamage,
 			() => {
 				this.particlesManager.showParticles();
 			},
@@ -66,7 +60,6 @@ export default class LevelScene extends Phaser.Scene {
 		);
 
 		this.fpsText = new FpsText(this);
-		
 	}
 
 	update(): void {

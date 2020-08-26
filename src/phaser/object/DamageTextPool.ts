@@ -8,6 +8,7 @@ import FontKeys from '../../config/FontKeys';
 import { getGame } from 'phaser/Game';
 import PlatformManager from './PlatformManager';
 import Player from './Player';
+import { DepthConfig } from 'phaser/config/DepthConfig';
 
 export default class DamageTextPool extends Phaser.GameObjects.Group implements IDamageTextPool {
 	constructor(scene: Phaser.Scene, config: Phaser.Types.GameObjects.Group.GroupCreateConfig = {}) {
@@ -49,6 +50,7 @@ export default class DamageTextPool extends Phaser.GameObjects.Group implements 
 				this.despawn(DamageText);
 			}
 		});
+		this.setDepth(DepthConfig.Texts);
 		return DamageText;
 	}
 

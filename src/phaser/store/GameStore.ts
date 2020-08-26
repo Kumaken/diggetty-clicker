@@ -47,7 +47,7 @@ export class GameStore implements IGameStore {
 	@observable topPlatformToughness: number = 0;
 	@observable topPlatformMaxToughness: number = 1;
 	@observable playerDPC: number = 1;
-	@observable playerDPS: number = 0;
+	@observable playerDPS: number = 1;
 	@observable money: number = 0;
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};

@@ -10,6 +10,7 @@ export default class Player {
 	private depth: number;
 	private upgradeProgressManager: UpgradeProgressManager;
 	public static clickDamage: number;
+	public static dps: number = 1;
 
 	handleUpgrade(key: string) {
 		const price = this.upgradeProgressManager.getCurrentUpgradePrice(key);
