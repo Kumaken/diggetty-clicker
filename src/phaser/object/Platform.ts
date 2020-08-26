@@ -80,8 +80,7 @@ export default class Platform {
 
 	// Platform stats methods:
 	damage(amount: number) {
-		const newToughness = this.toughness - amount;
-		this.game.events.emit(GameEvents.OnDamage, newToughness >= 0 ? newToughness : 0);
+		this.game.events.emit(GameEvents.OnDamage, amount);
 		if (amount >= this.toughness) this.onDestruction();
 		else {
 			this.toughness -= amount;
