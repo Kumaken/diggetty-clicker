@@ -46,7 +46,7 @@ export default class PlatformManager {
 		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.45);
 
 		// deduce tile size dynamically:
-		const sample = this.pool.spawnTile(0, 0, '', 0);
+		const sample = this.pool.spawn(0, 0, '', 0);
 		PlatformManager.tileSize = new Phaser.Structs.Size(
 			sample.displayWidth - this.tileWidthGap,
 			sample.displayHeight - this.tileHeightGap
@@ -97,7 +97,7 @@ export default class PlatformManager {
 			if(tile.itemType){
 				this.player.addItem(tile.itemType);
 
-				const itemSprite = this.pool.spawnTile(tile.x, tile.y, tile.texture.key, 0);
+				const itemSprite = this.pool.spawn(tile.x, tile.y, tile.texture.key, 0);
 				itemSprite.setDepth(DepthConfig.Pillar);
 				this.scene.tweens.add({
 					targets: itemSprite,

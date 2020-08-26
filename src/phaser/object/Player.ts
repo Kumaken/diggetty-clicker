@@ -69,6 +69,7 @@ export default class Player {
 	
 	addItem(itemType: string){
 		let item!: Item;
+		const lastItemId = this._inventory[this._inventory.length - 1] ? this._inventory[this._inventory.length - 1].id : 1;
 		switch(itemType){
 			case ItemData.Apple.name:
 				item = new Item(
@@ -77,7 +78,8 @@ export default class Player {
 					0, 
 					ItemData.Apple.textureKey.key, 
 					0, 
-					ItemData.Apple
+					ItemData.Apple,
+					lastItemId+1
 				);
 				break;
 
@@ -88,7 +90,8 @@ export default class Player {
 					0, 
 					ItemData.Book.textureKey.key, 
 					0, 
-					ItemData.Book
+					ItemData.Book,
+					lastItemId+1
 				);
 				break;
 			
@@ -99,7 +102,8 @@ export default class Player {
 					0, 
 					ItemData.GoldIngot.textureKey.key, 
 					0, 
-					ItemData.GoldIngot
+					ItemData.GoldIngot,
+					lastItemId+1
 				);
 				break;
 			
@@ -110,7 +114,8 @@ export default class Player {
 					0, 
 					ItemData.Potion.textureKey.key, 
 					0, 
-					ItemData.Potion
+					ItemData.Potion,
+					lastItemId+1
 				);
 				break;
 		}

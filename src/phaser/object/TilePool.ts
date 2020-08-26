@@ -26,7 +26,7 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 		super(world, scene, Object.assign(defaults, config));
 	}
 
-	spawnTile(x: number, y: number, key: string, frame: number, tileType?: string): Tile {
+	spawn(x: number, y: number, key: string, frame: number, tileType?: string): Tile {
 		const spawnExisting = this.countActive(false) > 0;
 		const tile: Tile = this.get(x, y, key, frame);
 		if (!tile) {

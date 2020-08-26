@@ -68,9 +68,9 @@ export default class Platform {
 				const randIdx = Algorithm.randomIntFromInterval(0, ITEM_KEYS.length - 1);
 				const key = ITEM_KEYS[randIdx];
 
-				newTile = this.pool.spawnTile(curX, this.y, ItemData[key].textureKey.key, 0, ItemData[key].name);
+				newTile = this.pool.spawn(curX, this.y, ItemData[key].textureKey.key, 0, ItemData[key].name);
 			} else {
-				newTile = this.pool.spawnTile(curX, this.y, this.platformData.textureKey.key, frame);
+				newTile = this.pool.spawn(curX, this.y, this.platformData.textureKey.key, frame);
 			}
 			this.row.push(newTile);
 			curX += this.tileSize.width;

@@ -5,4 +5,5 @@ export interface IItemData {
   attributes: string;
   description: string;
   textureKey: ITextureKey;
+  texturePath: string;
 }

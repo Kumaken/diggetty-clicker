@@ -2,6 +2,7 @@ import { IRootStore } from '../../RootStore';
 import { action, observable } from '../../../node_modules/mobx/lib/mobx';
 import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/interface/IUpgradeProgress';
 import { UpgradeData } from 'data/UpgradeData';
+import { IItem } from 'phaser/interface/IItem';
 
 export interface IGameStore {
 	topPlatformName: string;
@@ -10,6 +11,7 @@ export interface IGameStore {
 	playerDPC: number;
 	playerDPS: number;
 	money: number;
+	inventory: IItem[];
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
 	insufficientMoneyNotif: boolean;
@@ -49,6 +51,7 @@ export class GameStore implements IGameStore {
 	@observable playerDPC: number = 1;
 	@observable playerDPS: number = 0;
 	@observable money: number = 0;
+	@observable inventory: IItem[] = [];
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
@@ -75,6 +78,14 @@ export class GameStore implements IGameStore {
 
 	@action setMoney(value: number) {
 		this.money = value;
+	}
+
+	@action addItem(item: IItem){
+		this.inventory.push(item);
+	}
+
+	@action useItem(id: number){
+		this.inventory.splice(id);
 	}
 
 	@action setDepth(value: number) {
