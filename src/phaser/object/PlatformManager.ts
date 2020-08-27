@@ -13,6 +13,7 @@ import { ITopMostPlatformInfo } from 'phaser/interface/ITopMostPlatformInfo';
 import { getGame } from 'phaser/Game';
 import Algorithm from 'phaser/util/Algorithm';
 import { DepthConfig } from 'phaser/config/DepthConfig';
+import ItemConfig from 'phaser/config/ItemConfig';
 
 export default class PlatformManager {
 	private game: Phaser.Game;
@@ -94,6 +95,7 @@ export default class PlatformManager {
 	despawnTopmostPlatform() {
 		const topMost = this.platforms.shift()!.row;
 		topMost.forEach((tile) => {
+			
 			if(tile.itemType){
 				this.player.addItem(tile.itemType);
 
@@ -132,7 +134,7 @@ export default class PlatformManager {
 
 	spawnBottommostPlatform(platformData: IPlatformData) {
 		let createItem = false;
-		if(this.player.depth >= 0 && this.itemCooldown === 0){
+		if(this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER && this.itemCooldown === 0){
 			createItem = true;
 			this.addItemCooldown();
 		}
@@ -160,7 +162,11 @@ export default class PlatformManager {
 	}
 
 	addItemCooldown() {
-		const duration = Algorithm.randomIntFromInterval(5,8);
+		const duration = Algorithm.randomIntFromInterval(
+			ItemConfig.itemGenCooldown.min,
+			ItemConfig.itemGenCooldown.max
+		);
 		this.itemCooldown = duration;
+		ItemConfig.setItemGenCooldown(this.player.depth);
 	}
 }
