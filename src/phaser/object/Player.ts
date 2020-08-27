@@ -68,58 +68,31 @@ export default class Player {
 	}
 	
 	addItem(itemType: string){
+		if(this._inventory.length === 15) {
+			this.game.events.emit(GameEvents.OnItemAcquired, true);
+			return;
+		}
 		let item!: Item;
-		const lastItemId = this._inventory[this._inventory.length - 1] ? this._inventory[this._inventory.length - 1].id : 1;
+
 		switch(itemType){
 			case ItemData.Apple.name:
-				item = new Item(
-					this.scene, 
-					0,
-					0, 
-					ItemData.Apple.textureKey.key, 
-					0, 
-					ItemData.Apple,
-					lastItemId+1
-				);
+				item = new Item(ItemData.Apple);
 				break;
 
 			case ItemData.Book.name:
-				item = new Item(
-					this.scene, 
-					0,
-					0, 
-					ItemData.Book.textureKey.key, 
-					0, 
-					ItemData.Book,
-					lastItemId+1
-				);
+				item = new Item(ItemData.Book);
 				break;
 			
 			case ItemData.GoldIngot.name:
-				item = new Item(
-					this.scene, 
-					0,
-					0, 
-					ItemData.GoldIngot.textureKey.key, 
-					0, 
-					ItemData.GoldIngot,
-					lastItemId+1
-				);
+				item = new Item(ItemData.GoldIngot);
 				break;
 			
 			case ItemData.Potion.name:
-				item = new Item(
-					this.scene, 
-					0,
-					0, 
-					ItemData.Potion.textureKey.key, 
-					0, 
-					ItemData.Potion,
-					lastItemId+1
-				);
+				item = new Item(ItemData.Potion);
 				break;
 		}
 
 		this._inventory.push(item);
+		this.game.events.emit(GameEvents.OnItemAcquired, false, item);
 	}
 }

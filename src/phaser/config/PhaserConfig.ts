@@ -17,7 +17,7 @@ export const gameConfig: GameInstance = {
 	physics: {
 		default: 'arcade',
 		arcade: {
-			debug: true
+			debug: false
 		}
 	},
 	backgroundColor: '#000000',

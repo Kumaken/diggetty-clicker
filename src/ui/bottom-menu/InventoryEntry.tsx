@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { RootStoreContext } from 'index';
 import './InventoryEntry.scss';
 
 import Button from 'react-bulma-components/lib/components/button';
-import Columns from 'react-bulma-components/lib/components/columns';
 import Image from 'react-bulma-components/lib/components/image';
-// import { getGame } from 'phaser/Game';
+import { IItemData } from 'phaser/interface/IItemData';
 
-export const InventoryEntry = () => {
-	// let inventoryTiles = [];
-	// for(let j=0; j < <Image src="http://bulma.io/images/placeholders/128x128.png" />; j++){
-	// 	if(j==0) inventoryTiles.push([]);
+export const InventoryEntry = (id: number, itemData: IItemData) => {
+	const store = useContext(RootStoreContext);
 
-	// 	for(let i=0; i < 8; i++){
-	// 		inventoryTiles[j].push()
-	// 	}
-	// }
+	const issueUseItem = (id: number) => {
+		store.gameStore?.useItem(id);
+	}
 
 	return (
-		<Columns className="is-multiline is-mobile inventory">
-		</Columns>
+		<Button key={id}
+			className="column is-2 is-dark inventory-tile" 
+			id={id} 
+			onClick={() => issueUseItem(id)}
+		>
+			<Image className='item' src={itemData.texturePath}/>
+		</Button>
 	);
 };
 
