@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import './UpgradeEntry.scss';
 import { IUpgradeDatum } from '../../phaser/interface/IUpgradeData';
 import GameEvents from '../../phaser/config/GameEvents';
-
 import Card from 'react-bulma-components/lib/components/card';
 import Media from 'react-bulma-components/lib/components/media';
 import Image from 'react-bulma-components/lib/components/image';
@@ -13,6 +11,7 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
 import { getGame } from 'phaser/Game';
 import MoneyText from 'ui/resource-stats/MoneyText';
+import './TabEntry.scss';
 
 export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number, cur_level: number) => {
 	const [isUpgrading, setIsUpgrading] = useState(false);
@@ -31,9 +30,9 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 	};
 
 	return (
-		<Card key={key} className="upgrade-cards">
-			<Card.Content className="upgrade-content">
-				<Media className="upgrade-img-container">
+		<Card key={key} className="tab-entry-cards">
+			<Card.Content className="tab-entry-content">
+				<Media className="tab-entry-img-container">
 					<Media.Item renderAs="figure">
 						<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
 						<Image className="is-overlay" rounded size={64} alt="64x64" src={upgradeData.img} />
@@ -52,7 +51,7 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 					<Content>{upgradeData.effectDesc}</Content>
 				</Box>
 			</Card.Content>
-			<Columns className="upgrade-action">
+			<Columns className="tab-entry-action">
 				<Columns.Column className="is-8">
 					<Button
 						color="warning"
@@ -68,7 +67,10 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 					</Button>
 				</Columns.Column>
 				<Columns.Column className="is-4 is-flex">
-					<Heading className="is-centered silk-screen-A upgrade-cost text-yellow-outline text-gray " size={4}>
+					<Heading
+						className="is-centered silk-screen-A tab-entry-cost text-yellow-outline text-gray "
+						size={4}
+					>
 						<MoneyText value={cur_cost} />
 					</Heading>
 				</Columns.Column>

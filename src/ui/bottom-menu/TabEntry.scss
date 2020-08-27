@@ -1,6 +1,6 @@
 @import "../../_variables.sass";
 
-.upgrade-cards {
+.tab-entry-cards {
 	width: 13.5rem;
 	margin: 2.5rem 0.5rem 0.5rem 0.5rem;
 	display: inline-block;
@@ -9,13 +9,13 @@
 	height: 18.5rem;
 }
 
-.upgrade-content {
+.tab-entry-content {
 	position: relative;
 	padding: 4.5rem 1rem 1rem 1rem !important;
 	margin-top: -2rem;
 }
 
-.upgrade-img-container {
+.tab-entry-img-container {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -31,6 +31,8 @@
 }
 
 .desc-box {
+	display: flex !important;
+	position: relative;
 	white-space: pre-line;
 	text-align: center;
 	border-radius: 5% !important;
@@ -44,11 +46,11 @@
 	height: 5rem;
 }
 
-.upgrade-action {
+.tab-entry-action {
 	margin: -0.25rem 0.25rem !important;
 }
 
-.upgrade-cost {
+.tab-entry-cost {
 	display: flex; // both container and self needs to be flex?
 	justify-content: center; // align horizontally
 	width: 100%; // needs this for horizontal center

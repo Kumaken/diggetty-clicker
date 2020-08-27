@@ -70,6 +70,7 @@ export default class PlatformManager {
 	}
 
 	damageByDPS() {
+		if (Player.dps <= 0) return;
 		PlatformManager.topMostPlatform?.damage(Player.dps);
 	}
 

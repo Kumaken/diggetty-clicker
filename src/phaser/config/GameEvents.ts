@@ -6,7 +6,9 @@ enum GameEvents {
 	OnDepthChanged = 'ON_DEPTH_CHANGED',
 	OnMoneyChanged = 'ON_GOLD_CHANGED',
 	OnUpgradeIssued = 'ON_UPGRADE_ISSUED',
-	OnUpgradeDone = 'ON_UPGRADE_DONE'
+	OnUpgradeDone = 'ON_UPGRADE_DONE',
+	OnHiringIssued = 'ON_HIRING_ISSUED',
+	OnHiringDone = 'ON_HIRING_DONE'
 }
 
 export default GameEvents;

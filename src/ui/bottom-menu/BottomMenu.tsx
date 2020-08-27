@@ -5,6 +5,7 @@ import './BottomMenu.scss';
 import { CSSTransition } from 'react-transition-group';
 import Algorithm from 'phaser/util/Algorithm';
 import UpgradeTabIterator from './UpgradeTabIterator';
+import HiringTabIterator from './HiringTabIterator';
 
 const transitionDuration = 300;
 
@@ -18,7 +19,7 @@ export const BottomMenu = () => {
 		{
 			name: 'Hiring',
 			icon: '',
-			content: 'Stuff 2'
+			content: <HiringTabIterator />
 		},
 		{
 			name: 'Marketing',
@@ -31,7 +32,7 @@ export const BottomMenu = () => {
 			content: 'Stuff 4'
 		}
 	]);
-	const [activeTab, setActiveTab] = useState('Upgrades');
+	const [activeTab, setActiveTab] = useState('Hiring');
 	const [beginAnimation, setBeginAnimation] = useState(true);
 
 	const Tab = (props) => {

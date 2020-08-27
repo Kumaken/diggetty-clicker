@@ -2,6 +2,8 @@ import { IRootStore } from '../../RootStore';
 import { action, observable } from '../../../node_modules/mobx/lib/mobx';
 import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/interface/IUpgradeProgress';
 import { UpgradeData } from 'data/UpgradeData';
+import { IHiringProgresses, IHiringProgress } from 'phaser/interface/IHiringProgress';
+import { HiringData } from 'data/HiringData';
 
 export interface IGameStore {
 	topPlatformName: string;
@@ -12,6 +14,7 @@ export interface IGameStore {
 	money: number;
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
+	hiringProgresses: IHiringProgresses;
 	insufficientMoneyNotif: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
@@ -21,7 +24,9 @@ export interface IGameStore {
 	setMoney(value: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
+	setHiringProgresses(update: IHiringProgresses): void;
 	upgradeByKey(key: string);
+	hireByKey(key: string);
 	setInsufficientMoneyNotif(value: boolean);
 }
 
@@ -38,19 +43,31 @@ export class GameStore implements IGameStore {
 		}
 	}
 
+	initializeHiringProgresses() {
+		for (let key in HiringData) {
+			const newProgress: IHiringProgress = {
+				level: 1,
+				currdps: HiringData[key].baseDMG
+			};
+			this.hiringProgresses[key] = newProgress;
+		}
+	}
+
 	constructor(rootStore: IRootStore) {
 		this.rootStore = rootStore;
 		this.initializeUpgradeProgresses();
+		this.initializeHiringProgresses();
 	}
 
 	@observable topPlatformName: string = 'Loading';
 	@observable topPlatformToughness: number = 0;
 	@observable topPlatformMaxToughness: number = 1;
 	@observable playerDPC: number = 1;
-	@observable playerDPS: number = 1;
+	@observable playerDPS: number = 0;
 	@observable money: number = 0;
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
+	@observable hiringProgresses: IHiringProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
 
 	@action setTopPlatformName(name: string) {
@@ -85,8 +102,16 @@ export class GameStore implements IGameStore {
 		this.upgradeProgresses = update;
 	}
 
+	@action setHiringProgresses(update: IHiringProgresses) {
+		this.hiringProgresses = update;
+	}
+
 	@action upgradeByKey(key: string) {
 		this.upgradeProgresses[key].level += 1;
+	}
+
+	@action hireByKey(key: string) {
+		this.hiringProgresses[key].level += 1;
 	}
 
 	@action setInsufficientMoneyNotif(value: boolean) {
