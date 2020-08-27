@@ -7,7 +7,6 @@ import PreloadScene from '../scene/PreloadScene';
 import FontKeys from '../../config/FontKeys';
 import { getGame } from 'phaser/Game';
 import PlatformManager from './PlatformManager';
-import Player from './Player';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 
 export default class DamageTextPool extends Phaser.GameObjects.Group implements IDamageTextPool {
@@ -37,7 +36,7 @@ export default class DamageTextPool extends Phaser.GameObjects.Group implements 
 		DamageText.setFontSize(80 * PreloadScene.screenScale.scaleWidth);
 		DamageText.setFontFamily(FontKeys.SHPinscherRegular);
 		AlignTool.scaleToScreenWidth(this.scene, DamageText, 0.05);
-		DamageText.setDepth(DepthConfig.DpsText);
+		DamageText.setDepth(DepthConfig.Texts);
 
 		// Animation:
 		this.scene.tweens.add({
@@ -51,6 +50,7 @@ export default class DamageTextPool extends Phaser.GameObjects.Group implements 
 				this.despawn(DamageText);
 			}
 		});
+		this.setDepth(DepthConfig.Texts);
 		return DamageText;
 	}
 
@@ -73,8 +73,8 @@ Phaser.GameObjects.GameObjectFactory.register('damageTextPool', function (
 	const game = getGame();
 	game.events.on(
 		GameEvents.OnDamage,
-		() => {
-			pool.spawn(AlignTool.getCenterHorizontal(this.scene), PlatformManager.topMostY, Player.clickDamage);
+		(damage: number) => {
+			pool.spawn(AlignTool.getCenterHorizontal(this.scene), PlatformManager.topMostY, damage);
 		},
 		this
 	);

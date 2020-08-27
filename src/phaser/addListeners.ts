@@ -12,7 +12,8 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 	});
 
 	game.events.on(GameEvents.OnDamage, (value: number) => {
-		gameStore?.setTopPlatformToughness(value);
+		const newToughness = gameStore?.topPlatformToughness - value;
+		gameStore?.setTopPlatformToughness(newToughness >= 0 ? newToughness : 0);
 	});
 
 	game.events.on(GameEvents.OnMoneyChanged, (value: number) => {

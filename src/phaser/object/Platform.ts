@@ -47,7 +47,7 @@ export default class Platform {
 		this.tileSize = tileSize;
 		// Stats initialization:
 		this.toughness = platformData.toughness;
-		this.breakStep = Math.floor(this.toughness/5);
+		this.breakStep = Math.floor(this.toughness / 5);
 		this.phase = 0;
 		this.generateRow(platformData.textureKey.frame, createItem);
 	}
@@ -91,12 +91,12 @@ export default class Platform {
 	}
 
 	onClickPlatform() {
-		this.game.events.emit(GameEvents.OnDamage, this.toughness - 1);
 		this.damage(Player.clickDamage);
 	}
 
 	// Platform stats methods:
 	damage(amount: number) {
+		this.game.events.emit(GameEvents.OnDamage, amount);
 		if (amount >= this.toughness) this.onDestruction();
 		else {
 			this.toughness -= amount;
@@ -106,12 +106,10 @@ export default class Platform {
 
 	// Platform animation methods:
 	animatePlatformBreak(): void {
-		const currentPhase = (-1*Math.ceil(this.toughness/this.breakStep)) + 5;
-		if(currentPhase !== this.phase) {
-			this.row.forEach(tile => {
-				if(tile instanceof Tile){
-					tile.animateBreak();
-				}
+		const currentPhase = -1 * Math.ceil(this.toughness / this.breakStep) + 5;
+		if (currentPhase !== this.phase) {
+			this.row.forEach((tile) => {
+				tile.animateBreak();
 			});
 			this.phase = currentPhase;
 		}

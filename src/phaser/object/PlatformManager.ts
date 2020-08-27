@@ -62,6 +62,18 @@ export default class PlatformManager {
 			const topMostPlatform = this.platforms[0];
 			topMostPlatform.onClickPlatform();
 		});
+
+		// DPS System:
+		this.scene.time.addEvent({
+			delay: 1000, // ms
+			callback: this.damageByDPS,
+			callbackScope: this,
+			loop: true
+		});
+	}
+
+	damageByDPS() {
+		PlatformManager.topMostPlatform?.damage(Player.dps);
 	}
 
 	spawnPlatformInitial(textureKey: ITextureKey) {
