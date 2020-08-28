@@ -10,6 +10,10 @@ import TL_ROCKY_DIRT from '../../assets/tiles/rocky_dirt_spritesheet.png';
 import TL_SHAKY_DIRT from '../../assets/tiles/shaky_dirt_spritesheet.png';
 import TL_HARD_ROCK from '../../assets/tiles/hardrock.png';
 import BACKGROUND from '../../assets/background.jpg';
+import APPLE from '../../assets/items/apple.png';
+import BOOK from '../../assets/items/book.png';
+import GOLD_INGOT from '../../assets/items/gold_ingot.png';
+import POTION from '../../assets/items/potion.png';
 
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
@@ -45,6 +49,10 @@ export default class PreloadScene extends Phaser.Scene {
 		// 	frameHeight: this.tileFrameHeight
 		// });
 		// this.load.image(TexturePreloadKeys.TL_HARD_ROCK, TL_HARD_ROCK);
+		// this.load.image(TexturePreloadKeys.APPLE,APPLE);
+		// this.load.image(TexturePreloadKeys.BOOK,BOOK);
+		// this.load.image(TexturePreloadKeys.GOLD_INGOT,GOLD_INGOT);
+		// this.load.image(TexturePreloadKeys.POTION,POTION);
 
 		this.load.image(TexturePreloadKeys.BACKGROUND,BACKGROUND);
 
@@ -77,6 +85,10 @@ export default class PreloadScene extends Phaser.Scene {
 		shakyDirtImg.src = TL_SHAKY_DIRT;
 
 		this.textures.addBase64(TexturePreloadKeys.TL_HARD_ROCK,TL_HARD_ROCK);
+		this.textures.addBase64(TexturePreloadKeys.APPLE,APPLE);
+		this.textures.addBase64(TexturePreloadKeys.BOOK,BOOK);
+		this.textures.addBase64(TexturePreloadKeys.GOLD_INGOT,GOLD_INGOT);
+		this.textures.addBase64(TexturePreloadKeys.POTION,POTION);
 
 		// Load Icons:
 		this.load.spritesheet(TexturePreloadKeys.MINECRAFT_ICONS, `${this.assetRoot}icons/minecraft_transparent.png`, {

@@ -12,6 +12,8 @@ import './TilePool';
 import { ITopMostPlatformInfo } from 'phaser/interface/ITopMostPlatformInfo';
 import { getGame } from 'phaser/Game';
 import Algorithm from 'phaser/util/Algorithm';
+import { DepthConfig } from 'phaser/config/DepthConfig';
+import ItemConfig from 'phaser/config/ItemConfig';
 
 export default class PlatformManager {
 	private game: Phaser.Game;
@@ -30,6 +32,7 @@ export default class PlatformManager {
 	// Gameplay Related properties
 	private depthPerPlatform: number = 10;
 	private goldPerPlatform: number = 1;
+	private itemCooldown: number = 0;
 
 	// Static properties
 	public static topMostY: number;
@@ -80,13 +83,14 @@ export default class PlatformManager {
 			this.pool,
 			curY,
 			PlatformManager.tileSize,
-			PlatformData.Dirt
+			PlatformData.Dirt,
+			false
 		);
 		this.platforms.push(PlatformManager.topMostPlatform);
 		curY += PlatformManager.tileSize.height;
 
 		for (let i = 1; i < this.rowNums; i++) {
-			const newPlatform = new Platform(this.scene, this.pool, curY, PlatformManager.tileSize, PlatformData.Dirt);
+			const newPlatform = new Platform(this.scene, this.pool, curY, PlatformManager.tileSize, PlatformData.Dirt, false);
 			this.platforms.push(newPlatform);
 			curY += PlatformManager.tileSize.height;
 		}
@@ -103,6 +107,26 @@ export default class PlatformManager {
 	despawnTopmostPlatform() {
 		const topMost = this.platforms.shift()!.row;
 		topMost.forEach((tile) => {
+			
+			if(tile.itemType){
+				this.player.addItem(tile.itemType);
+
+				const itemSprite = this.pool.spawn(tile.x, tile.y, tile.texture.key, 0);
+				itemSprite.setDepth(DepthConfig.Pillar);
+				this.scene.tweens.add({
+					targets: itemSprite,
+					y: itemSprite.y - AlignTool.getYfromScreenHeight(this.scene, 0.1),
+					duration: 1000
+				});
+				this.scene.time.delayedCall(
+					1000,
+					() => {
+						this.pool.killAndHide(itemSprite);
+					},
+					null,
+					this
+				);
+			}
 			this.pool.despawn(tile);
 		});
 		PlatformManager.topMostPlatform = this.platforms[0];
@@ -121,13 +145,22 @@ export default class PlatformManager {
 	}
 
 	spawnBottommostPlatform(platformData: IPlatformData) {
+		let createItem = false;
+		if(this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER && this.itemCooldown === 0){
+			createItem = true;
+			this.addItemCooldown();
+		}
+
 		const newPlatform = new Platform(
 			this.scene,
 			this.pool,
 			this.bottomMostY,
 			PlatformManager.tileSize,
-			platformData
+			platformData,
+			createItem
 		);
+		if(this.itemCooldown > 0) this.itemCooldown--;
+		
 		this.platforms.push(newPlatform);
 	}
 
@@ -138,5 +171,14 @@ export default class PlatformManager {
 		this.shiftAllPlatformsUpward();
 		const randIdx = Algorithm.randomIntFromInterval(0, this.textureKeyArr.length - 1);
 		this.spawnBottommostPlatform(PlatformData[this.textureKeyArr[randIdx]]);
+	}
+
+	addItemCooldown() {
+		const duration = Algorithm.randomIntFromInterval(
+			ItemConfig.itemGenCooldown.min,
+			ItemConfig.itemGenCooldown.max
+		);
+		this.itemCooldown = duration;
+		ItemConfig.setItemGenCooldown(this.player.depth);
 	}
 }

@@ -1,0 +1,15 @@
+.inventory{
+    margin-top: 1rem;
+    
+    .inventory-tile{
+        background-color: gray;
+        margin: 0.5rem;
+        height: 7rem;
+
+        .item{
+            height: 7rem;
+            width: 7rem;
+        }
+    }
+
+}

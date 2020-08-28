@@ -2,6 +2,7 @@ import { IRootStore } from '../../RootStore';
 import { action, observable } from '../../../node_modules/mobx/lib/mobx';
 import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/interface/IUpgradeProgress';
 import { UpgradeData } from 'data/UpgradeData';
+import { IItem } from 'phaser/interface/IItem';
 
 export interface IGameStore {
 	topPlatformName: string;
@@ -10,19 +11,24 @@ export interface IGameStore {
 	playerDPC: number;
 	playerDPS: number;
 	money: number;
+	inventory: IItem[];
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
 	insufficientMoneyNotif: boolean;
+	inventoryFullNotif: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
 	setPlayerDPC(value: number): void;
 	setPlayerDPS(value: number): void;
 	setMoney(value: number): void;
+	addItem(item: IItem): void;
+	useItem(id: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
 	upgradeByKey(key: string);
 	setInsufficientMoneyNotif(value: boolean);
+	setInventoryFullNotif(value: boolean);
 }
 
 export class GameStore implements IGameStore {
@@ -49,9 +55,11 @@ export class GameStore implements IGameStore {
 	@observable playerDPC: number = 1;
 	@observable playerDPS: number = 1;
 	@observable money: number = 0;
+	@observable inventory: IItem[] = [];
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
+	@observable inventoryFullNotif: boolean = false;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -77,6 +85,14 @@ export class GameStore implements IGameStore {
 		this.money = value;
 	}
 
+	@action addItem(item: IItem){
+		this.inventory.push(item);
+	}
+
+	@action useItem(id: number){
+		this.inventory.splice(id,1);
+	}
+
 	@action setDepth(value: number) {
 		this.depth = value;
 	}
@@ -91,5 +107,9 @@ export class GameStore implements IGameStore {
 
 	@action setInsufficientMoneyNotif(value: boolean) {
 		this.insufficientMoneyNotif = value;
+	}
+
+	@action setInventoryFullNotif(value: boolean) {
+		this.inventoryFullNotif = value;
 	}
 }

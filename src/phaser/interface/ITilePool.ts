@@ -1,7 +1,8 @@
 import { ITile } from './ITile';
+import { IItem } from './IItem';
 
 export interface ITilePool extends Phaser.Physics.Arcade.Group {
-	spawn(x: number, y: number, key: string, frame: number): ITile;
+	spawn(x: number, y: number, key: string, frame: number, tileType?: string): ITile;
 	despawn(tile: ITile): void;
 }
 

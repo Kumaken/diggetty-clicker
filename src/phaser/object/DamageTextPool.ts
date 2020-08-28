@@ -36,6 +36,7 @@ export default class DamageTextPool extends Phaser.GameObjects.Group implements 
 		DamageText.setFontSize(80 * PreloadScene.screenScale.scaleWidth);
 		DamageText.setFontFamily(FontKeys.SHPinscherRegular);
 		AlignTool.scaleToScreenWidth(this.scene, DamageText, 0.05);
+		DamageText.setDepth(DepthConfig.Texts);
 
 		// Animation:
 		this.scene.tweens.add({
