@@ -24,7 +24,7 @@ export const HiringData: IHiringData = {
 		effectDesc: 'Increase click dmg greatly.',
 		baseCost: 10,
 		costUpRatio: 2,
-		baseDMG: 1,
+		baseDMG: 2,
 		dmgGrowthType: 'exponential',
 		dmgUpRatio: 2,
 		img: feistyHen
@@ -46,7 +46,7 @@ export const HiringData: IHiringData = {
 		effectDesc: 'Increase click dmg by 10',
 		baseCost: 50,
 		costUpRatio: 2,
-		baseDMG: 1,
+		baseDMG: 10,
 		dmgGrowthType: 'linear',
 		dmgUpRatio: 10,
 		img: drillMachine

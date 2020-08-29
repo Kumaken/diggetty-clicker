@@ -4,8 +4,6 @@ import { IUpgradeProgresses, IUpgradeProgress } from 'phaser/interface/IUpgradeP
 import { UpgradeData } from 'data/UpgradeData';
 import { IHiringProgresses, IHiringProgress } from 'phaser/interface/IHiringProgress';
 import { HiringData } from 'data/HiringData';
-import { IUpgradeDatum } from 'phaser/interface/IUpgradeData';
-import { IHiringDatum } from 'phaser/interface/IHiringData';
 import { IItem } from 'phaser/interface/IItem';
 
 export interface IGameStore {
@@ -44,8 +42,8 @@ export class GameStore implements IGameStore {
 	initializeUpgradeProgresses() {
 		for (let key in UpgradeData) {
 			const newProgress: IUpgradeProgress = {
-				level: 1,
-				currdmg: UpgradeData[key].baseDMG,
+				level: 0,
+				currdmg: 0,
 				currprice: UpgradeData[key].baseCost
 			};
 			this.upgradeProgresses[key] = newProgress;
@@ -55,16 +53,12 @@ export class GameStore implements IGameStore {
 	initializeHiringProgresses() {
 		for (let key in HiringData) {
 			const newProgress: IHiringProgress = {
-				level: 1,
-				currdps: HiringData[key].baseDMG,
+				level: 0,
+				currdps: 0,
 				currprice: HiringData[key].baseCost
 			};
 			this.hiringProgresses[key] = newProgress;
 		}
-	}
-
-	calculatePriceIncrease(key: string, data: IUpgradeDatum | IHiringDatum, basePrice: number): number {
-		return basePrice * data.costUpRatio;
 	}
 
 	constructor(rootStore: IRootStore) {
@@ -132,22 +126,10 @@ export class GameStore implements IGameStore {
 
 	@action upgradeByKey(key: string) {
 		this.upgradeProgresses[key].level += 1;
-		console.log(this.upgradeProgresses[key].currprice * UpgradeData[key].costUpRatio);
-		this.upgradeProgresses[key].currprice = this.calculatePriceIncrease(
-			key,
-			UpgradeData[key],
-			this.upgradeProgresses[key].currprice
-		);
 	}
 
 	@action hireByKey(key: string) {
 		this.hiringProgresses[key].level += 1;
-		console.log(this.hiringProgresses[key].currprice);
-		this.hiringProgresses[key].currprice = this.calculatePriceIncrease(
-			key,
-			HiringData[key],
-			this.hiringProgresses[key].currprice
-		);
 	}
 
 	@action setInsufficientMoneyNotif(value: boolean) {

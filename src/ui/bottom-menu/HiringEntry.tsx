@@ -14,6 +14,7 @@ import './TabEntry.scss';
 import './HiringEntry.scss';
 import { RootStoreContext } from 'index';
 import { observer } from 'mobx-react';
+import { HiringData } from 'data/HiringData';
 
 interface IHiringEntryParam {
 	_key: string;
@@ -38,6 +39,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 	};
 
 	const countNextDPSIncrease = useCallback(() => {
+		if (store.gameStore.hiringProgresses[props._key].level <= 0) return HiringData[props._key].baseDMG;
 		if (props.hiringData.dmgGrowthType === 'linear')
 			return store.gameStore.hiringProgresses[props._key].currdps + props.hiringData.dmgUpRatio;
 		// exponential
@@ -61,7 +63,11 @@ const HiringEntry = (props: IHiringEntryParam) => {
 					{props.hiringData.name}
 				</Heading>
 				<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
-					Lvl.{store.gameStore.hiringProgresses[props._key].level}
+					Lvl.{store.gameStore.hiringProgresses[props._key].level}{' '}
+					<span className="silk-screen-A no-wrap text-yellow-outline">{'>>'}</span>{' '}
+					<span className="silk-screen-A no-wrap text-yellow-outline next-level-text">
+						{store.gameStore.hiringProgresses[props._key].level + 1}
+					</span>
 				</Heading>
 				<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
 					{props.hiringData.desc}
@@ -73,9 +79,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 					<Columns className="dps-columns">
 						<Columns.Column className="is-4">
 							<Heading className="silk-screen-A no-wrap" subtitle size={4}>
-								{store.gameStore.hiringProgresses[props._key].currdps - 1 <= 0
-									? 0
-									: store.gameStore.hiringProgresses[props._key].currdps - 1}
+								{store.gameStore.hiringProgresses[props._key].currdps}
 							</Heading>
 						</Columns.Column>
 						<Columns.Column className="is-4">
@@ -85,7 +89,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 						</Columns.Column>
 						<Columns.Column className="is-4">
 							<Heading className="silk-screen-A no-wrap text-yellow-outline" subtitle size={2}>
-								{countNextDPSIncrease() - 1}
+								{countNextDPSIncrease()}
 							</Heading>
 						</Columns.Column>
 					</Columns>
@@ -100,7 +104,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 						loading={isUpgrading ? true : false}
 						onClick={() => issueHiringLevelUp(props._key)}
 					>
-						HIRE
+						{store.gameStore.hiringProgresses[props._key].level <= 0 ? 'HIRE' : 'LEVEL UP'}
 					</Button>
 				</Columns.Column>
 				<Columns.Column className="is-4 is-flex">

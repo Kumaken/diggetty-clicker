@@ -7,6 +7,8 @@ import HiringProgressManager from './HiringProgressManager';
 import { IGameStore } from 'phaser/store/GameStore';
 import Item from './Item';
 import { ItemData } from 'data/ItemData';
+import { UpgradeData } from 'data/UpgradeData';
+import { HiringData } from 'data/HiringData';
 
 export default class Player {
 	private scene: Phaser.Scene;
@@ -23,9 +25,21 @@ export default class Player {
 	handleUpgrade(key: string) {
 		const price = this.upgradeProgressManager.getCurrentUpgradePrice(key);
 		if (price <= this.money) {
-			const dmgChange = this.upgradeProgressManager.calculateDamageIncrease(key);
+			let dmgChange;
+			if (this.gameStore.upgradeProgresses[key].level <= 1) {
+				dmgChange = UpgradeData[key].baseDMG;
+			} else {
+				dmgChange = this.upgradeProgressManager.calculateDamageIncrease(key);
+			}
+
 			Player.clickDamage += dmgChange;
 			this.gameStore.upgradeProgresses[key].currdmg += dmgChange;
+
+			// increase cost:
+			this.gameStore.upgradeProgresses[key].currprice = this.upgradeProgressManager.calculatePriceIncrease(
+				UpgradeData[key],
+				this.gameStore.upgradeProgresses[key].currprice
+			);
 
 			this.spendGold(price);
 			this.game.events.emit(GameEvents.OnUpgradeDone, key, Player.clickDamage);
@@ -38,9 +52,20 @@ export default class Player {
 	handleHiring(key: string) {
 		const price = this.hiringProgressManager.getCurrentHiringPrice(key);
 		if (price <= this.money) {
-			const dmgChange = this.hiringProgressManager.calculateDamageIncrease(key);
+			let dmgChange;
+			if (this.gameStore.hiringProgresses[key].level <= 1) {
+				dmgChange = HiringData[key].baseDMG;
+			} else {
+				dmgChange = this.hiringProgressManager.calculateDamageIncrease(key);
+			}
 			Player.dps += dmgChange;
 			this.gameStore.hiringProgresses[key].currdps += dmgChange;
+
+			// increase cost:
+			this.gameStore.hiringProgresses[key].currprice = this.upgradeProgressManager.calculatePriceIncrease(
+				HiringData[key],
+				this.gameStore.hiringProgresses[key].currprice
+			);
 
 			this.spendGold(price);
 			this.game.events.emit(GameEvents.OnHiringDone, key, Player.dps);

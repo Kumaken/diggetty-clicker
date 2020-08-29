@@ -13,7 +13,7 @@ export const UpgradeData: IUpgradeData = {
 		effectDesc: 'Increase click damage by 1',
 		baseCost: 2,
 		costUpRatio: 1.5,
-		baseDMG: 0,
+		baseDMG: 1,
 		dmgGrowthType: 'linear',
 		dmgUpRatio: 1,
 		img: pickaxe
@@ -44,9 +44,9 @@ export const UpgradeData: IUpgradeData = {
 		name: 'Tenacity',
 		desc: 'Much ambis... wow...',
 		effectDesc: 'Increase click dmg by 10',
-		baseCost: 50,
+		baseCost: 500,
 		costUpRatio: 2,
-		baseDMG: 1,
+		baseDMG: 10,
 		dmgGrowthType: 'linear',
 		dmgUpRatio: 10,
 		img: tenacity

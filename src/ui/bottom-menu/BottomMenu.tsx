@@ -33,7 +33,7 @@ export const BottomMenu = () => {
 			content: <InventoryIterator />
 		}
 	]);
-	const [activeTab, setActiveTab] = useState('Hiring');
+	const [activeTab, setActiveTab] = useState('Upgrades');
 	const [beginAnimation, setBeginAnimation] = useState(true);
 
 	const Tab = (props) => {
@@ -81,7 +81,6 @@ export const BottomMenu = () => {
 	return (
 		<div className="bottom-tab">
 			<Tabs />
-			{/* <ActiveTabContent key={activeTab} content={activeTabContent()} /> */}
 
 			<CSSTransition
 				in={beginAnimation}

@@ -8,7 +8,6 @@ import { IPlatformData } from '../interface/IPlatformData';
 import Algorithm from '../util/Algorithm';
 import { getGame } from 'phaser/Game';
 import { ItemData } from '../../data/ItemData';
-import Tile from './Tile';
 
 const ITEM_KEYS = Object.keys(ItemData);
 export default class Platform {
@@ -55,8 +54,8 @@ export default class Platform {
 	generateRow(frameArr: number[], createItem: boolean = false) {
 		let curX = this.effLeftX;
 		let itemIndex = undefined;
-		if(createItem){
-			itemIndex = Algorithm.randomIntFromInterval(0,this.rowSize-1);
+		if (createItem) {
+			itemIndex = Algorithm.randomIntFromInterval(0, this.rowSize - 1);
 		}
 
 		for (let i = 0; i < this.rowSize; i += 1) {
@@ -64,7 +63,7 @@ export default class Platform {
 			const frame = frameArr[randIdx];
 			let newTile: ITile;
 
-			if(createItem && i === itemIndex){
+			if (createItem && i === itemIndex) {
 				const randIdx = Algorithm.randomIntFromInterval(0, ITEM_KEYS.length - 1);
 				const key = ITEM_KEYS[randIdx];
 

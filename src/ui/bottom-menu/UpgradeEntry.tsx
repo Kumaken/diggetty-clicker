@@ -11,10 +11,10 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
 import { getGame } from 'phaser/Game';
 import MoneyText from 'ui/resource-stats/MoneyText';
-import './TabEntry.scss';
 import { observer } from 'mobx-react';
 import { RootStoreContext } from 'index';
-
+import './TabEntry.scss';
+import './UpgradeEntry.scss';
 interface IUpgradeEntryParam {
 	_key: string;
 	upgradeData: IUpgradeDatum;
@@ -50,7 +50,11 @@ const UpgradeEntry = (props: IUpgradeEntryParam) => {
 					{props.upgradeData.name}
 				</Heading>
 				<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
-					Lvl.{store.gameStore.upgradeProgresses[props._key].level}
+					Lvl. {store.gameStore.upgradeProgresses[props._key].level}{' '}
+					<span className="silk-screen-A no-wrap text-yellow-outline">{'>>'}</span>{' '}
+					<span className="silk-screen-A no-wrap text-yellow-outline next-level-text">
+						{store.gameStore.upgradeProgresses[props._key].level + 1}
+					</span>
 				</Heading>
 				<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
 					{props.upgradeData.desc}
@@ -68,7 +72,7 @@ const UpgradeEntry = (props: IUpgradeEntryParam) => {
 						loading={isUpgrading ? true : false}
 						onClick={() => issueUpgradeLevelUp(props._key)}
 					>
-						UPGRADE
+						{store.gameStore.upgradeProgresses[props._key].level <= 0 ? 'BUY' : 'LEVEL UP'}
 					</Button>
 				</Columns.Column>
 				<Columns.Column className="is-4 is-flex">
