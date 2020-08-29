@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { IUpgradeDatum } from '../../phaser/interface/IUpgradeData';
 import GameEvents from '../../phaser/config/GameEvents';
 import Card from 'react-bulma-components/lib/components/card';
@@ -12,8 +12,16 @@ import Button from 'react-bulma-components/lib/components/button';
 import { getGame } from 'phaser/Game';
 import MoneyText from 'ui/resource-stats/MoneyText';
 import './TabEntry.scss';
+import { observer } from 'mobx-react';
+import { RootStoreContext } from 'index';
 
-export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: number, cur_level: number) => {
+interface IUpgradeEntryParam {
+	_key: string;
+	upgradeData: IUpgradeDatum;
+}
+
+const UpgradeEntry = (props: IUpgradeEntryParam) => {
+	const store = useContext(RootStoreContext);
 	const [isUpgrading, setIsUpgrading] = useState(false);
 
 	const issueUpgradeLevelUp = (key: string) => {
@@ -30,25 +38,25 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 	};
 
 	return (
-		<Card key={key} className="tab-entry-cards">
+		<Card key={props._key} className="tab-entry-cards">
 			<Card.Content className="tab-entry-content">
 				<Media className="tab-entry-img-container">
 					<Media.Item renderAs="figure">
 						<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
-						<Image className="is-overlay" rounded size={64} alt="64x64" src={upgradeData.img} />
+						<Image className="is-overlay" rounded size={64} alt="64x64" src={props.upgradeData.img} />
 					</Media.Item>
 				</Media>
 				<Heading className="text-yellow-outline text-gray shpinscher-regular is-centered" size={4}>
-					{upgradeData.name}
+					{props.upgradeData.name}
 				</Heading>
 				<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
-					Lvl.{cur_level}
+					Lvl.{store.gameStore.upgradeProgresses[props._key].level}
 				</Heading>
 				<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
-					{upgradeData.desc}
+					{props.upgradeData.desc}
 				</Heading>
 				<Box className="desc-box text-yellow">
-					<Content>{upgradeData.effectDesc}</Content>
+					<Content>{props.upgradeData.effectDesc}</Content>
 				</Box>
 			</Card.Content>
 			<Columns className="tab-entry-action">
@@ -58,12 +66,9 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 						className={`button-text text-black `}
 						rounded
 						loading={isUpgrading ? true : false}
-						onClick={() => issueUpgradeLevelUp(key)}
+						onClick={() => issueUpgradeLevelUp(props._key)}
 					>
 						UPGRADE
-						{/* <Heading className={`shpinscher-regular  text-gray `} subtitle size={4}>
-							UPGRADE
-						</Heading> */}
 					</Button>
 				</Columns.Column>
 				<Columns.Column className="is-4 is-flex">
@@ -71,10 +76,12 @@ export const UpgradeEntry = (key: string, upgradeData: IUpgradeDatum, cur_cost: 
 						className="is-centered silk-screen-A tab-entry-cost text-yellow-outline text-gray "
 						size={4}
 					>
-						<MoneyText value={cur_cost} />
+						<MoneyText value={store.gameStore.upgradeProgresses[props._key].currprice} />
 					</Heading>
 				</Columns.Column>
 			</Columns>
 		</Card>
 	);
 };
+
+export default observer(UpgradeEntry);

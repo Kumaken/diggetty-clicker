@@ -5,4 +5,5 @@ export interface IHiringProgresses {
 export interface IHiringProgress {
 	level: number;
 	currdps: number;
+	currprice: number;
 }

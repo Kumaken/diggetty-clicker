@@ -1,10 +1,12 @@
 import 'phaser';
-import { IUpgradeProgresses, IUpgradeProgress } from '../interface/IUpgradeProgress';
 import { UpgradeData } from '../../data/UpgradeData';
+import { IGameStore } from 'phaser/store/GameStore';
+import { getGame } from 'phaser/Game';
 
 export default class UpgradeProgressManager {
 	private scene: Phaser.Scene;
-	private upgradeProgresses: IUpgradeProgresses;
+	private game: Phaser.Game;
+	private gameStore: IGameStore;
 
 	calculateDamageIncrease(key: string): number {
 		const upgradeType = UpgradeData[key].dmgGrowthType;
@@ -12,26 +14,17 @@ export default class UpgradeProgressManager {
 			return UpgradeData[key].dmgUpRatio;
 		} else {
 			// exponential
-			return this.upgradeProgresses[key].currdmg * UpgradeData[key].dmgUpRatio;
+			return this.gameStore.upgradeProgresses[key].currdmg * UpgradeData[key].dmgUpRatio;
 		}
-	}
-	levelUpProgress(key: string): void {
-		this.upgradeProgresses[key].level += 1;
 	}
 
 	getCurrentUpgradePrice(key: string) {
-		return UpgradeData[key].baseCost * this.upgradeProgresses[key].level * UpgradeData[key].costUpRatio;
+		return this.gameStore.upgradeProgresses[key].currprice;
 	}
+
 	constructor(scene: Phaser.Scene) {
 		this.scene = scene;
-		this.upgradeProgresses = {};
-
-		for (let key in UpgradeData) {
-			const newProgress: IUpgradeProgress = {
-				level: 1,
-				currdmg: UpgradeData[key].baseDMG
-			};
-			this.upgradeProgresses[key] = newProgress;
-		}
+		this.game = getGame();
+		this.gameStore = this.game.registry.get('gameStore');
 	}
 }

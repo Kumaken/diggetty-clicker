@@ -1,24 +1,16 @@
 import { UpgradeData } from '../../data/UpgradeData';
-import { UpgradeEntry } from './UpgradeEntry';
+import UpgradeEntry from './UpgradeEntry';
 import { IUpgradeDatum } from '../../phaser/interface/IUpgradeData';
-import React, { /* useEffect, useState, */ useContext } from 'react';
-import { RootStoreContext } from 'index';
-import { observer } from 'mobx-react';
-
+import React from 'react';
 const UpgradeTabIterator = () => {
-	const store = useContext(RootStoreContext);
+	// const store = useContext(RootStoreContext);
 
-	const calculateCurrentCost = (level: number, upgradeDatum: IUpgradeDatum) => {
-		return upgradeDatum.baseCost * level * upgradeDatum.costUpRatio;
-	};
+	// const calculateCurrentCost = (level: number, upgradeDatum: IUpgradeDatum) => {
+	// 	return upgradeDatum.baseCost * level * upgradeDatum.costUpRatio;
+	// };
 
 	const createUpgradeEntry = (key: string, upgradeDatum: IUpgradeDatum) => {
-		return UpgradeEntry(
-			key,
-			upgradeDatum,
-			calculateCurrentCost(store.gameStore?.upgradeProgresses[key].level, upgradeDatum),
-			store.gameStore?.upgradeProgresses[key].level
-		);
+		return <UpgradeEntry key={key} _key={key} upgradeData={upgradeDatum} />;
 	};
 
 	const createUpgradeList = () => {
@@ -32,4 +24,4 @@ const UpgradeTabIterator = () => {
 	return <>{createUpgradeList()}</>;
 };
 
-export default observer(UpgradeTabIterator);
+export default UpgradeTabIterator;

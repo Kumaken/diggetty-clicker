@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { IHiringDatum } from '../../phaser/interface/IHiringData';
 import GameEvents from '../../phaser/config/GameEvents';
 import Card from 'react-bulma-components/lib/components/card';
@@ -17,12 +17,10 @@ import { observer } from 'mobx-react';
 
 interface IHiringEntryParam {
 	_key: string;
-	HiringData: IHiringDatum;
-	cur_cost: number;
-	cur_level: number;
+	hiringData: IHiringDatum;
 }
 
-const HiringEntry = observer((props: IHiringEntryParam) => {
+const HiringEntry = (props: IHiringEntryParam) => {
 	const store = useContext(RootStoreContext);
 	const [isUpgrading, setIsUpgrading] = useState(false);
 
@@ -38,19 +36,17 @@ const HiringEntry = observer((props: IHiringEntryParam) => {
 		);
 		game.events.emit(GameEvents.OnHiringIssued, _key);
 	};
-	const [currDPS, setCurrDPS] = useState(0);
-	const [nextDPS, setNextDPS] = useState(0);
 
 	const countNextDPSIncrease = useCallback(() => {
-		if (props.HiringData.dmgGrowthType === 'linear') return currDPS + props.HiringData.dmgUpRatio;
+		if (props.hiringData.dmgGrowthType === 'linear')
+			return store.gameStore.hiringProgresses[props._key].currdps + props.hiringData.dmgUpRatio;
 		// exponential
-		else return currDPS * props.HiringData.dmgUpRatio;
-	}, [props.HiringData, currDPS]);
-
-	useEffect(() => {
-		setCurrDPS(store.gameStore.hiringProgresses[props._key]?.currdps);
-		setNextDPS(countNextDPSIncrease());
-	}, [countNextDPSIncrease, props._key, store.gameStore.hiringProgresses[props._key]?.currdps]);
+		else
+			return (
+				store.gameStore.hiringProgresses[props._key].currdps +
+				store.gameStore.hiringProgresses[props._key].currdps * props.hiringData.dmgUpRatio
+			);
+	}, [props.hiringData.dmgGrowthType, props.hiringData.dmgUpRatio, props._key, store.gameStore.hiringProgresses]);
 
 	return (
 		<Card _key={props._key} className="tab-entry-cards">
@@ -58,17 +54,17 @@ const HiringEntry = observer((props: IHiringEntryParam) => {
 				<Media className="tab-entry-img-container">
 					<Media.Item renderAs="figure">
 						<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
-						<Image className="is-overlay" rounded size={64} alt="64x64" src={props.HiringData.img} />
+						<Image className="is-overlay" rounded size={64} alt="64x64" src={props.hiringData.img} />
 					</Media.Item>
 				</Media>
 				<Heading className="text-yellow-outline text-gray shpinscher-regular is-centered" size={4}>
-					{props.HiringData.name}
+					{props.hiringData.name}
 				</Heading>
 				<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
-					Lvl.{props.cur_level}
+					Lvl.{store.gameStore.hiringProgresses[props._key].level}
 				</Heading>
 				<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
-					{props.HiringData.desc}
+					{props.hiringData.desc}
 				</Heading>
 				<Box className="desc-box text-yellow">
 					<Heading className="silk-screen-A hiring-dps-text text-gray text-yellow-outline" subtitle size={4}>
@@ -77,7 +73,9 @@ const HiringEntry = observer((props: IHiringEntryParam) => {
 					<Columns className="dps-columns">
 						<Columns.Column className="is-4">
 							<Heading className="silk-screen-A no-wrap" subtitle size={4}>
-								{currDPS}
+								{store.gameStore.hiringProgresses[props._key].currdps - 1 <= 0
+									? 0
+									: store.gameStore.hiringProgresses[props._key].currdps - 1}
 							</Heading>
 						</Columns.Column>
 						<Columns.Column className="is-4">
@@ -87,7 +85,7 @@ const HiringEntry = observer((props: IHiringEntryParam) => {
 						</Columns.Column>
 						<Columns.Column className="is-4">
 							<Heading className="silk-screen-A no-wrap text-yellow-outline" subtitle size={2}>
-								{nextDPS}
+								{countNextDPSIncrease() - 1}
 							</Heading>
 						</Columns.Column>
 					</Columns>
@@ -110,12 +108,12 @@ const HiringEntry = observer((props: IHiringEntryParam) => {
 						className="is-centered silk-screen-A tab-entry-cost text-yellow-outline text-gray "
 						size={4}
 					>
-						<MoneyText value={props.cur_cost} />
+						<MoneyText value={store.gameStore.hiringProgresses[props._key].currprice} />
 					</Heading>
 				</Columns.Column>
 			</Columns>
 		</Card>
 	);
-});
+};
 
-export default HiringEntry;
+export default observer(HiringEntry);

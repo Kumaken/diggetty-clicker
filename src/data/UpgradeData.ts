@@ -26,7 +26,7 @@ export const UpgradeData: IUpgradeData = {
 		costUpRatio: 2,
 		baseDMG: 1,
 		dmgGrowthType: 'exponential',
-		dmgUpRatio: 1,
+		dmgUpRatio: 2,
 		img: body
 	},
 	Calf: {

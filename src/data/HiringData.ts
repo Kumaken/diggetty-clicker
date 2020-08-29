@@ -1,54 +1,54 @@
 import { IHiringData } from '../phaser/interface/IHiringData';
 
 // import icons: (PATH HAS TO BE STATIC LITERAL STRING)
-import pickaxe from 'assets/icons/individuals/minecraft_transparent_181.png';
-import body from 'assets/icons/individuals/minecraft_transparent_42.png';
-import legs from 'assets/icons/individuals/minecraft_transparent_44.png';
-import tenacity from 'assets/icons/individuals/minecraft_transparent_195.png';
+import feistyHen from 'assets/icons/individuals/minecraft_transparent_399.png';
+import drunkSquirrel from 'assets/icons/individuals/minecraft_transparent_344.png';
+import drillMachine from 'assets/icons/individuals/minecraft_transparent_4.png';
+import drillbird from 'assets/icons/individuals/minecraft_transparent_387.png';
 
 export const HiringData: IHiringData = {
-	Pickaxe: {
-		name: "Good ol' pickaxe",
-		desc: "Your good ol' trusty pickaxe",
+	DrillBird: {
+		name: 'The Drill Bird',
+		desc: 'she protecc, she also drills',
 		effectDesc: 'Increase click damage by 1',
 		baseCost: 2,
 		costUpRatio: 1.5,
-		baseDMG: 0,
+		baseDMG: 1,
 		dmgGrowthType: 'linear',
 		dmgUpRatio: 1,
-		img: pickaxe
+		img: drillbird
 	},
-	Bicep: {
-		name: 'Firm Biceps',
-		desc: 'Work that guns!',
+	White: {
+		name: 'Feisty Hen',
+		desc: 'She lays earthworm eggs',
 		effectDesc: 'Increase click dmg greatly.',
 		baseCost: 10,
 		costUpRatio: 2,
 		baseDMG: 1,
 		dmgGrowthType: 'exponential',
-		dmgUpRatio: 1,
-		img: body
+		dmgUpRatio: 2,
+		img: feistyHen
 	},
-	Calf: {
-		name: 'Calf Muscles',
-		desc: 'Never skip a leg day!',
+	DrunkSquirrel: {
+		name: 'Drunk Squirrel',
+		desc: 'Give me all your money!',
 		effectDesc: 'Increase click dmg massively',
 		baseCost: 100,
 		costUpRatio: 2.5,
-		baseDMG: 2,
+		baseDMG: 1,
 		dmgGrowthType: 'exponential',
 		dmgUpRatio: 3,
-		img: legs
+		img: drunkSquirrel
 	},
-	Tenacity: {
-		name: 'Tenacity',
-		desc: 'Much ambis... wow...',
+	DrillMachine: {
+		name: 'Man-made Driller',
+		desc: 'Behold the machinery era',
 		effectDesc: 'Increase click dmg by 10',
 		baseCost: 50,
 		costUpRatio: 2,
 		baseDMG: 1,
 		dmgGrowthType: 'linear',
 		dmgUpRatio: 10,
-		img: tenacity
+		img: drillMachine
 	}
 };

@@ -3,6 +3,7 @@ import GameEvents from '../config/GameEvents';
 import UpgradeProgressManager from './UpgradeProgressManager';
 import { getGame } from 'phaser/Game';
 import HiringProgressManager from './HiringProgressManager';
+import { IGameStore } from 'phaser/store/GameStore';
 
 export default class Player {
 	private scene: Phaser.Scene;
@@ -13,13 +14,14 @@ export default class Player {
 	private hiringProgressManager: HiringProgressManager;
 	public static clickDamage: number = 1;
 	public static dps: number = 0;
+	private gameStore: IGameStore;
 
 	handleUpgrade(key: string) {
 		const price = this.upgradeProgressManager.getCurrentUpgradePrice(key);
 		if (price <= this.gold) {
-			this.upgradeProgressManager.levelUpProgress(key);
 			const dmgChange = this.upgradeProgressManager.calculateDamageIncrease(key);
 			Player.clickDamage += dmgChange;
+			this.gameStore.upgradeProgresses[key].currdmg += dmgChange;
 
 			this.spendGold(price);
 			this.game.events.emit(GameEvents.OnUpgradeDone, key, Player.clickDamage);
@@ -32,12 +34,9 @@ export default class Player {
 	handleHiring(key: string) {
 		const price = this.hiringProgressManager.getCurrentHiringPrice(key);
 		if (price <= this.gold) {
-			const gameStore = this.game.registry.get('gameStore');
-
-			this.hiringProgressManager.levelUpProgress(key);
 			const dmgChange = this.hiringProgressManager.calculateDamageIncrease(key);
 			Player.dps += dmgChange;
-			gameStore.hiringProgresses[key].currdps += dmgChange;
+			this.gameStore.hiringProgresses[key].currdps += dmgChange;
 
 			this.spendGold(price);
 			this.game.events.emit(GameEvents.OnHiringDone, key, Player.dps);
@@ -54,6 +53,7 @@ export default class Player {
 		this.depth = 0;
 		this.upgradeProgressManager = new UpgradeProgressManager(this.scene);
 		this.hiringProgressManager = new HiringProgressManager(this.scene);
+		this.gameStore = this.game.registry.get('gameStore');
 
 		// listen to game events (with params):
 		this.game.events.on(GameEvents.OnUpgradeIssued, (key: string) => this.handleUpgrade(key), this);
