@@ -6,6 +6,7 @@ import { IHiringProgresses, IHiringProgress } from 'phaser/interface/IHiringProg
 import { HiringData } from 'data/HiringData';
 import { IUpgradeDatum } from 'phaser/interface/IUpgradeData';
 import { IHiringDatum } from 'phaser/interface/IHiringData';
+import { IItem } from 'phaser/interface/IItem';
 
 export interface IGameStore {
 	topPlatformName: string;
@@ -14,22 +15,27 @@ export interface IGameStore {
 	playerDPC: number;
 	playerDPS: number;
 	money: number;
+	inventory: IItem[];
 	depth: number;
 	upgradeProgresses: IUpgradeProgresses;
 	hiringProgresses: IHiringProgresses;
 	insufficientMoneyNotif: boolean;
+	inventoryFullNotif: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
 	setPlayerDPC(value: number): void;
 	setPlayerDPS(value: number): void;
 	setMoney(value: number): void;
+	addItem(item: IItem): void;
+	useItem(id: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
 	setHiringProgresses(update: IHiringProgresses): void;
 	upgradeByKey(key: string);
 	hireByKey(key: string);
 	setInsufficientMoneyNotif(value: boolean);
+	setInventoryFullNotif(value: boolean);
 }
 
 export class GameStore implements IGameStore {
@@ -73,10 +79,12 @@ export class GameStore implements IGameStore {
 	@observable playerDPC: number = 1;
 	@observable playerDPS: number = 0;
 	@observable money: number = 0;
+	@observable inventory: IItem[] = [];
 	@observable depth: number = 0;
 	@observable upgradeProgresses: IUpgradeProgresses = {};
 	@observable hiringProgresses: IHiringProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
+	@observable inventoryFullNotif: boolean = false;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -100,6 +108,14 @@ export class GameStore implements IGameStore {
 
 	@action setMoney(value: number) {
 		this.money = value;
+	}
+
+	@action addItem(item: IItem) {
+		this.inventory.push(item);
+	}
+
+	@action useItem(id: number) {
+		this.inventory.splice(id, 1);
 	}
 
 	@action setDepth(value: number) {
@@ -136,5 +152,9 @@ export class GameStore implements IGameStore {
 
 	@action setInsufficientMoneyNotif(value: boolean) {
 		this.insufficientMoneyNotif = value;
+	}
+
+	@action setInventoryFullNotif(value: boolean) {
+		this.inventoryFullNotif = value;
 	}
 }

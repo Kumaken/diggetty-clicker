@@ -1,6 +1,7 @@
 import GameEvents from './config/GameEvents';
 import { IGameStore } from './store/GameStore';
 import { ITopMostPlatformInfo } from './interface/ITopMostPlatformInfo';
+import { IItem } from './interface/IItem';
 
 // Custom event that change value in Mobx store
 const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
@@ -39,6 +40,14 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 		}
 		gameStore?.hireByKey(key);
 		gameStore?.setPlayerDPS(DPS);
+	});
+
+	game.events.on(GameEvents.OnItemAcquired, (isFull: boolean, item?: IItem) => {
+		if (isFull) {
+			gameStore?.setInventoryFullNotif(true);
+			return;
+		}
+		gameStore?.addItem(item);
 	});
 };
 

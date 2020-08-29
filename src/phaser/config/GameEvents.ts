@@ -8,7 +8,8 @@ enum GameEvents {
 	OnUpgradeIssued = 'ON_UPGRADE_ISSUED',
 	OnUpgradeDone = 'ON_UPGRADE_DONE',
 	OnHiringIssued = 'ON_HIRING_ISSUED',
-	OnHiringDone = 'ON_HIRING_DONE'
+	OnHiringDone = 'ON_HIRING_DONE',
+	OnItemAcquired = 'ON_ITEM_ACQUIRED'
 }
 
 export default GameEvents;

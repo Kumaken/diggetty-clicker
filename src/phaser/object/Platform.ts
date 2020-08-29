@@ -6,9 +6,11 @@ import Player from './Player';
 import GameEvents from '../config/GameEvents';
 import { IPlatformData } from '../interface/IPlatformData';
 import Algorithm from '../util/Algorithm';
-import TilePool from './TilePool';
 import { getGame } from 'phaser/Game';
+import { ItemData } from '../../data/ItemData';
+import Tile from './Tile';
 
+const ITEM_KEYS = Object.keys(ItemData);
 export default class Platform {
 	public row: ITile[] = [];
 	private rowSize: number = 9;
@@ -29,10 +31,11 @@ export default class Platform {
 
 	constructor(
 		scene: Phaser.Scene,
-		pool: TilePool,
+		pool: ITilePool,
 		y: number,
 		tileSize: Phaser.Structs.Size,
-		platformData: IPlatformData
+		platformData: IPlatformData,
+		createItem: boolean = false
 	) {
 		this.scene = scene;
 		this.game = getGame();
@@ -46,16 +49,29 @@ export default class Platform {
 		this.toughness = platformData.toughness;
 		this.breakStep = Math.floor(this.toughness / 5);
 		this.phase = 0;
-		this.generateRow(platformData.textureKey.frame);
+		this.generateRow(platformData.textureKey.frame, createItem);
 	}
 
-	generateRow(frameArr: number[]) {
+	generateRow(frameArr: number[], createItem: boolean = false) {
 		let curX = this.effLeftX;
+		let itemIndex = undefined;
+		if(createItem){
+			itemIndex = Algorithm.randomIntFromInterval(0,this.rowSize-1);
+		}
 
 		for (let i = 0; i < this.rowSize; i += 1) {
 			const randIdx = Algorithm.randomIntFromInterval(0, frameArr.length - 1);
 			const frame = frameArr[randIdx];
-			const newTile: ITile = this.pool.spawn(curX, this.y, this.platformData.textureKey.key, frame);
+			let newTile: ITile;
+
+			if(createItem && i === itemIndex){
+				const randIdx = Algorithm.randomIntFromInterval(0, ITEM_KEYS.length - 1);
+				const key = ITEM_KEYS[randIdx];
+
+				newTile = this.pool.spawn(curX, this.y, ItemData[key].textureKey.key, 0, ItemData[key].name);
+			} else {
+				newTile = this.pool.spawn(curX, this.y, this.platformData.textureKey.key, frame);
+			}
 			this.row.push(newTile);
 			curX += this.tileSize.width;
 		}

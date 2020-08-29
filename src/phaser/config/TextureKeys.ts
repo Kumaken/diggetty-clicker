@@ -19,5 +19,21 @@ export const TextureKeys = {
     key: TexturePreloadKeys.TL_SHAKY_DIRT,
     frame: [0],
     frameStep: 1
+  },
+  APPLE: {
+    key: TexturePreloadKeys.APPLE,
+    frame: [0]
+  },
+  BOOK: {
+    key: TexturePreloadKeys.BOOK,
+    frame: [0]
+  },
+  GOLD_INGOT: {
+    key: TexturePreloadKeys.GOLD_INGOT,
+    frame: [0]
+  },
+  POTION: {
+    key: TexturePreloadKeys.POTION,
+    frame: [0]
   }
 };

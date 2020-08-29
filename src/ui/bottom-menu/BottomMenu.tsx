@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import Algorithm from 'phaser/util/Algorithm';
 import UpgradeTabIterator from './UpgradeTabIterator';
 import HiringTabIterator from './HiringTabIterator';
+import InventoryIterator from './InventoryIterator';
 
 const transitionDuration = 300;
 
@@ -29,7 +30,7 @@ export const BottomMenu = () => {
 		{
 			name: 'Inventory',
 			icon: '',
-			content: 'Stuff 4'
+			content: <InventoryIterator />
 		}
 	]);
 	const [activeTab, setActiveTab] = useState('Hiring');
