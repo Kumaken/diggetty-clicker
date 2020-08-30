@@ -14,6 +14,8 @@ import APPLE from '../../assets/items/apple.png';
 import BOOK from '../../assets/items/book.png';
 import GOLD_INGOT from '../../assets/items/gold_ingot.png';
 import POTION from '../../assets/items/potion.png';
+import FLARES from '../../assets/items/flares.png';
+import FLARES_JSON from '../../assets/items/flares.json';
 
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
@@ -55,6 +57,7 @@ export default class PreloadScene extends Phaser.Scene {
 		// this.load.image(TexturePreloadKeys.POTION,POTION);
 
 		this.load.image(TexturePreloadKeys.BACKGROUND,BACKGROUND);
+		this.load.atlas(TexturePreloadKeys.FLARES,FLARES,FLARES_JSON);
 
 		/* UNCOMMENT IF USING BASE64 FORMAT */
 		let dirtImg = new Image();

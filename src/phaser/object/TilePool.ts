@@ -36,6 +36,7 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 		tile.setTexture(key);
 		tile.setFrame(frame);
 		tile.setDepth(DepthConfig.Tile);
+		tile.setImmovable(true);
 		tile.currentTexture = key;
 		tile.currentFrame = frame;
 		tile.itemType = tileType;

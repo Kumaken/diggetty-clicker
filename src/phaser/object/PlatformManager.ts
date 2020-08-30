@@ -14,13 +14,16 @@ import { getGame } from 'phaser/Game';
 import Algorithm from 'phaser/util/Algorithm';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 import ItemConfig from 'phaser/config/ItemConfig';
+import { ITile } from 'phaser/interface/ITile';
+import ParticlesManager from './ParticlesManager';
+import { Physics } from 'phaser';
 
 export default class PlatformManager {
 	private game: Phaser.Game;
 	private scene: Phaser.Scene;
-	private pool: ITilePool;
+	private particlesManager: ParticlesManager;
+	private _pool: ITilePool;
 	private player: Player;
-	private bottomMostY: number = 0;
 	private platformYInterval: number = 0;
 	private platforms: Platform[] = [];
 	private rowNums: number = 4;
@@ -33,35 +36,71 @@ export default class PlatformManager {
 	private depthPerPlatform: number = 10;
 	private goldPerPlatform: number = 1;
 	private itemCooldown: number = 0;
+	private disappearTimer: Phaser.Time.TimerEvent;
 
 	// Static properties
+	public static bottomMostY: number = 0;
 	public static topMostY: number;
 	public static topMostPlatform: Platform;
 	public static tileSize: Phaser.Structs.Size;
 
-	constructor(scene: Phaser.Scene, player: Player) {
+	constructor(scene: Phaser.Scene, player: Player, particlesManager: ParticlesManager) {
 		this.scene = scene;
 		this.game = getGame();
-		this.pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
+		this.particlesManager = particlesManager;
+		this._pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
 		this.player = player;
 		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.45);
 
 		// deduce tile size dynamically:
-		const sample = this.pool.spawn(0, 0, '', 0);
+		const sample = this._pool.spawn(0, 0, '', 0);
 		PlatformManager.tileSize = new Phaser.Structs.Size(
 			sample.displayWidth - this.tileWidthGap,
 			sample.displayHeight - this.tileHeightGap
 		);
-		this.pool.despawn(sample);
+		this._pool.despawn(sample);
 
 		// listen to game events:
 		this.game.events.on(GameEvents.TopmostPlatformDestroyed, this.destroyTopmostPlatform, this);
+		this.game.events.on(
+			GameEvents.OnItemAcquired,
+			() => {
+				this.disappearTimer?.destroy();
+			},
+			this
+		)
 
-		this.scene.input.on('gameobjectdown', () => {
-			// damage topmost platform:
-			const topMostPlatform = this.platforms[0];
-			topMostPlatform.onClickPlatform();
-		});
+		this.scene.input.setHitArea(this.pool.getChildren()).on(
+			'gameobjectdown', 
+			(
+				pointer: Phaser.Input.Pointer, 
+				gameObject: Phaser.GameObjects.GameObject, 
+				event: Phaser.Events.EventEmitter
+			) => {
+				const tile = <ITile>gameObject;
+
+				if(gameObject.body.position.y >= PlatformManager.topMostY - tile.displayHeight/2){
+					// damage topmost platform:
+					const topMostPlatform = this.platforms[0];
+					topMostPlatform.onClickPlatform();
+
+				} else {
+					// Take item on surface
+					tile.takeItem();
+					this.particlesManager.showShootingStar(tile.x, tile.y);
+
+					this.scene.time.addEvent({
+						delay: tile.animDuration, // ms
+						callback: () => {
+							this.removeItem(tile);
+						},
+						callbackScope: this
+					});
+
+					this.player.addItem(tile.itemType);
+				}
+			}
+		);
 
 		// DPS System:
 		this.scene.time.addEvent({
@@ -71,6 +110,12 @@ export default class PlatformManager {
 			loop: true
 		});
 	}
+	
+	
+	public get pool() : ITilePool {
+		return this._pool;
+	}
+	
 
 	damageByDPS() {
 		PlatformManager.topMostPlatform?.damage(Player.dps);
@@ -80,7 +125,7 @@ export default class PlatformManager {
 		let curY = PlatformManager.topMostY;
 		PlatformManager.topMostPlatform = new Platform(
 			this.scene,
-			this.pool,
+			this._pool,
 			curY,
 			PlatformManager.tileSize,
 			PlatformData.Dirt,
@@ -90,11 +135,11 @@ export default class PlatformManager {
 		curY += PlatformManager.tileSize.height;
 
 		for (let i = 1; i < this.rowNums; i++) {
-			const newPlatform = new Platform(this.scene, this.pool, curY, PlatformManager.tileSize, PlatformData.Dirt, false);
+			const newPlatform = new Platform(this.scene, this._pool, curY, PlatformManager.tileSize, PlatformData.Dirt, false);
 			this.platforms.push(newPlatform);
 			curY += PlatformManager.tileSize.height;
 		}
-		this.bottomMostY = curY - PlatformManager.tileSize.height;
+		PlatformManager.bottomMostY = curY - PlatformManager.tileSize.height;
 
 		const topMostPlatformInfo: ITopMostPlatformInfo = {
 			name: PlatformManager.topMostPlatform.platformData.name,
@@ -109,33 +154,57 @@ export default class PlatformManager {
 		topMost.forEach((tile) => {
 			
 			if(tile.itemType){
-				this.player.addItem(tile.itemType);
-
-				const itemSprite = this.pool.spawn(tile.x, tile.y, tile.texture.key, 0);
+				const itemSprite: ITile = this._pool.spawn(tile.x, tile.y, tile.texture.key, 0, tile.itemType);
 				itemSprite.setDepth(DepthConfig.Pillar);
+				itemSprite.setImmovable(false);
 				this.scene.tweens.add({
 					targets: itemSprite,
 					y: itemSprite.y - AlignTool.getYfromScreenHeight(this.scene, 0.1),
-					duration: 1000
+					duration: 300,
 				});
 				this.scene.time.delayedCall(
-					1000,
+					300,
 					() => {
-						this.pool.killAndHide(itemSprite);
+						itemSprite.setGravityY(50);
+						this.startDisappearCountdown(itemSprite);
 					},
 					null,
 					this
 				);
 			}
-			this.pool.despawn(tile);
+			this._pool.despawn(tile);
 		});
 		PlatformManager.topMostPlatform = this.platforms[0];
+
 		const topMostPlatformInfo: ITopMostPlatformInfo = {
 			name: PlatformManager.topMostPlatform.platformData.name,
 			toughness: PlatformManager.topMostPlatform.toughness,
 			maxToughness: PlatformManager.topMostPlatform.platformData.toughness
 		};
 		this.game.events.emit(GameEvents.TopmostPlatformChanged, topMostPlatformInfo);
+	}
+
+	startDisappearCountdown(itemSprite: ITile){
+		this.disappearTimer = this.scene.time.delayedCall(
+			5 * 1000,
+			() => {
+				this.removeItem(itemSprite);
+			},
+			null,
+			this
+		);
+	}
+
+	removeItem(itemSprite: ITile){
+		if(!itemSprite.active || !itemSprite.visible) return;
+
+		itemSprite.setGravityY(0);
+		itemSprite.setVelocityY(0);
+		itemSprite.setPosition(
+			AlignTool.getXfromScreenWidth(this.scene,1),
+			AlignTool.getYfromScreenHeight(this.scene,1)
+		);
+		this._pool.killAndHide(itemSprite);
 	}
 
 	shiftAllPlatformsUpward() {
@@ -153,8 +222,8 @@ export default class PlatformManager {
 
 		const newPlatform = new Platform(
 			this.scene,
-			this.pool,
-			this.bottomMostY,
+			this._pool,
+			PlatformManager.bottomMostY,
 			PlatformManager.tileSize,
 			platformData,
 			createItem

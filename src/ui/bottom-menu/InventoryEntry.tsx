@@ -14,9 +14,9 @@ export const InventoryEntry = (id: number, itemData: IItemData) => {
 	}
 
 	return (
-		<Button key={id}
-			className="column is-2 is-dark inventory-tile" 
-			id={id} 
+		<Button 
+			key={id}
+			className="column is-2 is-dark inventory-tile"
 			onClick={() => issueUseItem(id)}
 		>
 			<Image className='item' src={itemData.texturePath}/>
