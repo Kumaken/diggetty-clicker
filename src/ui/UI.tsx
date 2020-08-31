@@ -24,7 +24,6 @@ import Level from "react-bulma-components/lib/components/level";
 const UI = () => {
   const store = useContext(RootStoreContext);
   const [isConfigLoaded, setIsConfigLoaded] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   const issueUseItem = () => {
     store.gameStore?.useItem();
@@ -41,7 +40,7 @@ const UI = () => {
     if (localStorage.getItem("isConfigured") === "true") {
       setIsConfigLoaded(true);
       return;
-    }
+	}
     saveToLocalStorage(UITextData);
 
     localStorage.setItem("isConfigured", "true");

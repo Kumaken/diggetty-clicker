@@ -18,6 +18,8 @@ export interface IGameStore {
 	inventoryFullNotif: boolean;
 	currentItemIndex: number;
 	itemShown: boolean;
+	buffDuration: number;
+	activeItem: IItem;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
@@ -33,6 +35,7 @@ export interface IGameStore {
 	upgradeByKey(key: string);
 	setInsufficientMoneyNotif(value: boolean);
 	setInventoryFullNotif(value: boolean);
+	setBuffDuration(duration: number);
 }
 
 export class GameStore implements IGameStore {
@@ -66,6 +69,8 @@ export class GameStore implements IGameStore {
 	@observable inventoryFullNotif: boolean = false;
 	@observable currentItemIndex: number = 0;
 	@observable itemShown: boolean = false;
+	@observable buffDuration: number = 0;
+	@observable activeItem: IItem;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -105,6 +110,8 @@ export class GameStore implements IGameStore {
 	}
 
 	@action useItem(){
+		this.activeItem = this.inventory[this.currentItemIndex];
+		this.setBuffDuration(this.activeItem.itemData.duration * 60);
 		this.inventory.splice(this.currentItemIndex,1);
 		this.itemShown = false;
 	}
@@ -127,5 +134,9 @@ export class GameStore implements IGameStore {
 
 	@action setInventoryFullNotif(value: boolean) {
 		this.inventoryFullNotif = value;
+	}
+
+	@action setBuffDuration(duration: number){
+		this.buffDuration = duration;
 	}
 }
