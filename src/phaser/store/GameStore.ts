@@ -16,6 +16,8 @@ export interface IGameStore {
 	upgradeProgresses: IUpgradeProgresses;
 	insufficientMoneyNotif: boolean;
 	inventoryFullNotif: boolean;
+	currentItemIndex: number;
+	itemShown: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
@@ -23,6 +25,8 @@ export interface IGameStore {
 	setPlayerDPS(value: number): void;
 	setMoney(value: number): void;
 	addItem(item: IItem): void;
+	showItem(id: number): void;
+	hideItem(): void;
 	useItem(id: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
@@ -60,6 +64,8 @@ export class GameStore implements IGameStore {
 	@observable upgradeProgresses: IUpgradeProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
 	@observable inventoryFullNotif: boolean = false;
+	@observable currentItemIndex: number = 0;
+	@observable itemShown: boolean = false;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -89,8 +95,18 @@ export class GameStore implements IGameStore {
 		this.inventory.push(item);
 	}
 
-	@action useItem(id: number){
-		this.inventory.splice(id,1);
+	@action showItem(id: number){
+		this.currentItemIndex = id;
+		this.itemShown = true;
+	}
+
+	@action hideItem(){
+		this.itemShown = false;
+	}
+
+	@action useItem(){
+		this.inventory.splice(this.currentItemIndex,1);
+		this.itemShown = false;
 	}
 
 	@action setDepth(value: number) {

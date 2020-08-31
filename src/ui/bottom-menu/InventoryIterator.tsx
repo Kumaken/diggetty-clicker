@@ -31,7 +31,6 @@ const InventoryIterator = () => {
 		const jsxElem = [];
 
 		inventory.forEach((item,index) => {
-			console.log(index,item.itemData.name)
 			jsxElem.push(createInventoryEntry(index, item.itemData));
 		});
 		return jsxElem;

@@ -15,7 +15,7 @@ export default class ItemConfig {
     }
 
     public static setItemGenCooldown(depth: number) {
-        this._itemGenCooldown.min = 5 + Math.floor(depth/10);
-        this._itemGenCooldown.max = 8 + Math.floor(depth/9);
+        this._itemGenCooldown.min = 5 + Math.floor(depth/50);
+        this._itemGenCooldown.max = 8 + Math.floor(depth/45);
     }
 }

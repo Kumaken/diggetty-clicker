@@ -9,7 +9,7 @@ export const ItemData = {
 	Apple: {
 		name: 'Apple',
         attributes: '+5 tap damage',
-        duration: 3 * 1000 * 60,
+        duration: 3,
         description: 'Eat one apple a day, keeps the doctor away!',
         textureKey: TextureKeys.APPLE,
         texturePath: APPLE
@@ -17,7 +17,7 @@ export const ItemData = {
 	Book: {
 		name: 'Book',
         attributes: '25% upgrade discount',
-        duration: 3 * 1000 * 60,
+        duration: 3,
         description: 'Books are a uniquely portable magic.',
         textureKey: TextureKeys.BOOK,
         texturePath: BOOK
@@ -25,7 +25,7 @@ export const ItemData = {
 	GoldIngot: {
 		name: 'Gold Ingot',
         attributes: '1.2x gold gain multiplier',
-        duration: 3 * 1000 * 60,
+        duration: 3,
         description: 'Gold is a treasure, and he who possesses it does all he wishes to in this world.',
         textureKey: TextureKeys.GOLD_INGOT,
         texturePath: GOLD_INGOT
@@ -33,7 +33,7 @@ export const ItemData = {
     Potion:{
         name: 'Potion',
         attributes: '+2 dps',
-        duration: 3 * 1000 * 60,
+        duration: 3,
         description: "What doesn't kill you makes you stronger.",
         textureKey: TextureKeys.POTION,
         texturePath: POTION

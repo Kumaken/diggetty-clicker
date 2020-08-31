@@ -68,7 +68,7 @@ export default class ParticlesManager {
             x: AlignTool.getXfromScreenWidth(this.scene, 0.95),
             y: PlatformManager.bottomMostY + AlignTool.getYfromScreenHeight(this.scene,0.1)
         }
-        const duration = 1000;
+        const duration = 750;
 
         this.star.start();
         this.star.setAngle(
