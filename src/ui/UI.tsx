@@ -27,8 +27,8 @@ const UI = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const issueUseItem = () => {
-	store.gameStore?.useItem();
-}
+    store.gameStore?.useItem();
+  };
 
   const saveToLocalStorage = (data: {}) => {
     Object.keys(data).forEach((key: string) => {
@@ -61,17 +61,21 @@ const UI = () => {
           <Modal
             show={store.gameStore?.itemShown}
             onClose={() => {
-				store.gameStore?.hideItem()
+              store.gameStore?.hideItem();
             }}
           >
             <Modal.Card>
               <Modal.Card.Head
                 onClose={() => {
-					store.gameStore?.hideItem()
+                  store.gameStore?.hideItem();
                 }}
               >
                 <Modal.Card.Title>
-                  {store.gameStore?.inventory[0]?.itemData.name}
+                  {
+                    store.gameStore?.inventory[
+                      store.gameStore?.currentItemIndex
+                    ]?.itemData.name
+                  }
                 </Modal.Card.Title>
               </Modal.Card.Head>
               <Modal.Card.Body>
@@ -100,7 +104,7 @@ const UI = () => {
                         </span>
                         <span>
                           <small>
-							for{" "}
+                            for{" "}
                             {
                               store.gameStore?.inventory[
                                 store.gameStore?.currentItemIndex
@@ -125,9 +129,9 @@ const UI = () => {
                 style={{ alignItems: "center", justifyContent: "center" }}
               >
                 <Button
-				  className="is-primary"
+                  className="is-primary"
                   onClick={() => {
-                    issueUseItem()
+                    issueUseItem();
                   }}
                 >
                   Use Item
