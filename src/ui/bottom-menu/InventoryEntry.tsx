@@ -23,18 +23,3 @@ export const InventoryEntry = (id: number, itemData: IItemData) => {
 		</Button>
 	);
 };
-
-{/* <Columns className="is-multiline is-mobile inventory">
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile">2</Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile">2</Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile">2</Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-			<Button className="column is-2 is-dark inventory-tile"><Image className='item' src={APPLE} /></Button>
-		</Columns> */}

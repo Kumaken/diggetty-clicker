@@ -1,10 +1,15 @@
 import 'phaser';
-import { IUpgradeProgresses, IUpgradeProgress } from '../interface/IUpgradeProgress';
 import { UpgradeData } from '../../data/UpgradeData';
+import { IGameStore } from 'phaser/store/GameStore';
+import { getGame } from 'phaser/Game';
+import { IUpgradeDatum } from 'phaser/interface/IUpgradeData';
+import { IHiringDatum } from 'phaser/interface/IHiringData';
 
 export default class UpgradeProgressManager {
 	private scene: Phaser.Scene;
-	private upgradeProgresses: IUpgradeProgresses;
+	private game: Phaser.Game;
+	private gameStore: IGameStore;
+	private discount: number;
 
 	calculateDamageIncrease(key: string): number {
 		const upgradeType = UpgradeData[key].dmgGrowthType;
@@ -12,26 +17,33 @@ export default class UpgradeProgressManager {
 			return UpgradeData[key].dmgUpRatio;
 		} else {
 			// exponential
-			return this.upgradeProgresses[key].currdmg * UpgradeData[key].dmgUpRatio;
+			return Math.floor(this.gameStore.upgradeProgresses[key].currdmg * UpgradeData[key].dmgUpRatio);
 		}
 	}
-	levelUpProgress(key: string): void {
-		this.upgradeProgresses[key].level += 1;
+
+	calculatePriceIncrease(data: IUpgradeDatum | IHiringDatum, basePrice: number): number {
+		return Math.floor(basePrice * data.costUpRatio);
 	}
 
 	getCurrentUpgradePrice(key: string) {
-		return UpgradeData[key].baseCost * this.upgradeProgresses[key].level * UpgradeData[key].costUpRatio;
+		return this.gameStore.upgradeProgresses[key].currprice;
 	}
+
+	setDiscount(value: number, recoverDiscount: boolean) {
+		this.discount = value;
+		for(let key in UpgradeData){
+			if(recoverDiscount){
+				this.gameStore.upgradeProgresses[key].currprice /= (1-this.discount);
+			} else {
+				this.gameStore.upgradeProgresses[key].currprice *= (1-this.discount);
+			}
+		}
+	}
+
 	constructor(scene: Phaser.Scene) {
 		this.scene = scene;
-		this.upgradeProgresses = {};
-
-		for (let key in UpgradeData) {
-			const newProgress: IUpgradeProgress = {
-				level: 1,
-				currdmg: UpgradeData[key].baseDMG
-			};
-			this.upgradeProgresses[key] = newProgress;
-		}
+		this.game = getGame();
+		this.gameStore = this.game.registry.get('gameStore');
+		this.discount = 0;
 	}
 }

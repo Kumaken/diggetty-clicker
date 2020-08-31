@@ -1,0 +1,13 @@
+@import "../../_variables.sass";
+
+.hiring-dps-text {
+	position: absolute;
+	top: -20%;
+}
+
+.dps-columns{
+	display: flex; // both container and self needs to be flex?
+	justify-content: center; // align horizontally
+	width: 100%; // needs this for horizontal center
+	align-items: center; // align vertically
+}

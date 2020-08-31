@@ -5,4 +5,5 @@ export interface IUpgradeProgresses {
 export interface IUpgradeProgress {
 	level: number;
 	currdmg: number;
+	currprice: number;
 }

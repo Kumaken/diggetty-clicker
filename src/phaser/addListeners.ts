@@ -33,8 +33,17 @@ const addGameEventListeners = (game: Phaser.Game, gameStore: IGameStore) => {
 		gameStore?.setPlayerDPC(DPC);
 	});
 
+	game.events.on(GameEvents.OnHiringDone, (key: string, DPS: number) => {
+		if (!key && !DPS) {
+			gameStore?.setInsufficientMoneyNotif(true);
+			return;
+		}
+		gameStore?.hireByKey(key);
+		gameStore?.setPlayerDPS(DPS);
+	});
+
 	game.events.on(GameEvents.OnItemAcquired, (isFull: boolean, item?: IItem) => {
-		if(isFull){
+		if (isFull) {
 			gameStore?.setInventoryFullNotif(true);
 			return;
 		}

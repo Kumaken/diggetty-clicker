@@ -16,7 +16,6 @@ import { DepthConfig } from 'phaser/config/DepthConfig';
 import ItemConfig from 'phaser/config/ItemConfig';
 import { ITile } from 'phaser/interface/ITile';
 import ParticlesManager from './ParticlesManager';
-import { Physics } from 'phaser';
 
 export default class PlatformManager {
 	private game: Phaser.Game;
@@ -68,7 +67,22 @@ export default class PlatformManager {
 				this.disappearTimer?.destroy();
 			},
 			this
-		)
+		);
+		this.game.events.on(
+			GameEvents.ActivateGoldIngot,
+			() => {
+				this.goldPerPlatform *= 1.2;
+			},
+			this
+		);
+
+		this.game.events.on(
+			GameEvents.DeactivateGoldIngot,
+			() => {
+				this.goldPerPlatform /= 1.2;
+			},
+			this
+		);
 
 		this.scene.input.setHitArea(this.pool.getChildren()).on(
 			'gameobjectdown', 
@@ -77,7 +91,7 @@ export default class PlatformManager {
 				gameObject: Phaser.GameObjects.GameObject, 
 				event: Phaser.Events.EventEmitter
 			) => {
-				const tile = <ITile>gameObject;
+				const tile = gameObject as ITile;
 
 				if(gameObject.body.position.y >= PlatformManager.topMostY - tile.displayHeight/2){
 					// damage topmost platform:
@@ -97,7 +111,7 @@ export default class PlatformManager {
 						callbackScope: this
 					});
 
-					this.player.addItem(tile.itemType);
+					this.player.handleAddItem(tile.itemType);
 				}
 			}
 		);
@@ -118,6 +132,7 @@ export default class PlatformManager {
 	
 
 	damageByDPS() {
+		if (Player.dps <= 0) return;
 		PlatformManager.topMostPlatform?.damage(Player.dps);
 	}
 

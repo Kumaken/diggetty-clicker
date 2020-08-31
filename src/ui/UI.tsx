@@ -8,7 +8,6 @@ import ResourceStats from "./resource-stats";
 import { BottomMenu } from "./bottom-menu/BottomMenu";
 import ItemDescModal from "./modal/ItemDescModal";
 import { observer } from "mobx-react";
-import PropTypes from "prop-types";
 
 // data jsons:
 import UITextData from "../data/json/UITextData.json";
@@ -18,8 +17,6 @@ import Image from "react-bulma-components/lib/components/image";
 import Media from "react-bulma-components/lib/components/media";
 import Button from "react-bulma-components/lib/components/button";
 import Content from "react-bulma-components/lib/components/content";
-import Section from "react-bulma-components/lib/components/section";
-import Level from "react-bulma-components/lib/components/level";
 
 const UI = () => {
   const store = useContext(RootStoreContext);
@@ -40,7 +37,7 @@ const UI = () => {
     if (localStorage.getItem("isConfigured") === "true") {
       setIsConfigLoaded(true);
       return;
-	}
+    }
     saveToLocalStorage(UITextData);
 
     localStorage.setItem("isConfigured", "true");
@@ -127,14 +124,20 @@ const UI = () => {
               <Modal.Card.Foot
                 style={{ alignItems: "center", justifyContent: "center" }}
               >
-                <Button
-                  className="is-primary"
-                  onClick={() => {
-                    issueUseItem();
-                  }}
-                >
-                  Use Item
-                </Button>
+                {store.gameStore?.buffDuration == 0 ? (
+                  <Button
+                    className="is-primary"
+                    onClick={() => {
+                      issueUseItem();
+                    }}
+                  >
+                    Use Item
+                  </Button>
+                ) : (
+                  <Content className="item-details">
+                    <span>A buff is active. Can't activate another item.</span>
+                  </Content>
+                )}
               </Modal.Card.Foot>
             </Modal.Card>
           </Modal>

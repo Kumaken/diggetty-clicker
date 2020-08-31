@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { RootStoreContext } from "index";
 import { observer } from "mobx-react";
 import Tag from "react-bulma-components/lib/components/tag";
@@ -15,7 +15,18 @@ const PlayerStats = () => {
   const DPCText = localStorage.getItem(LocalStorageKeys.DPCText);
   const BuffDuration = localStorage.getItem(LocalStorageKeys.BuffDuration);
 
-  const StatsComponent = (icon: string, name: string, value: number) => {
+  const convertSecondsToClock = () => {
+    let date = new Date(null);
+    date.setSeconds(store.gameStore?.buffDuration); // specify value for SECONDS here
+    let result = date.toISOString().substr(15, 5);
+    return result;
+  };
+
+  const StatsComponent = (
+    icon: string,
+    name: string,
+    value: number | string
+  ) => {
     return (
       <div className="stats-component">
         <Media className="stats-pic">
@@ -26,13 +37,7 @@ const PlayerStats = () => {
               alt="dpc icon pic bg"
               src="http://bulma.io/images/placeholders/16x16.png"
             />
-            <Image
-              overlay
-              rounded
-              size={48}
-              alt="dpc icon pic"
-              src={icon}
-            />
+            <Image overlay rounded size={48} alt="dpc icon pic" src={icon} />
           </Media.Item>
         </Media>
         <Tag className="dpc-tag" color="dark" rounded>
@@ -57,7 +62,7 @@ const PlayerStats = () => {
           ? StatsComponent(
               store.gameStore?.activeItem.itemData.texturePath,
               BuffDuration,
-              store.gameStore?.buffDuration
+              convertSecondsToClock()
             )
           : null}
       </div>

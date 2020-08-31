@@ -1,7 +1,6 @@
 import 'phaser';
 import { TextureKeys } from '../config/TextureKeys';
 import PlatformManager from './PlatformManager';
-import Alerts from 'ui/alert';
 import AlignTool from 'phaser/util/AlignTool';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 
@@ -42,7 +41,7 @@ export default class ParticlesManager {
         );
         this.starSprite.setVisible(true);
         this.star = this.shootingStar.createEmitter({
-            lifespan: 1000,
+            lifespan: 600,
             speed: 300,
             angle: 330,
             gravityY: 100,
@@ -68,7 +67,7 @@ export default class ParticlesManager {
             x: AlignTool.getXfromScreenWidth(this.scene, 0.95),
             y: PlatformManager.bottomMostY + AlignTool.getYfromScreenHeight(this.scene,0.1)
         }
-        const duration = 750;
+        const duration = 600;
 
         this.star.start();
         this.star.setAngle(

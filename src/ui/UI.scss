@@ -25,6 +25,11 @@
 	text-align: center;
 }
 
+/* Wraps */
+.no-wrap{
+	white-space: nowrap;
+}
+
 /* Colors */
 .text-white {
 	color: #{$white} !important;

@@ -5,6 +5,7 @@ import './BottomMenu.scss';
 import { CSSTransition } from 'react-transition-group';
 import Algorithm from 'phaser/util/Algorithm';
 import UpgradeTabIterator from './UpgradeTabIterator';
+import HiringTabIterator from './HiringTabIterator';
 import InventoryIterator from './InventoryIterator';
 
 const transitionDuration = 300;
@@ -19,7 +20,7 @@ export const BottomMenu = () => {
 		{
 			name: 'Hiring',
 			icon: '',
-			content: 'Stuff 2'
+			content: <HiringTabIterator />
 		},
 		{
 			name: 'Marketing',
@@ -80,7 +81,6 @@ export const BottomMenu = () => {
 	return (
 		<div className="bottom-tab">
 			<Tabs />
-			{/* <ActiveTabContent key={activeTab} content={activeTabContent()} /> */}
 
 			<CSSTransition
 				in={beginAnimation}

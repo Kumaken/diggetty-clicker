@@ -65,6 +65,7 @@ export default class LevelScene extends Phaser.Scene {
 
 	update(): void {
 		this.physics.collide(this.platformManager.pool,this.platformManager.pool);
+		this.player.checkItem();
 		this.fpsText.update();
 	}
 }
