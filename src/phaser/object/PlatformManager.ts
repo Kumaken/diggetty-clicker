@@ -59,6 +59,7 @@ export default class PlatformManager {
 
 		this.scene.input.on('gameobjectdown', () => {
 			// damage topmost platform:
+			this.player.playDigAnimation();
 			const topMostPlatform = this.platforms[0];
 			topMostPlatform.onClickPlatform();
 		});

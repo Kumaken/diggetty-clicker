@@ -13,6 +13,7 @@ import AlignTool from 'phaser/util/AlignTool';
 import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
 import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
 import { DepthConfig } from 'phaser/config/DepthConfig';
+import { AnimationKeys } from 'phaser/config/AnimationKeys';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
 	public scene: Phaser.Scene;
@@ -79,17 +80,26 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
-	constructor(scene: Phaser.Scene) {
-		super(scene, AlignTool.getCenterHorizontal(scene), 100, TexturePreloadKeys.PLAYER);
-		// scene.physics.world.enable(this);
-		scene.add.existing(this); // add to screen
-		scene.physics.add.existing(this); // enable physics
-		AlignTool.scaleToScreenWidth(scene, this, 0.3);
+	setupPhysics() {
+		this.scene.add.existing(this); // add to screen
+		this.scene.physics.add.existing(this); // enable physics
 		this.setGravityY(PhysicsConfig.WorldGravity);
-		this.setDepth(DepthConfig.Player);
 		this.setBounce(0.2, 0.2);
 		this.setCollideWorldBounds(true);
 		this.body.setSize(); // readjust physics body to texture size
+	}
+
+	setupAnimations() {
+		this.scene.anims.create({
+			key: AnimationKeys.PLAYER_DIG,
+			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.PLAYER, { start: 0, end: 6 }),
+			frameRate: 20,
+			repeat: 0
+		});
+	}
+
+	constructor(scene: Phaser.Scene) {
+		super(scene, AlignTool.getCenterHorizontal(scene), 100, TexturePreloadKeys.PLAYER);
 
 		this.scene = scene;
 		this.game = getGame();
@@ -99,6 +109,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		this.upgradeProgressManager = new UpgradeProgressManager(this.scene);
 		this.hiringProgressManager = new HiringProgressManager(this.scene);
 		this.gameStore = this.game.registry.get('gameStore');
+
+		// setup sprite
+		AlignTool.scaleToScreenWidth(scene, this, 0.3);
+		this.setDepth(DepthConfig.Player);
+		this.setupPhysics();
+
+		// setup animations:
+		this.setupAnimations();
 
 		// listen to game events (with params):
 		this.game.events.on(GameEvents.OnUpgradeIssued, (key: string) => this.handleUpgrade(key), this);
@@ -159,5 +177,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
 		this._inventory.push(item);
 		this.game.events.emit(GameEvents.OnItemAcquired, false, item);
+	}
+
+	playDigAnimation() {
+		this.anims.play(AnimationKeys.PLAYER_DIG);
 	}
 }
