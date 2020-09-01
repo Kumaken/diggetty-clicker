@@ -121,6 +121,7 @@ export default class PlatformManager {
 
 				const itemSprite = this.pool.spawn(tile.x, tile.y, tile.texture.key, 0);
 				itemSprite.setDepth(DepthConfig.Pillar);
+				itemSprite.body.enable = false;
 				this.scene.tweens.add({
 					targets: itemSprite,
 					y: itemSprite.y - AlignTool.getYfromScreenHeight(this.scene, 0.1),
@@ -129,7 +130,7 @@ export default class PlatformManager {
 				this.scene.time.delayedCall(
 					1000,
 					() => {
-						this.pool.killAndHide(itemSprite);
+						this.pool.despawn(itemSprite);
 					},
 					null,
 					this
