@@ -6,16 +6,11 @@ interface IITemGenCooldown{
 export default class ItemConfig {
     public static readonly ITEM_GEN_STARTING_LAYER = 0;
     private static _itemGenCooldown: IITemGenCooldown = {
-        min: 5,
-        max: 8
+        min: 0.125,
+        max: 1
     }
     
     public static get itemGenCooldown() : IITemGenCooldown {
         return this._itemGenCooldown;
-    }
-
-    public static setItemGenCooldown(depth: number) {
-        this._itemGenCooldown.min = 5 + Math.floor(depth/50);
-        this._itemGenCooldown.max = 8 + Math.floor(depth/45);
     }
 }

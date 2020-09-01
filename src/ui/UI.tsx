@@ -22,10 +22,6 @@ const UI = () => {
   const store = useContext(RootStoreContext);
   const [isConfigLoaded, setIsConfigLoaded] = useState(false);
 
-  const issueUseItem = () => {
-    store.gameStore?.useItem();
-  };
-
   const saveToLocalStorage = (data: {}) => {
     Object.keys(data).forEach((key: string) => {
       localStorage.setItem(key, data[key]);
@@ -48,10 +44,10 @@ const UI = () => {
     <div className="UI noselect">
       {isConfigLoaded ? (
         <>
+          {/* <ItemDescModal></ItemDescModal> */}
           <PlayerStats></PlayerStats>
           <ToughnessBar></ToughnessBar>
           <ResourceStats></ResourceStats>
-          {/* <ItemDescModal></ItemDescModal> */}
           <BottomMenu></BottomMenu>
           <Alerts></Alerts>
           <Modal
@@ -128,7 +124,7 @@ const UI = () => {
                   <Button
                     className="is-primary"
                     onClick={() => {
-                      issueUseItem();
+                      store.gameStore?.useItem();
                     }}
                   >
                     Use Item

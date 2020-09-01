@@ -34,12 +34,12 @@ export default class ParticlesManager {
         scene.add.existing(this.shootingStar);
 
         this.starSprite = this.scene.physics.add.image(
-            AlignTool.getXfromScreenWidth(scene, 0.5),
-            AlignTool.getYfromScreenHeight(scene, 0.5),
+            AlignTool.getXfromScreenWidth(scene, 1),
+            AlignTool.getYfromScreenHeight(scene, 1),
             TextureKeys.FLARES.key,
             TextureKeys.FLARES.frame[2]
         );
-        this.starSprite.setVisible(true);
+        this.starSprite.setVisible(false);
         this.star = this.shootingStar.createEmitter({
             lifespan: 600,
             speed: 300,
