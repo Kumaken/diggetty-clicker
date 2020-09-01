@@ -18,7 +18,7 @@ import ItemConfig from 'phaser/config/ItemConfig';
 export default class PlatformManager {
 	private game: Phaser.Game;
 	private scene: Phaser.Scene;
-	private pool: ITilePool;
+	public pool: ITilePool;
 	private player: Player;
 	private bottomMostY: number = 0;
 	private platformYInterval: number = 0;
@@ -91,7 +91,14 @@ export default class PlatformManager {
 		curY += PlatformManager.tileSize.height;
 
 		for (let i = 1; i < this.rowNums; i++) {
-			const newPlatform = new Platform(this.scene, this.pool, curY, PlatformManager.tileSize, PlatformData.Dirt, false);
+			const newPlatform = new Platform(
+				this.scene,
+				this.pool,
+				curY,
+				PlatformManager.tileSize,
+				PlatformData.Dirt,
+				false
+			);
 			this.platforms.push(newPlatform);
 			curY += PlatformManager.tileSize.height;
 		}
@@ -108,8 +115,7 @@ export default class PlatformManager {
 	despawnTopmostPlatform() {
 		const topMost = this.platforms.shift()!.row;
 		topMost.forEach((tile) => {
-			
-			if(tile.itemType){
+			if (tile.itemType) {
 				this.player.addItem(tile.itemType);
 
 				const itemSprite = this.pool.spawn(tile.x, tile.y, tile.texture.key, 0);
@@ -147,7 +153,7 @@ export default class PlatformManager {
 
 	spawnBottommostPlatform(platformData: IPlatformData) {
 		let createItem = false;
-		if(this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER && this.itemCooldown === 0){
+		if (this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER && this.itemCooldown === 0) {
 			createItem = true;
 			this.addItemCooldown();
 		}
@@ -160,8 +166,8 @@ export default class PlatformManager {
 			platformData,
 			createItem
 		);
-		if(this.itemCooldown > 0) this.itemCooldown--;
-		
+		if (this.itemCooldown > 0) this.itemCooldown--;
+
 		this.platforms.push(newPlatform);
 	}
 

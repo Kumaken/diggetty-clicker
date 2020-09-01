@@ -48,6 +48,9 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 
 		AlignTool.scaleToScreenWidth(this.scene, tile, 0.11);
 		tile.setInteractive();
+		tile.body.setSize();
+		tile.body.immovable = true;
+
 		return tile;
 	}
 

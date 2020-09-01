@@ -8,5 +8,6 @@ export const TexturePreloadKeys = {
 	APPLE: 'apple',
 	BOOK: 'book',
 	GOLD_INGOT: 'gold',
-	POTION: 'potion'
+	POTION: 'potion',
+	PLAYER: 'player'
 };

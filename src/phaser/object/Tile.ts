@@ -10,12 +10,15 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 
 	constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: number) {
 		super(scene, x, y, texture, frame);
+		scene.physics.add.existing(this);
+		scene.physics.world.add(this.body);
+
 		this.currentTexture = texture;
 		this.currentFrame = frame;
 	}
 
-	animateBreak(): ITile{
-		switch (this.currentTexture){
+	animateBreak(): ITile {
+		switch (this.currentTexture) {
 			case TextureKeys.TL_DIRT.key:
 				this.currentFrame += TextureKeys.TL_DIRT.frameStep;
 				this.setTexture(this.currentTexture, this.currentFrame);
@@ -25,7 +28,7 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 				this.currentFrame += TextureKeys.TL_ROCKY_DIRT.frameStep;
 				this.setTexture(this.currentTexture, this.currentFrame);
 				break;
-			
+
 			case TextureKeys.TL_SHAKY_DIRT.key:
 				this.currentFrame += TextureKeys.TL_SHAKY_DIRT.frameStep;
 				this.setTexture(this.currentTexture, this.currentFrame);

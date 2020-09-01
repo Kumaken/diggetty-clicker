@@ -9,9 +9,13 @@ import Item from './Item';
 import { ItemData } from 'data/ItemData';
 import { UpgradeData } from 'data/UpgradeData';
 import { HiringData } from 'data/HiringData';
+import AlignTool from 'phaser/util/AlignTool';
+import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
+import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
+import { DepthConfig } from 'phaser/config/DepthConfig';
 
-export default class Player {
-	private scene: Phaser.Scene;
+export default class Player extends Phaser.Physics.Arcade.Sprite {
+	public scene: Phaser.Scene;
 	private game: Phaser.Game;
 	private money: number;
 	private _depth: number;
@@ -76,6 +80,17 @@ export default class Player {
 	}
 
 	constructor(scene: Phaser.Scene) {
+		super(scene, AlignTool.getCenterHorizontal(scene), 100, TexturePreloadKeys.PLAYER);
+		// scene.physics.world.enable(this);
+		scene.add.existing(this); // add to screen
+		scene.physics.add.existing(this); // enable physics
+		AlignTool.scaleToScreenWidth(scene, this, 0.3);
+		this.setGravityY(PhysicsConfig.WorldGravity);
+		this.setDepth(DepthConfig.Player);
+		this.setBounce(0.2, 0.2);
+		this.setCollideWorldBounds(true);
+		this.body.setSize(); // readjust physics body to texture size
+
 		this.scene = scene;
 		this.game = getGame();
 		this.money = 10000;
@@ -97,6 +112,10 @@ export default class Player {
 	public get inventory(): string {
 		return this.inventory;
 	}
+
+	// spawnSprite() {
+	// 	this.scene.add.sprite();
+	// }
 
 	addGold(amount: number) {
 		this.money += amount;
