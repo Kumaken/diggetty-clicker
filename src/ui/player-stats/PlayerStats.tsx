@@ -18,7 +18,7 @@ const PlayerStats = () => {
   const convertSecondsToClock = () => {
     let date = new Date(null);
     date.setSeconds(store.gameStore?.buffDuration); // specify value for SECONDS here
-    let result = date.toISOString().substr(15, 5);
+    let result = date.toISOString().substr(15, 4);
     return result;
   };
 
