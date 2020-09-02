@@ -37,6 +37,7 @@ export default class PlatformManager {
   private disappearTimer: Phaser.Time.TimerEvent;
   private createItem: boolean = false;
   private createItemCooldown: Phaser.Time.TimerEvent;
+  private itemDisappear: boolean = false;
 
   // Static properties
   public static bottomMostY: number = 0;
@@ -232,6 +233,7 @@ export default class PlatformManager {
     this.disappearTimer = this.scene.time.delayedCall(
       5 * 1000,
       () => {
+        this.itemDisappear = true;
         this.removeItem(itemSprite);
       },
       null,
@@ -258,28 +260,28 @@ export default class PlatformManager {
   }
 
   spawnBottommostPlatform(platformData: IPlatformData) {
-    if (
-      this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER &&
-      !this.createItem &&
-      !this.createItemCooldown
-    ) {
-      this.createItem = true;
-    }
+      if (
+        this.player.depth >= ItemConfig.ITEM_GEN_STARTING_LAYER &&
+        !this.createItem &&
+        !this.createItemCooldown
+      ) {
+        this.createItem = true;
+      }
 
-    const newPlatform = new Platform(
-      this.scene,
-      this._pool,
-      PlatformManager.bottomMostY,
-      PlatformManager.tileSize,
-      platformData,
-      this.createItem
-	);
-    this.platforms.push(newPlatform);
-	
-	if(this.createItem){
-		this.createItem = false;
-		this.addItemCooldown();
-	}
+      const newPlatform = new Platform(
+        this.scene,
+        this._pool,
+        PlatformManager.bottomMostY,
+        PlatformManager.tileSize,
+        platformData,
+        this.createItem
+    );
+      this.platforms.push(newPlatform);
+    
+    if(this.createItem || this.itemDisappear){
+      this.createItem = false;
+      this.addItemCooldown();
+    }
   }
 
   destroyTopmostPlatform() {
@@ -295,10 +297,16 @@ export default class PlatformManager {
   }
 
   addItemCooldown() {
-    const duration = Algorithm.randomFloatFromInterval(
+    let duration = Algorithm.randomFloatFromInterval(
       ItemConfig.itemGenCooldown.min,
       ItemConfig.itemGenCooldown.max
     );
+    
+    if(this.itemDisappear){
+      duration = ItemConfig.itemGenCooldown.itemNotTaken;
+      this.createItemCooldown?.destroy();
+    }
+    this.itemDisappear = false;
 
     this.createItemCooldown = this.scene.time.delayedCall(
       duration * 60 * 1000,

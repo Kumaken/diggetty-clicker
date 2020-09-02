@@ -9,6 +9,11 @@ export default class Algorithm {
 		return (Math.random()*(max - min)) + min;
 	}
 
+	static roundToNDecimal(value: number, n: number){
+		// n is number of decimal
+		return Math.round((value + Number.EPSILON) * Math.pow(10,n)) / Math.pow(10,n)
+	}
+
 	static delay(ms: number) {
 		return new Promise((resolve) => setTimeout(resolve, ms));
 	}

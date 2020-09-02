@@ -4,6 +4,7 @@ import { IGameStore } from 'phaser/store/GameStore';
 import { getGame } from 'phaser/Game';
 import { IUpgradeDatum } from 'phaser/interface/IUpgradeData';
 import { IHiringDatum } from 'phaser/interface/IHiringData';
+import Algorithm from 'phaser/util/Algorithm';
 
 export default class UpgradeProgressManager {
 	private scene: Phaser.Scene;
@@ -37,6 +38,10 @@ export default class UpgradeProgressManager {
 			} else {
 				this.gameStore.upgradeProgresses[key].currprice *= (1-this.discount);
 			}
+			this.gameStore.upgradeProgresses[key].currprice = Algorithm.roundToNDecimal(
+				this.gameStore.upgradeProgresses[key].currprice,
+				1
+			);
 		}
 	}
 

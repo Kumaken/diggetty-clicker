@@ -1,8 +1,6 @@
 import 'phaser';
 import Tile from './Tile';
 import { ITilePool } from '../interface/ITilePool';
-import AlignTool from '../util/AlignTool';
-import { DepthConfig } from '../config/DepthConfig';
 
 export default class TilePool extends Phaser.Physics.Arcade.Group implements ITilePool {
 	constructor(
@@ -33,31 +31,20 @@ export default class TilePool extends Phaser.Physics.Arcade.Group implements ITi
 			return tile;
 		}
 
-		tile.setTexture(key);
-		tile.setFrame(frame);
-		tile.setDepth(DepthConfig.Tile);
-		tile.setImmovable(true);
-		tile.currentTexture = key;
-		tile.currentFrame = frame;
-		tile.itemType = tileType;
-
 		if (spawnExisting) {
-			tile.setVisible(true);
-			tile.setActive(true);
+			tile.enableSprite();
 			this.world.add(tile.body);
 		}
 
-		AlignTool.scaleToScreenWidth(this.scene, tile, 0.11);
-		tile.setInteractive();
+		tile.setupSprite(key, frame, tileType);
+		tile.setupPhysics();
 		return tile;
 	}
 
 	despawn(tile: Tile): void {
 		this.killAndHide(tile);
 		this.world.remove(tile.body);
-		tile.alpha = 1;
-		tile.body.reset(0, 0);
-		tile.disableInteractive();
+		tile.disableSprite();
 	}
 }
 
