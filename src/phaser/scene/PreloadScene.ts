@@ -18,6 +18,9 @@ import FLARES from '../../assets/items/flares.png';
 import FLARES_JSON from '../../assets/items/flares.json';
 import PLAYER from '../../assets/characters/player.png';
 import DRILL_BIRD from '../../assets/characters/drill_bird.png';
+import FEISTY_HEN from '../../assets/characters/feisty_hen.png';
+import DRUNK_SQUIRREL from '../../assets/characters/drunk_squirrel.png';
+import DRILL_MACHINE from '../../assets/characters/man_made_driller.png';
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
 	static screenScale: {
@@ -118,6 +121,33 @@ export default class PreloadScene extends Phaser.Scene {
 			});
 		};
 		drillbirdIMG.src = DRILL_BIRD;
+
+		let feistyHenIMG = new Image();
+		feistyHenIMG.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.FEISTY_HEN, feistyHenIMG, {
+				frameWidth: 16,
+				frameHeight: 17
+			});
+		};
+		feistyHenIMG.src = FEISTY_HEN;
+
+		let drunkSquirrelIMG = new Image();
+		drunkSquirrelIMG.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.DRUNK_SQUIRREL, drunkSquirrelIMG, {
+				frameWidth: 16,
+				frameHeight: 15
+			});
+		};
+		drunkSquirrelIMG.src = DRUNK_SQUIRREL;
+
+		let manMadeDrillerIMG = new Image();
+		manMadeDrillerIMG.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.DRILL_MACHINE, manMadeDrillerIMG, {
+				frameWidth: 26,
+				frameHeight: 29
+			});
+		};
+		manMadeDrillerIMG.src = DRILL_MACHINE;
 
 		this.game.events.once(GameEvents.PreloadFinished, this.handlePreloadFinished, this);
 	}

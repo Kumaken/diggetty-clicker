@@ -11,5 +11,8 @@ export const TexturePreloadKeys = {
 	POTION: 'potion',
 	FLARES: 'flares',
 	PLAYER: 'player',
-	DRILL_BIRD: 'drill_bird'
+	DRILL_BIRD: 'drill_bird',
+	FEISTY_HEN: 'feisty_hen',
+	DRUNK_SQUIRREL: 'drunk_squirrel',
+	DRILL_MACHINE: 'drill-machine'
 };

@@ -22,7 +22,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite implements I
 		this.setFrame(frame);
 		this.setDepth(DepthConfig.Character);
 
-		AlignTool.scaleToScreenWidth(this.scene, this, 0.11);
+		AlignTool.scaleToScreenWidth(this.scene, this, 0.25);
 		// this.setInteractive();
 	}
 

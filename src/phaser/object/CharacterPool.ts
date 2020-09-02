@@ -39,7 +39,7 @@ export default class CharacterPool extends Phaser.Physics.Arcade.Group implement
 
 		character.setupSprite(key, frame);
 		character.setupPhysics();
-		character.anims.play(AnimationKeys.DRILL_BIRD_IDLE);
+		character.anims.play(AnimationKeys[key]);
 		return character;
 	}
 

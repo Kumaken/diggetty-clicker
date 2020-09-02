@@ -18,7 +18,7 @@ export const HiringData: IHiringData = {
 		dmgUpRatio: 1,
 		img: drillbird
 	},
-	White: {
+	FEISTY_HEN: {
 		name: 'Feisty Hen',
 		desc: 'She lays earthworm eggs',
 		effectDesc: 'Increase click dmg greatly.',
@@ -29,7 +29,7 @@ export const HiringData: IHiringData = {
 		dmgUpRatio: 2,
 		img: feistyHen
 	},
-	DrunkSquirrel: {
+	DRUNK_SQUIRREL: {
 		name: 'Drunk Squirrel',
 		desc: 'Give me all your money!',
 		effectDesc: 'Increase click dmg massively',
@@ -40,7 +40,7 @@ export const HiringData: IHiringData = {
 		dmgUpRatio: 3,
 		img: drunkSquirrel
 	},
-	DrillMachine: {
+	DRILL_MACHINE: {
 		name: 'Man-made Driller',
 		desc: 'Behold the machinery era',
 		effectDesc: 'Increase click dmg by 10',

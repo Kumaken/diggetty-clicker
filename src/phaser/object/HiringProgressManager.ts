@@ -42,9 +42,9 @@ export default class HiringProgressManager {
 
 	spawnSprite(key: string) {
 		const sprite = this.characterPool.spawn(
-			Algorithm.randomIntFromInterval(0, getResolution().width),
+			Algorithm.randomIntFromInterval(100, getResolution().width - 100),
 			100,
-			TexturePreloadKeys[key],
+			key,
 			0
 		);
 		this.setupPhysics(sprite);
@@ -53,9 +53,27 @@ export default class HiringProgressManager {
 
 	setupAnimations() {
 		this.scene.anims.create({
-			key: AnimationKeys.DRILL_BIRD_IDLE,
+			key: AnimationKeys.DRILL_BIRD,
 			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRILL_BIRD, { start: 0, end: 5 }),
 			frameRate: 10,
+			repeat: -1
+		});
+		this.scene.anims.create({
+			key: AnimationKeys.FEISTY_HEN,
+			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.FEISTY_HEN, { start: 0, end: 2 }),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.scene.anims.create({
+			key: AnimationKeys.DRUNK_SQUIRREL,
+			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRUNK_SQUIRREL, { start: 0, end: 5 }),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.scene.anims.create({
+			key: AnimationKeys.DRILL_MACHINE,
+			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRILL_MACHINE, { start: 0, end: 7 }),
+			frameRate: 2,
 			repeat: -1
 		});
 	}
