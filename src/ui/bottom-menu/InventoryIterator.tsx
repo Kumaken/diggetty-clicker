@@ -29,8 +29,7 @@ const InventoryIterator = () => {
 		const inventory = store.gameStore?.inventory as IItem[];
 		const jsxElem = [];
 
-		inventory.forEach((item, index) => {
-			console.log(index, item.itemData.name);
+		inventory.forEach((item,index) => {
 			jsxElem.push(createInventoryEntry(index, item.itemData));
 		});
 		return jsxElem;

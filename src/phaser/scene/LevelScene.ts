@@ -46,7 +46,18 @@ export default class LevelScene extends Phaser.Scene {
 		this.player = new Player(this);
 
 		this.add.damageTextPool();
-		this.platformManager = new PlatformManager(this, this.player);
+
+		// Particles Manager
+		this.particlesManager = new ParticlesManager(this);
+		this.game.events.on(
+			GameEvents.OnDamage,
+			() => {
+				this.particlesManager.showGroundCrumbs();
+			},
+			this
+		);
+
+		this.platformManager = new PlatformManager(this, this.player, this.particlesManager);
 		this.platformManager.spawnPlatformInitial(TextureKeys.TL_DIRT);
 
 		// Tile pillars
@@ -59,22 +70,14 @@ export default class LevelScene extends Phaser.Scene {
 			this
 		);
 
-		// Particles Manager
-		this.particlesManager = new ParticlesManager(this);
-		this.game.events.on(
-			GameEvents.OnDamage,
-			() => {
-				this.particlesManager.showParticles();
-			},
-			this
-		);
-
 		this.fpsText = new FpsText(this);
 
 		this.setupCollision();
 	}
 
 	update(): void {
+		this.physics.collide(this.platformManager.pool,this.platformManager.pool);
+		this.player.checkItem();
 		this.fpsText.update();
 	}
 }

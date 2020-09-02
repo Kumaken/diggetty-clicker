@@ -19,6 +19,12 @@ export interface IGameStore {
 	hiringProgresses: IHiringProgresses;
 	insufficientMoneyNotif: boolean;
 	inventoryFullNotif: boolean;
+	currentItemIndex: number;
+	itemShown: boolean;
+	buffDuration: number;
+	activeItem: IItem;
+	newActiveItem: boolean;
+	buffJustFinished: boolean;
 	setTopPlatformName(name: string): void;
 	setTopPlatformToughness(value: number): void;
 	setTopPlatformMaxToughness(value: number): void;
@@ -26,6 +32,8 @@ export interface IGameStore {
 	setPlayerDPS(value: number): void;
 	setMoney(value: number): void;
 	addItem(item: IItem): void;
+	showItem(id: number): void;
+	hideItem(): void;
 	useItem(id: number): void;
 	setDepth(value: number): void;
 	setUpgradeProgresses(update: IUpgradeProgresses): void;
@@ -34,6 +42,7 @@ export interface IGameStore {
 	hireByKey(key: string);
 	setInsufficientMoneyNotif(value: boolean);
 	setInventoryFullNotif(value: boolean);
+	setBuffDuration(duration: number);
 }
 
 export class GameStore implements IGameStore {
@@ -79,6 +88,13 @@ export class GameStore implements IGameStore {
 	@observable hiringProgresses: IHiringProgresses = {};
 	@observable insufficientMoneyNotif: boolean = false;
 	@observable inventoryFullNotif: boolean = false;
+	@observable overlapBuffNotif: boolean = false;
+	@observable currentItemIndex: number = 0;
+	@observable itemShown: boolean = false;
+	@observable buffDuration: number = 0;
+	@observable activeItem: IItem;
+	@observable newActiveItem: boolean = false;
+	@observable buffJustFinished: boolean = false;
 
 	@action setTopPlatformName(name: string) {
 		this.topPlatformName = name;
@@ -108,8 +124,23 @@ export class GameStore implements IGameStore {
 		this.inventory.push(item);
 	}
 
-	@action useItem(id: number) {
-		this.inventory.splice(id, 1);
+	@action showItem(id: number){
+		this.currentItemIndex = id;
+		this.itemShown = true;
+	}
+
+	@action hideItem(){
+		this.itemShown = false;
+	}
+
+	@action useItem(){
+		if(this.buffDuration === 0){
+			this.activeItem = this.inventory[this.currentItemIndex];
+			this.setBuffDuration(this.activeItem.itemData.duration * 60);
+			this.inventory.splice(this.currentItemIndex,1);
+			this.itemShown = false;
+			this.newActiveItem = true;
+		} 
 	}
 
 	@action setDepth(value: number) {
@@ -138,5 +169,24 @@ export class GameStore implements IGameStore {
 
 	@action setInventoryFullNotif(value: boolean) {
 		this.inventoryFullNotif = value;
+	}
+
+	@action setBuffDuration(duration: number){
+		this.buffDuration = duration;
+		this.startBuff();
+	}
+
+	startBuff(){
+		let timer = setInterval(
+			() => {
+				this.buffDuration -= 1;
+
+				if(this.buffDuration === 0){
+					clearInterval(timer);
+					this.buffJustFinished = true;
+				}
+			},
+			1000
+		)
 	}
 }

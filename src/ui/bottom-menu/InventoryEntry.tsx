@@ -9,13 +9,17 @@ import { IItemData } from 'phaser/interface/IItemData';
 export const InventoryEntry = (id: number, itemData: IItemData) => {
 	const store = useContext(RootStoreContext);
 
-	const issueUseItem = (id: number) => {
-		store.gameStore?.useItem(id);
-	};
+	const issueOpenModal = (id: number) => {
+		store.gameStore?.showItem(id);
+	}
 
 	return (
-		<Button key={id} className="column is-2 is-dark inventory-tile" id={id} onClick={() => issueUseItem(id)}>
-			<Image className="item" src={itemData.texturePath} />
+		<Button 
+			key={id}
+			className="column is-2 is-dark inventory-tile"
+			onClick={() => issueOpenModal(id)}
+		>
+			<Image className='item' src={itemData.texturePath}/>
 		</Button>
 	);
 };

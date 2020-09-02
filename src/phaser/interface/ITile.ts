@@ -1,4 +1,5 @@
 export interface ITile extends Phaser.Physics.Arcade.Sprite {
+    readonly animDuration: number;
     currentTexture: string;
     currentFrame: number;
     itemType: string;
@@ -7,4 +8,6 @@ export interface ITile extends Phaser.Physics.Arcade.Sprite {
      * Animate tile break after hit
      */
     animateBreak(): ITile;
+
+    takeItem(): ITile;
 }

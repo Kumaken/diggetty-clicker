@@ -4,11 +4,13 @@ import { IGameStore } from 'phaser/store/GameStore';
 import { getGame } from 'phaser/Game';
 import { IUpgradeDatum } from 'phaser/interface/IUpgradeData';
 import { IHiringDatum } from 'phaser/interface/IHiringData';
+import Algorithm from 'phaser/util/Algorithm';
 
 export default class UpgradeProgressManager {
 	private scene: Phaser.Scene;
 	private game: Phaser.Game;
 	private gameStore: IGameStore;
+	private discount: number;
 
 	calculateDamageIncrease(key: string): number {
 		const upgradeType = UpgradeData[key].dmgGrowthType;
@@ -28,9 +30,25 @@ export default class UpgradeProgressManager {
 		return this.gameStore.upgradeProgresses[key].currprice;
 	}
 
+	setDiscount(value: number, recoverDiscount: boolean) {
+		this.discount = value;
+		for(let key in UpgradeData){
+			if(recoverDiscount){
+				this.gameStore.upgradeProgresses[key].currprice /= (1-this.discount);
+			} else {
+				this.gameStore.upgradeProgresses[key].currprice *= (1-this.discount);
+			}
+			this.gameStore.upgradeProgresses[key].currprice = Algorithm.roundToNDecimal(
+				this.gameStore.upgradeProgresses[key].currprice,
+				1
+			);
+		}
+	}
+
 	constructor(scene: Phaser.Scene) {
 		this.scene = scene;
 		this.game = getGame();
 		this.gameStore = this.game.registry.get('gameStore');
+		this.discount = 0;
 	}
 }

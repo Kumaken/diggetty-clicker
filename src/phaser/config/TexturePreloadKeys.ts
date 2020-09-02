@@ -9,5 +9,6 @@ export const TexturePreloadKeys = {
 	BOOK: 'book',
 	GOLD_INGOT: 'gold',
 	POTION: 'potion',
+	FLARES: 'flares',
 	PLAYER: 'player'
 };

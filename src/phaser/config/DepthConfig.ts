@@ -3,5 +3,6 @@ export enum DepthConfig {
 	Tile = 1,
 	Pillar = 2,
 	Player = 3,
-	Texts = 4
+	Texts = 4,
+	Star = 5
 }

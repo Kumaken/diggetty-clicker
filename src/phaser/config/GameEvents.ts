@@ -9,7 +9,9 @@ enum GameEvents {
 	OnUpgradeDone = 'ON_UPGRADE_DONE',
 	OnHiringIssued = 'ON_HIRING_ISSUED',
 	OnHiringDone = 'ON_HIRING_DONE',
-	OnItemAcquired = 'ON_ITEM_ACQUIRED'
+	OnItemAcquired = 'ON_ITEM_ACQUIRED',
+	ActivateGoldIngot = "ACTIVATE_GOLD_INGOT",
+	DeactivateGoldIngot = "DEACTIVATE_GOLD_INGOT"
 }
 
 export default GameEvents;

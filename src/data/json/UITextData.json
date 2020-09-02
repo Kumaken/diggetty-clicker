@@ -1,6 +1,7 @@
 {
 	"DPSStatsText": "Damage Per Second",
 	"DPCStatsText": "Damage Per Click",
+	"BuffDuration": "Buff Duration",
 	"Currency": "$",
 	"DepthMetric": "km"
 }

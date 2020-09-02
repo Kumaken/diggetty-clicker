@@ -6,6 +6,7 @@ import { DepthConfig } from 'phaser/config/DepthConfig';
 
 export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile {
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
+	readonly animDuration: number = 250;
 	currentTexture: string;
 	currentFrame: number;
 	itemType: string;
@@ -66,5 +67,19 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 		}
 
 		return this;
+	}
+
+	takeItem(): ITile{
+		console.log(this.itemType);
+		if(!this.itemType) return this;
+
+		console.log('get item')
+		this.setGravityY(0);
+		this.scene.tweens.add({
+			targets: this,
+			scale: 0.5,
+			duration: this.animDuration
+		});
+		
 	}
 }

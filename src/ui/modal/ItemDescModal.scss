@@ -1,0 +1,19 @@
+@import "../../_variables.sass";
+
+.item-details{
+    span{
+        display: block;
+    }
+}
+
+.modal-card{
+    .content{
+        color: black;
+    }
+    max-width: 50%;
+}
+
+.item-pic {
+    width: 5rem;
+    height: 5rem;
+}

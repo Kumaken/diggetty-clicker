@@ -35,5 +35,9 @@ export const TextureKeys = {
   POTION: {
     key: TexturePreloadKeys.POTION,
     frame: [0]
+  },
+  FLARES: {
+    key: TexturePreloadKeys.FLARES,
+    frame: ['blue', 'green', 'red', 'white', 'yellow']
   }
 };

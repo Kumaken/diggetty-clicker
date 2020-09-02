@@ -1,11 +1,10 @@
 import 'phaser';
 import GameEvents from '../config/GameEvents';
-import { IItem } from '../interface/IItem';
 import UpgradeProgressManager from './UpgradeProgressManager';
+import InventoryManager from './InventoryManager';
 import { getGame } from 'phaser/Game';
 import HiringProgressManager from './HiringProgressManager';
 import { IGameStore } from 'phaser/store/GameStore';
-import Item from './Item';
 import { ItemData } from 'data/ItemData';
 import { UpgradeData } from 'data/UpgradeData';
 import { HiringData } from 'data/HiringData';
@@ -14,13 +13,14 @@ import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
 import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 import { AnimationKeys } from 'phaser/config/AnimationKeys';
+import Algorithm from 'phaser/util/Algorithm';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
 	public scene: Phaser.Scene;
 	private game: Phaser.Game;
 	private money: number;
 	private _depth: number;
-	private _inventory: IItem[];
+	private inventoryManager: InventoryManager;
 	private upgradeProgressManager: UpgradeProgressManager;
 	private hiringProgressManager: HiringProgressManager;
 	public static clickDamage: number = 1;
@@ -80,6 +80,65 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
+	handleAddItem(itemType: string) {
+		this.inventoryManager.addItem(itemType);
+	}
+	
+	checkItem() {
+		if (this.gameStore.newActiveItem) {
+			this.gameStore.newActiveItem = false;
+
+			const itemData = this.gameStore.activeItem.itemData;
+			switch (itemData.name) {
+			case ItemData.Apple.name:
+				Player.clickDamage += 5;
+				this.gameStore.setPlayerDPC(Player.clickDamage);
+				break;
+
+			case ItemData.Book.name:
+				this.upgradeProgressManager.setDiscount(0.25, false);
+				break;
+
+			case ItemData.GoldIngot.name:
+				this.game.events.emit(GameEvents.ActivateGoldIngot);
+				break;
+
+			case ItemData.Potion.name:
+				Player.dps += 2;
+				this.gameStore.setPlayerDPS(Player.dps);
+				break;
+			}
+		}
+		
+		if(this.gameStore.buffJustFinished){
+			this.gameStore.buffJustFinished = false;
+
+			const itemData = this.gameStore.activeItem.itemData;
+			switch (itemData.name) {
+			case ItemData.Apple.name:
+				Player.clickDamage -= 5;
+				this.gameStore.setPlayerDPC(Player.clickDamage);
+				break;
+
+			case ItemData.Book.name:
+				this.upgradeProgressManager.setDiscount(0.25, true);
+				break;
+
+			case ItemData.GoldIngot.name:
+				this.game.events.emit(GameEvents.DeactivateGoldIngot);
+				break;
+
+			case ItemData.Potion.name:
+				Player.dps -= 2;
+				this.gameStore.setPlayerDPS(Player.dps);
+				break;
+			}
+
+			this.gameStore.activeItem = undefined;
+		}
+	}
+	
+
 	setupPhysics() {
 		this.scene.add.existing(this); // add to screen
 		this.scene.physics.add.existing(this); // enable physics
@@ -105,7 +164,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		this.game = getGame();
 		this.money = 10000;
 		this._depth = 0;
-		this._inventory = [];
+		this.inventoryManager = new InventoryManager(this.scene);
 		this.upgradeProgressManager = new UpgradeProgressManager(this.scene);
 		this.hiringProgressManager = new HiringProgressManager(this.scene);
 		this.gameStore = this.game.registry.get('gameStore');
@@ -137,6 +196,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
 	addGold(amount: number) {
 		this.money += amount;
+		this.money = Algorithm.roundToNDecimal(this.money,1); // Rounding to 2 decimals
 		this.game.events.emit(GameEvents.OnMoneyChanged, this.money);
 	}
 
@@ -148,35 +208,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 	addDepth(amount: number) {
 		this._depth += amount;
 		this.game.events.emit(GameEvents.OnDepthChanged, this._depth);
-	}
-
-	addItem(itemType: string) {
-		if (this._inventory.length === 15) {
-			this.game.events.emit(GameEvents.OnItemAcquired, true);
-			return;
-		}
-		let item!: Item;
-
-		switch (itemType) {
-			case ItemData.Apple.name:
-				item = new Item(ItemData.Apple);
-				break;
-
-			case ItemData.Book.name:
-				item = new Item(ItemData.Book);
-				break;
-
-			case ItemData.GoldIngot.name:
-				item = new Item(ItemData.GoldIngot);
-				break;
-
-			case ItemData.Potion.name:
-				item = new Item(ItemData.Potion);
-				break;
-		}
-
-		this._inventory.push(item);
-		this.game.events.emit(GameEvents.OnItemAcquired, false, item);
 	}
 
 	playDigAnimation() {
