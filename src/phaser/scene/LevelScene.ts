@@ -11,6 +11,7 @@ import Player from '../object/Player';
 // import { IDamageTextPool } from '../Interfaces/IDamageTextPool';
 
 import '../object/DamageTextPool';
+import '../object/CharacterPool';
 import TilePillarsManager from '../object/TilePillarsManager';
 import { getResolution } from 'phaser/util/Util';
 // import { ITile } from '../interfaces/ITile';
@@ -38,6 +39,7 @@ export default class LevelScene extends Phaser.Scene {
 		this.physics.world.setBoundsCollision(true, true, false, true);
 
 		this.physics.add.collider(this.player, this.platformManager.pool);
+		this.physics.add.collider(this.player.characterPool, this.platformManager.pool);
 	}
 
 	preload(): void {}
@@ -76,7 +78,7 @@ export default class LevelScene extends Phaser.Scene {
 	}
 
 	update(): void {
-		this.physics.collide(this.platformManager.pool,this.platformManager.pool);
+		this.physics.collide(this.platformManager.pool, this.platformManager.pool);
 		this.player.checkItem();
 		this.fpsText.update();
 	}

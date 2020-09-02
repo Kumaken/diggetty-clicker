@@ -7,7 +7,7 @@ import drillMachine from 'assets/icons/individuals/minecraft_transparent_4.png';
 import drillbird from 'assets/icons/individuals/minecraft_transparent_387.png';
 
 export const HiringData: IHiringData = {
-	DrillBird: {
+	DRILL_BIRD: {
 		name: 'The Drill Bird',
 		desc: 'she protecc, she also drills',
 		effectDesc: 'Increase click damage by 1',

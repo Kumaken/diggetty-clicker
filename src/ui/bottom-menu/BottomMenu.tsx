@@ -33,7 +33,7 @@ export const BottomMenu = () => {
 			content: <InventoryIterator />
 		}
 	]);
-	const [activeTab, setActiveTab] = useState('Upgrades');
+	const [activeTab, setActiveTab] = useState('Hiring');
 	const [beginAnimation, setBeginAnimation] = useState(true);
 
 	const Tab = (props) => {

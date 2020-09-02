@@ -10,5 +10,6 @@ export const TexturePreloadKeys = {
 	GOLD_INGOT: 'gold',
 	POTION: 'potion',
 	FLARES: 'flares',
-	PLAYER: 'player'
+	PLAYER: 'player',
+	DRILL_BIRD: 'drill_bird'
 };

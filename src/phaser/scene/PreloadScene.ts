@@ -17,7 +17,7 @@ import POTION from '../../assets/items/potion.png';
 import FLARES from '../../assets/items/flares.png';
 import FLARES_JSON from '../../assets/items/flares.json';
 import PLAYER from '../../assets/characters/player.png';
-
+import DRILL_BIRD from '../../assets/characters/drill_bird.png';
 export default class PreloadScene extends Phaser.Scene {
 	private assetRoot = 'src/assets/';
 	static screenScale: {
@@ -57,8 +57,8 @@ export default class PreloadScene extends Phaser.Scene {
 		// this.load.image(TexturePreloadKeys.GOLD_INGOT,GOLD_INGOT);
 		// this.load.image(TexturePreloadKeys.POTION,POTION);
 
-		this.load.image(TexturePreloadKeys.BACKGROUND,BACKGROUND);
-		this.load.atlas(TexturePreloadKeys.FLARES,FLARES,FLARES_JSON);
+		this.load.image(TexturePreloadKeys.BACKGROUND, BACKGROUND);
+		this.load.atlas(TexturePreloadKeys.FLARES, FLARES, FLARES_JSON);
 
 		/* UNCOMMENT IF USING BASE64 FORMAT */
 		let dirtImg = new Image();
@@ -109,6 +109,15 @@ export default class PreloadScene extends Phaser.Scene {
 			});
 		};
 		playerImg.src = PLAYER;
+
+		let drillbirdIMG = new Image();
+		drillbirdIMG.onload = () => {
+			this.textures.addSpriteSheet(TexturePreloadKeys.DRILL_BIRD, drillbirdIMG, {
+				frameWidth: 17,
+				frameHeight: 15
+			});
+		};
+		drillbirdIMG.src = DRILL_BIRD;
 
 		this.game.events.once(GameEvents.PreloadFinished, this.handlePreloadFinished, this);
 	}

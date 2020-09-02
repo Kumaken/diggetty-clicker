@@ -14,6 +14,7 @@ import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 import { AnimationKeys } from 'phaser/config/AnimationKeys';
 import Algorithm from 'phaser/util/Algorithm';
+import { ICharacterPool } from 'phaser/interface/ICharacterPool';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
 	public scene: Phaser.Scene;
@@ -23,6 +24,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 	private inventoryManager: InventoryManager;
 	private upgradeProgressManager: UpgradeProgressManager;
 	private hiringProgressManager: HiringProgressManager;
+	public characterPool: ICharacterPool;
 	public static clickDamage: number = 1;
 	public static dps: number = 0;
 	private gameStore: IGameStore;
@@ -58,7 +60,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		const price = this.hiringProgressManager.getCurrentHiringPrice(key);
 		if (price <= this.money) {
 			let dmgChange;
-			if (this.gameStore.hiringProgresses[key].level <= 1) {
+			if (this.gameStore.hiringProgresses[key].level < 1) {
+				console.log(key);
+				this.hiringProgressManager.spawnSprite(key);
 				dmgChange = HiringData[key].baseDMG;
 			} else {
 				dmgChange = this.hiringProgressManager.calculateDamageIncrease(key);
@@ -83,61 +87,60 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 	handleAddItem(itemType: string) {
 		this.inventoryManager.addItem(itemType);
 	}
-	
+
 	checkItem() {
 		if (this.gameStore.newActiveItem) {
 			this.gameStore.newActiveItem = false;
 
 			const itemData = this.gameStore.activeItem.itemData;
 			switch (itemData.name) {
-			case ItemData.Apple.name:
-				Player.clickDamage += 5;
-				this.gameStore.setPlayerDPC(Player.clickDamage);
-				break;
+				case ItemData.Apple.name:
+					Player.clickDamage += 5;
+					this.gameStore.setPlayerDPC(Player.clickDamage);
+					break;
 
-			case ItemData.Book.name:
-				this.upgradeProgressManager.setDiscount(0.25, false);
-				break;
+				case ItemData.Book.name:
+					this.upgradeProgressManager.setDiscount(0.25, false);
+					break;
 
-			case ItemData.GoldIngot.name:
-				this.game.events.emit(GameEvents.ActivateGoldIngot);
-				break;
+				case ItemData.GoldIngot.name:
+					this.game.events.emit(GameEvents.ActivateGoldIngot);
+					break;
 
-			case ItemData.Potion.name:
-				Player.dps += 2;
-				this.gameStore.setPlayerDPS(Player.dps);
-				break;
+				case ItemData.Potion.name:
+					Player.dps += 2;
+					this.gameStore.setPlayerDPS(Player.dps);
+					break;
 			}
 		}
-		
-		if(this.gameStore.buffJustFinished){
+
+		if (this.gameStore.buffJustFinished) {
 			this.gameStore.buffJustFinished = false;
 
 			const itemData = this.gameStore.activeItem.itemData;
 			switch (itemData.name) {
-			case ItemData.Apple.name:
-				Player.clickDamage -= 5;
-				this.gameStore.setPlayerDPC(Player.clickDamage);
-				break;
+				case ItemData.Apple.name:
+					Player.clickDamage -= 5;
+					this.gameStore.setPlayerDPC(Player.clickDamage);
+					break;
 
-			case ItemData.Book.name:
-				this.upgradeProgressManager.setDiscount(0.25, true);
-				break;
+				case ItemData.Book.name:
+					this.upgradeProgressManager.setDiscount(0.25, true);
+					break;
 
-			case ItemData.GoldIngot.name:
-				this.game.events.emit(GameEvents.DeactivateGoldIngot);
-				break;
+				case ItemData.GoldIngot.name:
+					this.game.events.emit(GameEvents.DeactivateGoldIngot);
+					break;
 
-			case ItemData.Potion.name:
-				Player.dps -= 2;
-				this.gameStore.setPlayerDPS(Player.dps);
-				break;
+				case ItemData.Potion.name:
+					Player.dps -= 2;
+					this.gameStore.setPlayerDPS(Player.dps);
+					break;
 			}
 
 			this.gameStore.activeItem = undefined;
 		}
 	}
-	
 
 	setupPhysics() {
 		this.scene.add.existing(this); // add to screen
@@ -166,7 +169,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		this._depth = 0;
 		this.inventoryManager = new InventoryManager(this.scene);
 		this.upgradeProgressManager = new UpgradeProgressManager(this.scene);
-		this.hiringProgressManager = new HiringProgressManager(this.scene);
+		this.characterPool = this.scene.add.characterPool(TexturePreloadKeys.DRILL_BIRD);
+		this.hiringProgressManager = new HiringProgressManager(this.scene, this.characterPool);
 		this.gameStore = this.game.registry.get('gameStore');
 
 		// setup sprite
@@ -196,7 +200,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
 	addGold(amount: number) {
 		this.money += amount;
-		this.money = Algorithm.roundToNDecimal(this.money,1); // Rounding to 2 decimals
+		this.money = Algorithm.roundToNDecimal(this.money, 1); // Rounding to 2 decimals
 		this.game.events.emit(GameEvents.OnMoneyChanged, this.money);
 	}
 
