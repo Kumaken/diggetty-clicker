@@ -3,6 +3,7 @@ import { ICharacter } from '../interface/ICharacter';
 import AlignTool from 'phaser/util/AlignTool';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
+import AnimationHelper from 'phaser/util/AnimationHelper';
 
 export default class Character extends Phaser.Physics.Arcade.Sprite implements ICharacter {
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -24,6 +25,27 @@ export default class Character extends Phaser.Physics.Arcade.Sprite implements I
 
 		AlignTool.scaleToScreenWidth(this.scene, this, 0.25);
 		// this.setInteractive();
+	}
+
+	playUpgradeEffect() {
+		AnimationHelper.Pulse(
+			this.scene, // scene
+			this, // target object
+			0.3, // duration in seconds
+			1.25, // scale
+			1, // repeat times
+			0 // delay
+		);
+		AnimationHelper.ChangeAlpha(
+			this.scene, // scene
+			this, // target object
+			0.1, // duration in seconds
+			0, // target alpha
+			true, // yoyo
+			0, // delay
+			1, // starting alpha
+			4 // times played
+		);
 	}
 
 	enableSprite() {

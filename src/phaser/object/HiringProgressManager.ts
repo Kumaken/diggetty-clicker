@@ -3,12 +3,10 @@ import { HiringData } from '../../data/HiringData';
 import { getGame } from 'phaser/Game';
 import { IGameStore } from 'phaser/store/GameStore';
 import { IHiringSprites } from 'phaser/interface/IHiringSprite';
-import { AnimationKeys } from 'phaser/config/AnimationKeys';
-import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
 import Algorithm from 'phaser/util/Algorithm';
-import { getResolution } from 'phaser/util/Util';
 import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
 import { ICharacterPool } from 'phaser/interface/ICharacterPool';
+import AlignTool from 'phaser/util/AlignTool';
 
 export default class HiringProgressManager {
 	private scene: Phaser.Scene;
@@ -42,8 +40,11 @@ export default class HiringProgressManager {
 
 	spawnSprite(key: string) {
 		const sprite = this.characterPool.spawn(
-			Algorithm.randomIntFromInterval(100, getResolution().width - 100),
-			100,
+			Algorithm.randomIntFromInterval(
+				AlignTool.getXfromScreenWidth(this.scene, 0.1),
+				AlignTool.getXfromScreenWidth(this.scene, 0.9)
+			),
+			AlignTool.getYfromScreenHeight(this.scene, 0.2),
 			key,
 			0
 		);
@@ -51,31 +52,8 @@ export default class HiringProgressManager {
 		this.hiringSprites[key] = sprite;
 	}
 
-	setupAnimations() {
-		this.scene.anims.create({
-			key: AnimationKeys.DRILL_BIRD,
-			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRILL_BIRD, { start: 0, end: 5 }),
-			frameRate: 10,
-			repeat: -1
-		});
-		this.scene.anims.create({
-			key: AnimationKeys.FEISTY_HEN,
-			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.FEISTY_HEN, { start: 0, end: 2 }),
-			frameRate: 5,
-			repeat: -1
-		});
-		this.scene.anims.create({
-			key: AnimationKeys.DRUNK_SQUIRREL,
-			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRUNK_SQUIRREL, { start: 0, end: 5 }),
-			frameRate: 5,
-			repeat: -1
-		});
-		this.scene.anims.create({
-			key: AnimationKeys.DRILL_MACHINE,
-			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.DRILL_MACHINE, { start: 0, end: 7 }),
-			frameRate: 2,
-			repeat: -1
-		});
+	playUpgradeEffect(key: string) {
+		this.hiringSprites[key].playUpgradeEffect();
 	}
 
 	constructor(scene: Phaser.Scene, characterPool: ICharacterPool) {
@@ -83,6 +61,5 @@ export default class HiringProgressManager {
 		this.characterPool = characterPool;
 		this.game = getGame();
 		this.gameStore = this.game.registry.get('gameStore');
-		this.setupAnimations();
 	}
 }

@@ -10,13 +10,13 @@ import { UpgradeData } from 'data/UpgradeData';
 import { HiringData } from 'data/HiringData';
 import AlignTool from 'phaser/util/AlignTool';
 import { TexturePreloadKeys } from 'phaser/config/TexturePreloadKeys';
-import { PhysicsConfig } from 'phaser/config/PhysicsConfig';
 import { DepthConfig } from 'phaser/config/DepthConfig';
 import { AnimationKeys } from 'phaser/config/AnimationKeys';
 import Algorithm from 'phaser/util/Algorithm';
 import { ICharacterPool } from 'phaser/interface/ICharacterPool';
+import { ICharacter } from 'phaser/interface/ICharacter';
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
+export default class Player {
 	public scene: Phaser.Scene;
 	private game: Phaser.Game;
 	private money: number;
@@ -28,10 +28,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 	public static clickDamage: number = 1;
 	public static dps: number = 0;
 	private gameStore: IGameStore;
+	private playerSprite: ICharacter;
 
 	handleUpgrade(key: string) {
 		const price = this.upgradeProgressManager.getCurrentUpgradePrice(key);
 		if (price <= this.money) {
+			this.playerSprite.playUpgradeEffect();
 			let dmgChange;
 			if (this.gameStore.upgradeProgresses[key].level <= 1) {
 				dmgChange = UpgradeData[key].baseDMG;
@@ -65,6 +67,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 				this.hiringProgressManager.spawnSprite(key);
 				dmgChange = HiringData[key].baseDMG;
 			} else {
+				this.hiringProgressManager.playUpgradeEffect(key);
 				dmgChange = this.hiringProgressManager.calculateDamageIncrease(key);
 			}
 			Player.dps += dmgChange;
@@ -142,27 +145,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
-	setupPhysics() {
-		this.scene.add.existing(this); // add to screen
-		this.scene.physics.add.existing(this); // enable physics
-		this.setGravityY(PhysicsConfig.WorldGravity);
-		this.setBounce(0.2, 0.2);
-		this.setCollideWorldBounds(true);
-		this.body.setSize(); // readjust physics body to texture size
-	}
-
-	setupAnimations() {
-		this.scene.anims.create({
-			key: AnimationKeys.PLAYER_DIG,
-			frames: this.scene.anims.generateFrameNumbers(TexturePreloadKeys.PLAYER, { start: 0, end: 6 }),
-			frameRate: 20,
-			repeat: 0
-		});
-	}
-
 	constructor(scene: Phaser.Scene) {
-		super(scene, AlignTool.getCenterHorizontal(scene), 100, TexturePreloadKeys.PLAYER);
-
 		this.scene = scene;
 		this.game = getGame();
 		this.money = 10000;
@@ -173,13 +156,16 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		this.hiringProgressManager = new HiringProgressManager(this.scene, this.characterPool);
 		this.gameStore = this.game.registry.get('gameStore');
 
+		this.playerSprite = this.characterPool.spawn(
+			AlignTool.getCenterHorizontal(scene),
+			AlignTool.getYfromScreenHeight(scene, 0.2),
+			TexturePreloadKeys.PLAYER,
+			0
+		);
+
 		// setup sprite
 		AlignTool.scaleToScreenWidth(scene, this, 0.3);
-		this.setDepth(DepthConfig.Player);
-		this.setupPhysics();
-
-		// setup animations:
-		this.setupAnimations();
+		this.playerSprite.setDepth(DepthConfig.Player);
 
 		// listen to game events (with params):
 		this.game.events.on(GameEvents.OnUpgradeIssued, (key: string) => this.handleUpgrade(key), this);
@@ -215,6 +201,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	playDigAnimation() {
-		this.anims.play(AnimationKeys.PLAYER_DIG);
+		this.playerSprite.anims.play(AnimationKeys.PLAYER_DIG);
 	}
 }

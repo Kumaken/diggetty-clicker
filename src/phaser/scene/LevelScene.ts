@@ -38,7 +38,6 @@ export default class LevelScene extends Phaser.Scene {
 		this.physics.world.setBounds(0, 0, getResolution().width, getResolution().height);
 		this.physics.world.setBoundsCollision(true, true, false, true);
 
-		this.physics.add.collider(this.player, this.platformManager.pool);
 		this.physics.add.collider(this.player.characterPool, this.platformManager.pool);
 	}
 
