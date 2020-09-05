@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/diggetty-clicker/precache-manifest.9d7876c40da4b27a1a64c7110e6ff8d0.js"
+  "/diggetty-clicker/precache-manifest.6ccbb10b766b45c27fb35927644d7d2b.js"
 );
 
 self.addEventListener('message', (event) => {
