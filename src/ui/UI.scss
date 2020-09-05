@@ -25,6 +25,14 @@
 	text-align: center;
 }
 
+.is-overlay {
+	bottom: 0;
+    left: 0;
+    position: absolute !important;
+    right: 0;
+    top: 0;
+}
+
 /* Wraps */
 .no-wrap{
 	white-space: nowrap;
