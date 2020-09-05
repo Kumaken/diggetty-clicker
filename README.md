@@ -1,3 +1,6 @@
+# LIVE DEMO:
+Play the demo here: [DEMO](https://kumaken.github.io/diggetty-clicker/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
