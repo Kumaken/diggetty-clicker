@@ -7,6 +7,7 @@ import Algorithm from 'phaser/util/Algorithm';
 import UpgradeTabIterator from './UpgradeTabIterator';
 import HiringTabIterator from './HiringTabIterator';
 import InventoryIterator from './InventoryIterator';
+import PlayerStats from 'ui/player-stats/PlayerStats';
 
 const transitionDuration = 300;
 
@@ -80,6 +81,7 @@ export const BottomMenu = () => {
 
 	return (
 		<div className="bottom-tab">
+			<PlayerStats></PlayerStats>
 			<Tabs />
 
 			<CSSTransition

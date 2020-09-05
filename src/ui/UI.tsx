@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { RootStoreContext } from 'index';
-import PlayerStats from './player-stats/PlayerStats';
 import './UI.scss';
 import './modal/ItemDescModal.scss';
 import ToughnessBar from './toughness-bar/ToughnessBar';
@@ -44,7 +43,7 @@ const UI = () => {
 			{isConfigLoaded ? (
 				<>
 					{/* <ItemDescModal></ItemDescModal> */}
-					<PlayerStats></PlayerStats>
+
 					<ToughnessBar></ToughnessBar>
 					<ResourceStats></ResourceStats>
 					<BottomMenu></BottomMenu>

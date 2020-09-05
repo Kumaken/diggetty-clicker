@@ -17,8 +17,11 @@ export default function App() {
 
 	return (
 		<>
-			<div id="game" />
-			<UI></UI>
+			<div id="game">
+				<div id="UI">
+					<UI></UI>
+				</div>
+			</div>
 		</>
 	);
 }

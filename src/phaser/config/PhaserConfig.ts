@@ -6,10 +6,9 @@ export type PhaserConfig = Phaser.Types.Core.GameConfig;
 
 export const gameConfig: GameInstance = {
 	title: 'PhaserGame',
-	type: Phaser.AUTO,
+	type: Phaser.CANVAS,
 	scale: {
 		parent: 'game', // needed to specify which element will contain the canvas
-		mode: Phaser.Scale.FIT,
 		autoCenter: Phaser.Scale.CENTER_BOTH,
 		width: getResolution().width,
 		height: getResolution().height

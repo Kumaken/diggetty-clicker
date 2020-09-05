@@ -95,7 +95,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 					</Columns>
 				</Box>
 			</Card.Content>
-			<Columns className="tab-entry-action">
+			<Columns className="tab-entry-action is-mobile">
 				<Columns.Column className="is-8">
 					<Button
 						color="warning"
