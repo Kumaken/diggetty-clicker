@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/diggetty-clicker/static/css/main.3ccce600.chunk.css",
+    "main.js": "/diggetty-clicker/static/js/main.31a16aa5.chunk.js",
+    "main.js.map": "/diggetty-clicker/static/js/main.31a16aa5.chunk.js.map",
+    "runtime-main.js": "/diggetty-clicker/static/js/runtime-main.1fd67f4b.js",
+    "runtime-main.js.map": "/diggetty-clicker/static/js/runtime-main.1fd67f4b.js.map",
+    "static/css/2.13cfb977.chunk.css": "/diggetty-clicker/static/css/2.13cfb977.chunk.css",
+    "static/js/2.12bbdf0c.chunk.js": "/diggetty-clicker/static/js/2.12bbdf0c.chunk.js",
+    "static/js/2.12bbdf0c.chunk.js.map": "/diggetty-clicker/static/js/2.12bbdf0c.chunk.js.map",
+    "index.html": "/diggetty-clicker/index.html",
+    "precache-manifest.9d7876c40da4b27a1a64c7110e6ff8d0.js": "/diggetty-clicker/precache-manifest.9d7876c40da4b27a1a64c7110e6ff8d0.js",
+    "service-worker.js": "/diggetty-clicker/service-worker.js",
+    "static/css/2.13cfb977.chunk.css.map": "/diggetty-clicker/static/css/2.13cfb977.chunk.css.map",
+    "static/css/main.3ccce600.chunk.css.map": "/diggetty-clicker/static/css/main.3ccce600.chunk.css.map",
+    "static/js/2.12bbdf0c.chunk.js.LICENSE.txt": "/diggetty-clicker/static/js/2.12bbdf0c.chunk.js.LICENSE.txt",
+    "static/media/LoadFont.css": "/diggetty-clicker/static/media/slkscr.f7aceb26.ttf",
+    "static/media/background.jpg": "/diggetty-clicker/static/media/background.ae35005c.jpg",
+    "static/media/flares.png": "/diggetty-clicker/static/media/flares.587b045c.png",
+    "static/media/player.png": "/diggetty-clicker/static/media/player.7f063bba.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1fd67f4b.js",
+    "static/css/2.13cfb977.chunk.css",
+    "static/js/2.12bbdf0c.chunk.js",
+    "static/css/main.3ccce600.chunk.css",
+    "static/js/main.31a16aa5.chunk.js"
+  ]
+}
