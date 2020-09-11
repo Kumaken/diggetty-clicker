@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import RootStore from './RootStore';
-import './LoadFont.css';
+import './helper/LoadFont.css';
 
 export const RootStoreContext = React.createContext(null);
 

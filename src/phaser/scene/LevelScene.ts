@@ -34,7 +34,6 @@ export default class LevelScene extends Phaser.Scene {
 
 	// Setup Collisions:
 	setupCollision(): void {
-		console.log(this.platformManager.pool);
 		this.physics.world.setBounds(0, 0, getResolution().width, getResolution().height);
 		this.physics.world.setBoundsCollision(true, true, false, true);
 
