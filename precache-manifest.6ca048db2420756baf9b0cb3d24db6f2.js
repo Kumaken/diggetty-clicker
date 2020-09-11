@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "05675ad8748b253366acd44dfbbc841c",
+    "revision": "e5632295ebb02505a2303c927739d56c",
     "url": "/diggetty-clicker/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/diggetty-clicker/static/css/2.c8a7ccc1.chunk.css"
   },
   {
-    "revision": "7f2f91ea693db64464d2",
-    "url": "/diggetty-clicker/static/css/main.6d2ef78a.chunk.css"
+    "revision": "c50514744594fc94ae3a",
+    "url": "/diggetty-clicker/static/css/main.3ef76ea6.chunk.css"
   },
   {
     "revision": "0d7c86120452c3d7b9d6",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/diggetty-clicker/static/js/2.34f02721.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7f2f91ea693db64464d2",
+    "revision": "c50514744594fc94ae3a",
     "url": "/diggetty-clicker/static/js/main.d5ebc38e.chunk.js"
   },
   {
