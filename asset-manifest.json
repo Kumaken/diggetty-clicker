@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/diggetty-clicker/static/css/main.8a74e175.chunk.css",
+    "main.css": "/diggetty-clicker/static/css/main.50e6b1d5.chunk.css",
     "main.js": "/diggetty-clicker/static/js/main.d4fd4837.chunk.js",
     "main.js.map": "/diggetty-clicker/static/js/main.d4fd4837.chunk.js.map",
     "runtime-main.js": "/diggetty-clicker/static/js/runtime-main.1fd67f4b.js",
@@ -9,10 +9,10 @@
     "static/js/2.34f02721.chunk.js": "/diggetty-clicker/static/js/2.34f02721.chunk.js",
     "static/js/2.34f02721.chunk.js.map": "/diggetty-clicker/static/js/2.34f02721.chunk.js.map",
     "index.html": "/diggetty-clicker/index.html",
-    "precache-manifest.55a9e2ca9862d9f1ce24e679bb7a4c80.js": "/diggetty-clicker/precache-manifest.55a9e2ca9862d9f1ce24e679bb7a4c80.js",
+    "precache-manifest.a86c3404d37161509a22de386ce55bcd.js": "/diggetty-clicker/precache-manifest.a86c3404d37161509a22de386ce55bcd.js",
     "service-worker.js": "/diggetty-clicker/service-worker.js",
     "static/css/2.c8a7ccc1.chunk.css.map": "/diggetty-clicker/static/css/2.c8a7ccc1.chunk.css.map",
-    "static/css/main.8a74e175.chunk.css.map": "/diggetty-clicker/static/css/main.8a74e175.chunk.css.map",
+    "static/css/main.50e6b1d5.chunk.css.map": "/diggetty-clicker/static/css/main.50e6b1d5.chunk.css.map",
     "static/js/2.34f02721.chunk.js.LICENSE.txt": "/diggetty-clicker/static/js/2.34f02721.chunk.js.LICENSE.txt",
     "static/media/LoadFont.css": "/diggetty-clicker/static/media/slkscr.f7aceb26.ttf",
     "static/media/background.jpg": "/diggetty-clicker/static/media/background.ae35005c.jpg",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.1fd67f4b.js",
     "static/css/2.c8a7ccc1.chunk.css",
     "static/js/2.34f02721.chunk.js",
-    "static/css/main.8a74e175.chunk.css",
+    "static/css/main.50e6b1d5.chunk.css",
     "static/js/main.d4fd4837.chunk.js"
   ]
 }
