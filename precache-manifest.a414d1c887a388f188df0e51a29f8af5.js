@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2742f430ce58b6870af616a41c0088b2",
+    "revision": "05675ad8748b253366acd44dfbbc841c",
     "url": "/diggetty-clicker/index.html"
   },
   {
