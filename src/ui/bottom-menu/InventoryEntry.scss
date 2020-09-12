@@ -7,8 +7,11 @@
 		height: 7vh;
 
 		.item {
-			height: 6vh;
-			width: 10vw;
+			// width: 10vw;
+			display: flex; // both container and self needs to be flex?
+			justify-content: center; // align horizontally
+			width: 100% !important; // needs this for horizontal center
+			align-items: center; // align vertically
 		}
 	}
 }
