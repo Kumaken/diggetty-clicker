@@ -72,7 +72,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 					</Media.Item>
 				</Media>
 				<Heading
-					className="text-yellow-outline text-gray shpinscher-regular is-centered is-size-5-mobile"
+					className="entry-name text-yellow-outline text-gray shpinscher-regular is-centered is-size-5-tablet is-size-6-mobile"
 					size={4}
 				>
 					{props.hiringData.name}

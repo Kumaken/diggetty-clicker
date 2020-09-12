@@ -27,7 +27,7 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 		this.itemType = tileType;
 
 		if (isMobile()) {
-			AlignTool.scaleToScreenWidth(this.scene, this, 0.116);
+			AlignTool.scaleToScreenWidth(this.scene, this, 0.12);
 			this.setInteractive();
 		} else {
 			AlignTool.scaleToScreenWidth(this.scene, this, 0.11);

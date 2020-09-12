@@ -25,7 +25,7 @@ export default class PlatformManager {
 	private player: Player;
 	private platformYInterval: number = 0;
 	private platforms: Platform[] = [];
-	private rowNums: number = 4;
+	private rowNums: number = 13;
 	private textureKeyArr: string[] = Object.keys(PlatformData);
 	// NOTE DELETE THIS IF NOT USING TERRARIA TILES: to handle the gap from the tilesheet
 	private tileWidthGap: number = 10;
@@ -51,7 +51,7 @@ export default class PlatformManager {
 		this.particlesManager = particlesManager;
 		this._pool = this.scene.add.tilePool(TextureKeys.TL_DIRT.key);
 		this.player = player;
-		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.45);
+		PlatformManager.topMostY = AlignTool.getYfromScreenHeight(scene, 0.35);
 
 		// deduce tile size dynamically:
 		const sample = this._pool.spawn(0, 0, '', 0);

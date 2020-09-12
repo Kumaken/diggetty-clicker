@@ -9,7 +9,7 @@ import tenacity from 'assets/icons/individuals/minecraft_transparent_195.png';
 export const UpgradeData: IUpgradeData = {
 	Pickaxe: {
 		name: "Good ol' pickaxe",
-		desc: "Your good ol' trusty pickaxe",
+		desc: "Good ol' trusty pickaxe",
 		effectDesc: 'Increase click damage by 1',
 		baseCost: 2,
 		costUpRatio: 1.5,

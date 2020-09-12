@@ -50,7 +50,7 @@
 
 .tabs-content {
 	padding: 0 0.75rem;
-	// height: 33vh;
+	height: 33vh;
 	background-color: #{$background-light-2};
 	white-space: nowrap;
 	overflow-x: scroll;
@@ -61,6 +61,6 @@
 @media only screen and (max-width: 600px) {
 	.tabs-content {
 		padding: 0 1vw;
-		// height: 35.5vh;
+		height: 35.5vh;
 	}
 }

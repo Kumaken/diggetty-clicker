@@ -47,19 +47,27 @@
 // mobile view:
 @media only screen and (max-width: 600px) {
 	.stats-pic {
+		top: -90%;
 		width: 8vw;
 	}
 
 	.stats-text {
 		width: 70%;
-		direction: rtl;
-		position: absolute;
-		left: 30%;
-		top: -120%;
+		top: -60%;
 	}
 
 	.dpc-tag {
 		font-size: 2.25vw !important;
 		padding-left: 2vw !important;
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.stats-pic {
+		top: -80% !important;
+	}
+
+	.stats-text {
+		top: -60% !important;
 	}
 }

@@ -12,7 +12,7 @@ const ToughnessBar = () => {
 			<span className="platform-name shpinscher-regular is-size-6-mobile">
 				{store.gameStore?.topPlatformName}
 			</span>
-			<span className="platform-toughness silk-screen-A is-size-5-mobile">
+			<span className="platform-toughness silk-screen-A is-size-6-mobile">
 				{store.gameStore?.topPlatformToughness}
 			</span>
 			<Progress

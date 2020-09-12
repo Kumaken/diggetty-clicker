@@ -40,7 +40,7 @@ const PlayerStats = () => {
 				<Tag className="dpc-tag" color="dark" rounded>
 					<p className="text-yellow silk-screen-A">{name}</p>
 				</Tag>
-				<Heading className="stats-text text-gray text-yellow-outline silk-screen-A is-size-3-mobile" size={1}>
+				<Heading className="stats-text text-gray text-yellow-outline silk-screen-A is-size-5-mobile" size={1}>
 					{value}
 				</Heading>
 			</div>

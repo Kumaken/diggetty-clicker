@@ -9,7 +9,7 @@ import drillbird from 'assets/icons/individuals/minecraft_transparent_387.png';
 export const HiringData: IHiringData = {
 	DRILL_BIRD: {
 		name: 'The Drill Bird',
-		desc: 'she protecc, she also drills',
+		desc: 'she protecc, she attacc',
 		effectDesc: 'Increase click damage by 1',
 		baseCost: 2,
 		costUpRatio: 1.5,
@@ -19,8 +19,8 @@ export const HiringData: IHiringData = {
 		img: drillbird
 	},
 	FEISTY_HEN: {
-		name: 'Feisty Hen',
-		desc: 'She lays earthworm eggs',
+		name: 'Blue Megaman',
+		desc: 'He drills all day',
 		effectDesc: 'Increase click dmg greatly.',
 		baseCost: 10,
 		costUpRatio: 2,
@@ -42,7 +42,7 @@ export const HiringData: IHiringData = {
 	},
 	DRILL_MACHINE: {
 		name: 'Man-made Driller',
-		desc: 'Behold the machinery era',
+		desc: 'Machinery era!',
 		effectDesc: 'Increase click dmg by 10',
 		baseCost: 50,
 		costUpRatio: 2,
