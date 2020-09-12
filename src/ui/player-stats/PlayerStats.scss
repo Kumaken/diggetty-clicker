@@ -1,8 +1,8 @@
-@import "../../_variables.sass";
+@import '../../_variables.sass';
 
 .player-stats {
 	position: absolute;
-	top: -7%;
+	top: -3.6vh;
 	left: 0%;
 	width: 100%;
 }
@@ -12,8 +12,8 @@
 	position: relative;
 }
 
-.stats-component{
-	width:30%;
+.stats-component {
+	width: 30%;
 	margin-right: 0.1rem;
 	margin-left: 0.1rem;
 	position: relative;
@@ -21,7 +21,7 @@
 }
 
 .dpc-tag {
-	width:100%;
+	width: 100%;
 	margin-left: 0rem;
 	padding-left: 4rem !important;
 }
@@ -42,4 +42,24 @@
 
 .stats-subtext {
 	font-size: small;
+}
+
+// mobile view:
+@media only screen and (max-width: 600px) {
+	.stats-pic {
+		width: 8vw;
+	}
+
+	.stats-text {
+		width: 70%;
+		direction: rtl;
+		position: absolute;
+		left: 30%;
+		top: -120%;
+	}
+
+	.dpc-tag {
+		font-size: 2.25vw !important;
+		padding-left: 2vw !important;
+	}
 }

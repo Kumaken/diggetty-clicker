@@ -1,3 +1,10 @@
 .next-level-text {
 	font-size: x-large;
 }
+
+// mobile view:
+@media only screen and (max-width: 600px) {
+	.upgrade-desc-text {
+		font-size: small;
+	}
+}

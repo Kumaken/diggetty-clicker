@@ -1,13 +1,24 @@
-@import "../../_variables.sass";
+@import '../../_variables.sass';
 
 .hiring-dps-text {
 	position: absolute;
 	top: -20%;
 }
 
-.dps-columns{
+.dps-columns {
 	display: flex; // both container and self needs to be flex?
 	justify-content: center; // align horizontally
-	width: 100%; // needs this for horizontal center
+	width: 100% !important; // needs this for horizontal center
 	align-items: center; // align vertically
+}
+
+// mobile view:
+@media only screen and (max-width: 600px) {
+	.dps-columns .column {
+		padding: 0;
+	}
+
+	.hiring.desc-box {
+		padding: 0 1vw 0 3vw !important;
+	}
 }

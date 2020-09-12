@@ -55,40 +55,67 @@ const HiringEntry = (props: IHiringEntryParam) => {
 			<Card.Content className="tab-entry-content">
 				<Media className="tab-entry-img-container">
 					<Media.Item renderAs="figure">
-						<Image rounded size={64} alt="64x64" src="http://bulma.io/images/placeholders/128x128.png" />
-						<Image className="is-overlay" rounded size={64} alt="64x64" src={props.hiringData.img} />
+						<Image
+							className="img-icon"
+							rounded
+							size={64}
+							alt="64x64"
+							src="http://bulma.io/images/placeholders/128x128.png"
+						/>
+						<Image
+							className="img-icon is-overlay"
+							rounded
+							size={64}
+							alt="64x64"
+							src={props.hiringData.img}
+						/>
 					</Media.Item>
 				</Media>
-				<Heading className="text-yellow-outline text-gray shpinscher-regular is-centered" size={4}>
+				<Heading
+					className="text-yellow-outline text-gray shpinscher-regular is-centered is-size-5-mobile"
+					size={4}
+				>
 					{props.hiringData.name}
 				</Heading>
-				<Heading className="silk-screen-A level-text is-centered" subtitle size={5}>
+				<Heading className="silk-screen-A level-text is-centered is-size-6-mobile" subtitle size={5}>
 					Lvl.{store.gameStore.hiringProgresses[props._key].level}{' '}
 					<span className="silk-screen-A no-wrap text-yellow-outline">{'>>'}</span>{' '}
 					<span className="silk-screen-A no-wrap text-yellow-outline next-level-text">
 						{store.gameStore.hiringProgresses[props._key].level + 1}
 					</span>
 				</Heading>
-				<Heading italic className="effect-text text-white is-centered " subtitle size={6}>
+				<Heading italic className="effect-text text-white is-centered is-size-7-mobile" subtitle size={6}>
 					{props.hiringData.desc}
 				</Heading>
-				<Box className="desc-box text-yellow">
-					<Heading className="silk-screen-A hiring-dps-text text-gray text-yellow-outline" subtitle size={4}>
+				<Box className="hiring desc-box text-yellow">
+					<Heading
+						className="silk-screen-A hiring-dps-text text-gray text-yellow-outline is-size-6-mobile"
+						subtitle
+						size={4}
+					>
 						DPS
 					</Heading>
 					<Columns className="dps-columns">
-						<Columns.Column className="is-4">
-							<Heading className="silk-screen-A no-wrap" subtitle size={4}>
+						<Columns.Column className="is-4 is-5-mobile">
+							<Heading className="silk-screen-A no-wrap is-size-6-mobile" subtitle size={4}>
 								{store.gameStore.hiringProgresses[props._key].currdps}
 							</Heading>
 						</Columns.Column>
-						<Columns.Column className="is-4">
-							<Heading className="silk-screen-A no-wrap text-yellow-outline" subtitle size={4}>
+						<Columns.Column className="is-4 is-2-mobile">
+							<Heading
+								className="silk-screen-A no-wrap text-yellow-outline is-size-6-mobile"
+								subtitle
+								size={4}
+							>
 								{'>>'}
 							</Heading>
 						</Columns.Column>
-						<Columns.Column className="is-4">
-							<Heading className="silk-screen-A no-wrap text-yellow-outline" subtitle size={2}>
+						<Columns.Column className="is-4 is-5-mobile">
+							<Heading
+								className="silk-screen-A no-wrap text-yellow-outline is-size-5-mobile"
+								subtitle
+								size={2}
+							>
 								{countNextDPSIncrease()}
 							</Heading>
 						</Columns.Column>
@@ -96,7 +123,7 @@ const HiringEntry = (props: IHiringEntryParam) => {
 				</Box>
 			</Card.Content>
 			<Columns className="tab-entry-action is-mobile">
-				<Columns.Column className="is-8">
+				<Columns.Column className="is-6">
 					<Button
 						color="warning"
 						className={`button-text text-black `}
@@ -107,10 +134,10 @@ const HiringEntry = (props: IHiringEntryParam) => {
 						{store.gameStore.hiringProgresses[props._key].level <= 0 ? 'HIRE' : 'LEVEL UP'}
 					</Button>
 				</Columns.Column>
-				<Columns.Column className="is-4 is-flex">
+				<Columns.Column className="is-6 is-flex">
 					<Heading
-						className="is-centered silk-screen-A tab-entry-cost text-yellow-outline text-gray "
 						size={4}
+						className="is-centered silk-screen-A tab-entry-cost text-yellow-outline text-gray is-size-5-mobile"
 					>
 						<MoneyText value={store.gameStore.hiringProgresses[props._key].currprice} />
 					</Heading>

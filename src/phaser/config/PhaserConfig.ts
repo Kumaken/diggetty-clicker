@@ -9,7 +9,7 @@ export const gameConfig: GameInstance = {
 	type: Phaser.CANVAS,
 	scale: {
 		parent: 'game', // needed to specify which element will contain the canvas
-		autoCenter: Phaser.Scale.CENTER_BOTH,
+		// autoCenter: Phaser.Scale.CENTER_BOTH, // this for some reason adds unwanted margin on top and bottom...
 		width: getResolution().width,
 		height: getResolution().height
 	},

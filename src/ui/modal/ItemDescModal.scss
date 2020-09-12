@@ -1,19 +1,26 @@
-@import "../../_variables.sass";
+@import '../../_variables.sass';
 
-.item-details{
-    span{
-        display: block;
-    }
+.item-details {
+	span {
+		display: block;
+	}
 }
 
-.modal-card{
-    .content{
-        color: black;
-    }
-    max-width: 50%;
+.modal-card {
+	.content {
+		color: black;
+	}
+	max-width: 50%;
 }
 
 .item-pic {
-    width: 5rem;
-    height: 5rem;
+	width: 5rem;
+	height: 5rem;
+}
+
+// mobile view:
+@media only screen and (max-width: 600px) {
+	.modal-card {
+		max-width: 90%;
+	}
 }

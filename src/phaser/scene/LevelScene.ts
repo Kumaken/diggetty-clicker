@@ -70,7 +70,7 @@ export default class LevelScene extends Phaser.Scene {
 			this
 		);
 
-		this.fpsText = new FpsText(this);
+		// this.fpsText = new FpsText(this);
 
 		this.setupCollision();
 	}
@@ -78,6 +78,6 @@ export default class LevelScene extends Phaser.Scene {
 	update(): void {
 		this.physics.collide(this.platformManager.pool, this.platformManager.pool);
 		this.player.checkItem();
-		this.fpsText.update();
+		// this.fpsText.update();
 	}
 }

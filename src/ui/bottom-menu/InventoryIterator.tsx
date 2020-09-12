@@ -5,7 +5,7 @@ import { InventoryEntry } from './InventoryEntry';
 import { IItemData } from 'phaser/interface/IItemData';
 import Columns from 'react-bulma-components/lib/components/columns';
 import { IItem } from 'phaser/interface/IItem';
-
+import './InventoryEntry.scss';
 const InventoryIterator = () => {
 	// const [upgradeProgress, setUpdateProgress] = useState({});
 	const store = useContext(RootStoreContext);
@@ -29,7 +29,7 @@ const InventoryIterator = () => {
 		const inventory = store.gameStore?.inventory as IItem[];
 		const jsxElem = [];
 
-		inventory.forEach((item,index) => {
+		inventory.forEach((item, index) => {
 			jsxElem.push(createInventoryEntry(index, item.itemData));
 		});
 		return jsxElem;

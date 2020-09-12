@@ -67,7 +67,7 @@ export const BottomMenu = () => {
 
 	const Tabs = () => {
 		return (
-			<div className="tabs is-centered is-medium is-fullwidth is-toggle silk-screen-A is-size-5 is-marginless is-size-6-mobile">
+			<div className="tabs is-centered is-medium is-fullwidth is-toggle silk-screen-A is-size-5 is-marginless is-size-7-mobile">
 				<ul>
 					{tabList.map((tab) => (
 						<Tab tab={tab} key={tab.name} />

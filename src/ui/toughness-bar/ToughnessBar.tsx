@@ -9,8 +9,12 @@ const ToughnessBar = () => {
 
 	return (
 		<div className="health-bar">
-			<span className="platform-name shpinscher-regular">{store.gameStore?.topPlatformName}</span>
-			<span className="platform-toughness silk-screen-A">{store.gameStore?.topPlatformToughness}</span>
+			<span className="platform-name shpinscher-regular is-size-6-mobile">
+				{store.gameStore?.topPlatformName}
+			</span>
+			<span className="platform-toughness silk-screen-A is-size-5-mobile">
+				{store.gameStore?.topPlatformToughness}
+			</span>
 			<Progress
 				max={store.gameStore?.topPlatformMaxToughness}
 				value={store.gameStore?.topPlatformToughness}

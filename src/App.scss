@@ -40,9 +40,11 @@
 // Bulma
 @import '~react-bulma-components/src/index.sass';
 
+html,
 body {
 	width: 100%;
 	height: 100%;
+	overflow-y: hidden !important; // to set overflow-y hidden, you must set html and body height first!
 }
 
 // root
@@ -64,6 +66,7 @@ body {
 
 #game {
 	position: relative;
+	margin: 0;
 	touch-action: none; // disable double click zoom
 	// max-height: 1200px;
 }

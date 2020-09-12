@@ -3,6 +3,7 @@ import { ITile } from '../interface/ITile';
 import { TextureKeys } from '../config/TextureKeys';
 import AlignTool from 'phaser/util/AlignTool';
 import { DepthConfig } from 'phaser/config/DepthConfig';
+import { isMobile } from 'phaser/util/Util';
 
 export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile {
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -25,8 +26,13 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 		this.currentFrame = frame;
 		this.itemType = tileType;
 
-		AlignTool.scaleToScreenWidth(this.scene, this, 0.11);
-		this.setInteractive();
+		if (isMobile()) {
+			AlignTool.scaleToScreenWidth(this.scene, this, 0.116);
+			this.setInteractive();
+		} else {
+			AlignTool.scaleToScreenWidth(this.scene, this, 0.11);
+			this.setInteractive();
+		}
 	}
 
 	enableSprite() {
@@ -69,17 +75,16 @@ export default class Tile extends Phaser.Physics.Arcade.Sprite implements ITile 
 		return this;
 	}
 
-	takeItem(): ITile{
+	takeItem(): ITile {
 		console.log(this.itemType);
-		if(!this.itemType) return this;
+		if (!this.itemType) return this;
 
-		console.log('get item')
+		console.log('get item');
 		this.setGravityY(0);
 		this.scene.tweens.add({
 			targets: this,
 			scale: 0.5,
 			duration: this.animDuration
 		});
-		
 	}
 }
