@@ -1,4 +1,4 @@
-@import "../../_variables.sass";
+@import '../../_variables.sass';
 
 .default-active {
 	display: block;
@@ -50,7 +50,7 @@
 
 .tabs-content {
 	padding: 0 0.75rem;
-	height: 23rem;
+	height: 33vh;
 	background-color: #{$background-light-2};
 	white-space: nowrap;
 	overflow-x: scroll;

@@ -11,10 +11,10 @@ const ResourceStats = () => {
 
 	return (
 		<>
-			<Heading className="text-gray text-yellow-outline silk-screen-A is-centered" size={1}>
+			<Heading className="text-gray text-yellow-outline silk-screen-A is-centered is-size-4-mobile" size={1}>
 				<MoneyText value={store.gameStore?.money} />
 			</Heading>
-			<Heading className="text-gray text-yellow-outline silk-screen-A is-centered">
+			<Heading className="text-gray text-yellow-outline silk-screen-A is-centered is-size-4-mobile">
 				<DepthText value={store.gameStore?.depth} />
 			</Heading>
 		</>
