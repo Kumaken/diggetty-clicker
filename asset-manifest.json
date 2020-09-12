@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/diggetty-clicker/static/css/main.8e410592.chunk.css",
-    "main.js": "/diggetty-clicker/static/js/main.febe2072.chunk.js",
-    "main.js.map": "/diggetty-clicker/static/js/main.febe2072.chunk.js.map",
+    "main.css": "/diggetty-clicker/static/css/main.0aa34765.chunk.css",
+    "main.js": "/diggetty-clicker/static/js/main.5f2af8cd.chunk.js",
+    "main.js.map": "/diggetty-clicker/static/js/main.5f2af8cd.chunk.js.map",
     "runtime-main.js": "/diggetty-clicker/static/js/runtime-main.1fd67f4b.js",
     "runtime-main.js.map": "/diggetty-clicker/static/js/runtime-main.1fd67f4b.js.map",
-    "static/css/2.c8a7ccc1.chunk.css": "/diggetty-clicker/static/css/2.c8a7ccc1.chunk.css",
+    "static/css/2.0744c01a.chunk.css": "/diggetty-clicker/static/css/2.0744c01a.chunk.css",
     "static/js/2.34f02721.chunk.js": "/diggetty-clicker/static/js/2.34f02721.chunk.js",
     "static/js/2.34f02721.chunk.js.map": "/diggetty-clicker/static/js/2.34f02721.chunk.js.map",
     "index.html": "/diggetty-clicker/index.html",
-    "precache-manifest.d928fa77d32f5f0a5ef85e467b9ec756.js": "/diggetty-clicker/precache-manifest.d928fa77d32f5f0a5ef85e467b9ec756.js",
+    "precache-manifest.63a544fd1ade1669b3b5f049a04d0749.js": "/diggetty-clicker/precache-manifest.63a544fd1ade1669b3b5f049a04d0749.js",
     "service-worker.js": "/diggetty-clicker/service-worker.js",
-    "static/css/2.c8a7ccc1.chunk.css.map": "/diggetty-clicker/static/css/2.c8a7ccc1.chunk.css.map",
-    "static/css/main.8e410592.chunk.css.map": "/diggetty-clicker/static/css/main.8e410592.chunk.css.map",
+    "static/css/2.0744c01a.chunk.css.map": "/diggetty-clicker/static/css/2.0744c01a.chunk.css.map",
+    "static/css/main.0aa34765.chunk.css.map": "/diggetty-clicker/static/css/main.0aa34765.chunk.css.map",
     "static/js/2.34f02721.chunk.js.LICENSE.txt": "/diggetty-clicker/static/js/2.34f02721.chunk.js.LICENSE.txt",
     "static/media/LoadFont.css": "/diggetty-clicker/static/media/slkscr.f7aceb26.ttf",
     "static/media/background.jpg": "/diggetty-clicker/static/media/background.ae35005c.jpg",
@@ -21,9 +21,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.1fd67f4b.js",
-    "static/css/2.c8a7ccc1.chunk.css",
+    "static/css/2.0744c01a.chunk.css",
     "static/js/2.34f02721.chunk.js",
-    "static/css/main.8e410592.chunk.css",
-    "static/js/main.febe2072.chunk.js"
+    "static/css/main.0aa34765.chunk.css",
+    "static/js/main.5f2af8cd.chunk.js"
   ]
 }
